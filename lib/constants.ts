@@ -1,0 +1,352 @@
+export const MISCALLENOUS_COST = {
+  CATEGORY: "SEWER CONNECTION,AC,PIPE-FITTING",
+  PERCENT: 5,
+};
+export const LABOUR_COST = { PER_SQFT_RATE: 290 };
+export const MANAGEMENT_COST = { PER_SQFT_RATE: 249 };
+
+export const GROUND_FLOOR_AREA = 2000;
+export const TOTAL_NO_OF_FLOORS = 5;
+export const TOTAL_BUILDUP_AREA = GROUND_FLOOR_AREA * TOTAL_NO_OF_FLOORS;
+
+export const TMT_STEEL_CATEGORY = {
+  PRODUCTS: [
+    {
+      NAME: "TATA TISCON",
+      PER_UNIT_RATE: 75,
+      PER_UNIT: "KG",
+      STANDARD_QUANTITY: 3.5,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "JINDAL PANTHER",
+      PER_UNIT_RATE: 75,
+      PER_UNIT: "KG",
+      STANDARD_QUANTITY: 3.5,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "JSW OR RATHI",
+      PER_UNIT_RATE: 70,
+      PER_UNIT: "KG",
+      STANDARD_QUANTITY: 3.5,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+  ],
+};
+
+export const BRICKS_CATEGORY = {
+  PRODUCTS: [
+    {
+      NAME: "FLY ASH BRICKS",
+      PER_UNIT_RATE: 8,
+      PER_UNIT: "NOS",
+      STANDARD_QUANTITY: 12,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "RENWEL OR OTHER CLAY BRICKS",
+      PER_UNIT_RATE: 7,
+      PER_UNIT: "NOS",
+      STANDARD_QUANTITY: 12,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "KANOTA OR HANUMANGARH",
+      PER_UNIT_RATE: 7,
+      PER_UNIT: "NOS",
+      STANDARD_QUANTITY: 12,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+  ],
+  WATER_PROOFING: [
+    {
+      NAME: "YES",
+      PER_SQFT_RATE: 40,
+      STANDARD_QUANTITY: 0.3,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "NO",
+      PER_SQFT_RATE: 0,
+      STANDARD_QUANTITY: 0,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+  ],
+  TERMITE_SOLUTION: [
+    {
+      NAME: "YES",
+      PER_SQFT_RATE: 15,
+      STANDARD_QUANTITY: 0.9,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "NO",
+      PER_SQFT_RATE: 0,
+      STANDARD_QUANTITY: 0,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+  ],
+};
+
+export const CEMENT_CATEGORY = {
+  PRODUCTS: [
+    {
+      NAME: "ULTRATECH OR AMBHUJA",
+      PER_UNIT_RATE: 340,
+      PER_UNIT: "BAG",
+      STANDARD_QUANTITY: 0.17,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "JK",
+      PER_UNIT_RATE: 320,
+      PER_UNIT: "BAG",
+      STANDARD_QUANTITY: 0.17,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+    {
+      NAME: "WONDER OR SHREE",
+      PER_UNIT_RATE: 320,
+      PER_UNIT: "BAG",
+      STANDARD_QUANTITY: 0.17,
+      STANDARD_QUANTITY_UNIT: "SQFT",
+    },
+  ],
+};
+
+export const ELECTRICAL_CATEGORY = {
+  ELECTRICAL_OR_WALL_MATERIAL: [
+    {
+      NAME: "SHIVA OR JINDAL",
+      PER_SQFT_RATE: 20,
+    },
+    {
+      NAME: "OTHER BRANDS",
+      PER_SQFT_RATE: 17,
+    },
+  ],
+  "WIRES_AND_CABLES_EWC0100-FLAT": [
+    {
+      NAME: "SHIVA OR JINDAL",
+      PER_SQFT_RATE: 70,
+    },
+    {
+      NAME: "OTHER BRANDS",
+      PER_SQFT_RATE: 60,
+    },
+  ],
+  "SHEET-AND-SWITCHES_EWC0100-FLAT": [
+    {
+      NAME: "ANCHOR PENTA",
+      PER_SQFT_RATE: 12,
+    },
+    {
+      NAME: "HAVELLS",
+      PER_SQFT_RATE: 18,
+    },
+    {
+      NAME: "SCHNEIDER/GM",
+      PER_SQFT_RATE: 18,
+    },
+  ],
+};
+
+export const FLOORING_CATEGORY = {
+  VETRIFIED_TILES: [
+    { NAME: "50RS/SQFT", PER_SQFT_RATE: 50 },
+    { NAME: "80RS/SQFT", PER_SQFT_RATE: 80 },
+    { NAME: "120RS/SQFT", PER_SQFT_RATE: 120 },
+  ],
+  CERAMIC_WALL_TILE_TOILET_KITCHEN: [
+    { NAME: "50RS/SQFT", PER_SQFT_RATE: 50, STANDARD_QUANTITY: 0.4 },
+    { NAME: "80RS/SQFT", PER_SQFT_RATE: 80, STANDARD_QUANTITY: 0.4 },
+    { NAME: "120RS/SQFT", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.4 },
+  ],
+  GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE: [
+    { NAME: "75RS/SQFT", PER_SQFT_RATE: 75, STANDARD_QUANTITY: 0.2 },
+    { NAME: "90RS/SQFT", PER_SQFT_RATE: 90, STANDARD_QUANTITY: 0.2 },
+    { NAME: "120RS/SQFT", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.2 },
+  ],
+  ROUGH_STONE_TERRACE_PARKINGAREA: [
+    { NAME: "40RS/SQFT", PER_SQFT_RATE: 40, STANDARD_QUANTITY: 1.25 },
+    { NAME: "60RS/SQFT", PER_SQFT_RATE: 60, STANDARD_QUANTITY: 1.25 },
+    { NAME: "90RS/SQFT", PER_SQFT_RATE: 90, STANDARD_QUANTITY: 1.25 },
+  ],
+};
+
+export const DOOR_CATEGORY = {
+  DOOR_SHUTTER: [
+    { PER_SQFT_RATE: 45 },
+    { PER_SQFT_RATE: 55 },
+    { PER_SQFT_RATE: 65 },
+  ],
+  DOOR_FRAME_SINGLE_REBATE_ELS0100: [
+    { NAME: "WOODEN", PER_SQFT_RATE: 35 },
+    { NAME: "GRANITE", PER_SQFT_RATE: 20 },
+    { NAME: "KAROLI STONE", PER_SQFT_RATE: 8 },
+  ],
+  MAIN_DOOR: [
+    { NAME: "15000/DOOR", PER_RATE_UNIT: 15000, PER_UNIT: "DOOR" },
+    { NAME: "20000/DOOR", PER_RATE_UNIT: 20000, PER_UNIT: "DOOR" },
+    { NAME: "30000/DOOR", PER_RATE_UNIT: 30000, PER_UNIT: "DOOR" },
+  ],
+};
+
+export const WINDOWS_CATEGORY = {
+  MATERIAL: [
+    { NAME: "UPVC", PER_SQFT_RATE: 65 },
+    { NAME: "ALUMINIUM", PER_SQFT_RATE: 55 },
+    { NAME: "WOODEN", PER_SQFT_RATE: 65 },
+  ],
+};
+
+export const WALL_FINISHES = {
+  POP_FALSE_CEILING: [
+    { NAME: "SACARNI/BIRLA", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.7 },
+    { NAME: "JK SUPER", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.7 },
+    { NAME: "OTHER BRANDS", PER_SQFT_RATE: 110, STANDARD_QUANTITY: 0.7 },
+  ],
+  POP_IN_WALLS: [
+    { NAME: "PLUMB", PER_SQFT_RATE: 18, STANDARD_QUANTITY: 3 },
+    { NAME: "PHANTI", PER_SQFT_RATE: 15, STANDARD_QUANTITY: 3 },
+    { NAME: "PUNNING", PER_SQFT_RATE: 10, STANDARD_QUANTITY: 3 },
+  ],
+  INTERMNAL_WALL_PAINT: [
+    { NAME: "ROYAL MATT", PER_SQRT_RATE: 45, STANDARD_QUANTITY: 3.5 },
+    { NAME: "PREMIUM", PER_SQRT_RATE: 25, STANDARD_QUANTITY: 3.5 },
+    { NAME: "TRACTOR EMULSION", PER_SQRT_RATE: 20, STANDARD_QUANTITY: 3.5 },
+  ],
+};
+
+export const HANDRAILS = {
+  STAIR_HANDRAIL: [
+    {
+      NAME: "SS RAILING 304 GRADE",
+      PER_UNIT_RATE: 400,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 30,
+    },
+    {
+      NAME: "MS RAILING",
+      PER_UNIT_RATE: 1000,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 30,
+    },
+    {
+      NAME: "SS RAILING",
+      PER_UNIT_RATE: 1200,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 30,
+    },
+  ],
+  BALCONY_HANDRAIL: [
+    {
+      NAME: "SS RAILING GLASS",
+      PER_UNIT_RATE: 1200,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 35,
+    },
+    {
+      NAME: "SS RAILING GLASS",
+      PER_UNIT_RATE: 1500,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 35,
+    },
+    {
+      NAME: "SS RAILING GLASS",
+      PER_UNIT_RATE: 1000,
+      PER_UNIT: "RFT",
+      STANDARD_QUANTITY: 35,
+    },
+  ],
+};
+
+export const WATER_TANK_CATEGORY = {
+  RATE: 10,
+  PRODUCTS: [
+    { NAME: "500L*2", PER_UNIT_RATE: 10000, PER_UNIT: "RS" },
+    { NAME: "1000L+500L", PER_UNIT_RATE: 15000, PER_UNIT: "RS" },
+    { NAME: "5000L", PER_UNIT_RATE: 50000, PER_UNIT: "RS" },
+    { NAME: "10000L", PER_UNIT_RATE: 100000, PER_UNIT: "RS" },
+    { NAME: "50000L", PER_UNIT_RATE: 500000, PER_UNIT: "RS" },
+  ],
+};
+
+export const KITCHEN_CATEGORY = {
+  PRODUCTS: [
+    { NAME: "BASIC", PER_UNIT_RATE: 100000, PER_UNIT: "RS" },
+    { NAME: "PREMIUM", PER_UNIT_RATE: 150000, PER_UNIT: "RS" },
+    { NAME: "CLASSIC", PER_UNIT_RATE: 200000, PER_UNIT: "RS" },
+  ],
+};
+
+export const MIX_CONCRETE_CATEGORY = {
+  RMC: [
+    {
+      NAME: "M25",
+      PER_UNIT_RATE: 4200,
+      PER_UNIT: "CUM",
+      STANDARD_QUANTITY: 0.04,
+    },
+    {
+      NAME: "M20",
+      PER_UNIT_RATE: 4000,
+      PER_UNIT: "CUM",
+      STANDARD_QUANTITY: 0.04,
+    },
+  ],
+  PCC: [
+    {
+      NAME: "M7.5",
+      PER_UNIT_RATE: 2800,
+      PER_UNIT: "CUM",
+      STANDARD_QUANTITY: 0.012,
+    },
+  ],
+};
+
+export const SAND_QUANTITY = {
+  PRODUCTS: [
+    {
+      NAME: "RIVER SAND",
+      PER_UNIT_RATE: 1250,
+      PER_UNIT: "TON",
+      STANDARD_QUANTITY: 0.05,
+    },
+    {
+      NAME: "M/E SAND",
+      PER_UNIT_RATE: 900,
+      PER_UNIT: "TON",
+      STANDARD_QUANTITY: 0.05,
+    },
+  ],
+};
+
+export const STONE_QUANTITY = {
+  PRODUCTS: [
+    {
+      NAME: "STONE",
+      PER_UNIT_RATE: 750,
+      PER_UNIT: "TON",
+      STANDARD_QUANTITY: 0.05,
+    },
+  ],
+};
+
+export const PLUMBING_QUANTITY = {
+  "PVC-(INTERNAL & EXTERNAL)": [
+    { NAME: "ASHIRVAD/ASTRAL", PER_SQRT_RATE: 35 },
+    { NAME: "SUPREME/PRINCE", PER_SQRT_RATE: 30 },
+    { NAME: "KISAN", PER_SQRT_RATE: 35 },
+  ],
+  "CPVC-(INTERNAL & EXTERNAL)": [
+    { NAME: "ASHIRVAD/ASTRAL", PER_SQRT_RATE: 35 },
+    { NAME: "SUPREME/PRINCE", PER_SQRT_RATE: 30 },
+    { NAME: "KISAN", PER_SQRT_RATE: 35 },
+  ],
+  "CP-VITREOUS": [
+    { NAME: "35K", PER_UNIT_RATE: 35000, PER_UNIT: "NOS" },
+    { NAME: "50K", PER_UNIT_RATE: 50000, PER_UNIT: "NOS" },
+  ],
+};
