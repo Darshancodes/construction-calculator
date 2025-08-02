@@ -1,4 +1,7 @@
+import { useStepStore } from "@/store/useStepStore";
+
 export const Cement = () => {
+  const { nextStep, prevStep } = useStepStore();
   const brands = ["UltraTech or Ambhuja", "JK", "Wonder or shree"];
   const calculateCementPrice = () => {
     const per_unit_rate = 340;
@@ -12,9 +15,21 @@ export const Cement = () => {
   return (
     <div>
       {brands?.map((brand) => (
-        <h2>{brand}</h2>
+        <h2 key={brand}>{brand}</h2>
       ))}
       {calculateCementPrice()}
+      <button
+        className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+        onClick={nextStep}
+      >
+        nextStep
+      </button>
+      <button
+        className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+        onClick={prevStep}
+      >
+        prevStep
+      </button>
     </div>
   );
 };
