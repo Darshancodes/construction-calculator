@@ -6,33 +6,69 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ELECTRICAL_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const Electrical = () => {
   const brands = ["shiva/jindal", "other brands"];
   const [selectedWallMaterial, setSelectedWallMaterial] = useState("");
   const [selectedWiresCables, setSelectedWiresCables] = useState("");
   const [selectedSwitches, setSelectedSwitches] = useState("");
   const { nextStep, prevStep } = useStepStore();
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
 
-  const calculateSlabWallMaterial = () => {
-    const per_sqft_rate = 20;
-    const ground_floor_area = 2000;
-    const total_build_up_area = 10000;
+  const calculateSlabWallMaterial = (name, per_sqft_rate) => {
+    // const per_sqft_rate = 20;
+    // const ground_floor_area = 2000;
+    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
+    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
     return amount;
   };
-  const calculateWiresCables = () => {
-    const per_sqft_rate = 70;
-    const ground_floor_area = 2000;
-    const total_build_up_area = 10000;
+  const calculateWiresCables = (name, per_sqft_rate) => {
+    // const per_sqft_rate = 70;
+    // const ground_floor_area = 2000;
+    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
+    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
     return amount;
   };
-  const calculateSheetsSwitches = () => {
-    const per_sqft_rate = 12;
-    const ground_floor_area = 2000;
-    const total_build_up_area = 10000;
+  const calculateSheetsSwitches = (name, per_sqft_rate) => {
+    // const per_sqft_rate = 12;
+    // const ground_floor_area = 2000;
+    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
+    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
     return amount;
+  };
+
+  const handleSlabWall = (name) => {
+    setSelectedWallMaterial(name);
+    const selected = ELECTRICAL_CATEGORY.ELECTRICAL_OR_WALL_MATERIAL.find(
+      (material) => material.NAME === name
+    );
+    if (selected) {
+      calculateSlabWallMaterial(selected?.NAME, selected?.PER_SQFT_RATE);
+    }
+  };
+  const handleWireCables = (name) => {
+    setSelectedWiresCables(name);
+    const selected = ELECTRICAL_CATEGORY["WIRES_AND_CABLES_EWC0100-FLAT"].find(
+      (material) => material?.NAME === name
+    );
+    if (selected) {
+      calculateWiresCables(selected?.NAME, selected?.PER_SQFT_RATE);
+    }
+  };
+  const handleSheetsSwitches = (name) => {
+    setSelectedSwitches(name);
+    const selected = ELECTRICAL_CATEGORY[
+      "SHEET-AND-SWITCHES_EWC0100-FLAT"
+    ].find((material) => material?.NAME === name);
+    if (selected) {
+      calculateSheetsSwitches(selected?.NAME, selected?.PER_SQFT_RATE);
+    }
   };
   return (
     <Card className="w-full">
@@ -46,7 +82,7 @@ export const Electrical = () => {
           <h3 className="text-lg font-medium mb-4">Electrical/Wall Material</h3>
           <RadioGroup
             value={selectedWallMaterial}
-            onValueChange={setSelectedWallMaterial}
+            onValueChange={handleSlabWall}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ELECTRICAL_CATEGORY.ELECTRICAL_OR_WALL_MATERIAL.map(
@@ -67,7 +103,7 @@ export const Electrical = () => {
           <h3 className="text-lg font-medium mb-4">Wires and Cables</h3>
           <RadioGroup
             value={selectedWiresCables}
-            onValueChange={setSelectedWiresCables}
+            onValueChange={handleWireCables}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ELECTRICAL_CATEGORY["WIRES_AND_CABLES_EWC0100-FLAT"].map(
@@ -91,7 +127,7 @@ export const Electrical = () => {
           <h3 className="text-lg font-medium mb-4">Sheets and Switches</h3>
           <RadioGroup
             value={selectedSwitches}
-            onValueChange={setSelectedSwitches}
+            onValueChange={handleSheetsSwitches}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ELECTRICAL_CATEGORY["SHEET-AND-SWITCHES_EWC0100-FLAT"].map(

@@ -6,13 +6,30 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { WATER_TANK_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const WaterTank = () => {
   const [selectedTank, setSelectedTank] = useState("");
   const { nextStep, prevStep } = useStepStore();
-  const calculateTankPrice = () => {
+  const {
+    addAndCalculate,
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+  } = useDataStore();
+  const calculateTankPrice = (name, price) => {
     // (rs.10/L)
     const tankList = ["500L*2", "1000L+500L", "5000L", "10000L", "50000L"];
     const priceList = ["10000", "15000", "50000", "100000", "500000"];
+
+    addAndCalculate({ NAME: "WATER-TANK", AMOUNT: price, BRAND: name });
+  };
+
+  const handleTank = (name) => {
+    setSelectedTank(name);
+    const selected = WATER_TANK_CATEGORY.BRANDS.find(
+      (tank) => tank.NAME === name
+    );
+    if (selected) {
+      calculateTankPrice(selected?.NAME, selected?.PER_UNIT_RATE);
+    }
   };
   return (
     <div>

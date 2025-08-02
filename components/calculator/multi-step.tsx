@@ -17,9 +17,11 @@ import { MiscallenousCost } from "../options/miscallenous-cost";
 import { LabourCost } from "../options/labour-cost";
 import { ManagementDesignFees } from "../options/management-design-fee";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 
 export const MultiStep = () => {
   const { currentStep } = useStepStore();
+  const { all_prices, total_prices } = useDataStore();
   const render = () => {
     switch (currentStep) {
       case 1:
@@ -62,7 +64,9 @@ export const MultiStep = () => {
   return (
     <div>
       {currentStep}
+      <div>{JSON.stringify(all_prices)}</div>
       {render()}
+      <div className="text-xl font-bold">{total_prices}</div>
     </div>
   );
 };

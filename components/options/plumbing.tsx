@@ -6,36 +6,78 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { PLUMBING_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const Plumbing = () => {
   const [selectedPVC, setSelectedPVC] = useState("");
   const [selectedCPVC, setSelectedCPVC] = useState("");
   const [selectedVitreous, setSelectedVitreous] = useState("");
   const { nextStep, prevStep } = useStepStore();
-
-  const calculatePVC = () => {
-    const per_sqft_rate = 35;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
+  const calculatePVC = (name, per_sqft_rate) => {
+    // const per_sqft_rate = 35;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
-    return amount;
+    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    // return amount;
   };
-  const calculateCPVC = () => {
-    const per_sqft_rate = 30;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
+  const calculateCPVC = (name, per_sqft_rate) => {
+    // const per_sqft_rate = 30;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
-    return amount;
+    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    // return amount;
   };
-  const calculateCPVitreous = () => {
-    const per_unit_rate = 35000;
-    const standard_quantity = 2;
-    const no_of_floors = 5;
+  const calculateCPVitreous = (name, per_unit_rate, standard_quantity) => {
+    // const per_unit_rate = 35000;
+    // const standard_quantity = 2;
+    // const no_of_floors = 5;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    return amount;
+    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    // return amount;
   };
+
+  const handlePVC = (name) => {
+    setSelectedPVC(name);
+    const selected = PLUMBING_QUANTITY["PVC-(INTERNAL & EXTERNAL)"].find(
+      (plumbing) => plumbing.NAME === name
+    );
+    if (selected) {
+      calculatePVC(selected?.NAME, selected?.PER_SQRT_RATE);
+    }
+  };
+
+  const handleCPVC = (name) => {
+    setSelectedCPVC(name);
+    const selected = PLUMBING_QUANTITY["CPVC-(INTERNAL & EXTERNAL)"].find(
+      (plumbing) => plumbing.NAME === name
+    );
+    if (selected) {
+      calculateCPVC(selected?.NAME, selected?.PER_SQRT_RATE);
+    }
+  };
+
+  const handleCPVitreous = (name) => {
+    setSelectedVitreous(name);
+    const selected = PLUMBING_QUANTITY["CP-VITREOUS"].find(
+      (plumbing) => plumbing.NAME === name
+    );
+    if (selected) {
+      calculateCPVitreous(
+        selected?.NAME,
+        selected?.PER_UNIT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+
   return (
     <div>
       <Card className="w-full">
@@ -49,7 +91,7 @@ export const Plumbing = () => {
             <h3 className="text-lg font-medium mb-4">
               PVC (Internal & External)
             </h3>
-            <RadioGroup value={selectedPVC} onValueChange={setSelectedPVC}>
+            <RadioGroup value={selectedPVC} onValueChange={handlePVC}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {PLUMBING_QUANTITY["PVC-(INTERNAL & EXTERNAL)"].map(
                   (item, index) => (
@@ -72,7 +114,7 @@ export const Plumbing = () => {
             <h3 className="text-lg font-medium mb-4">
               CPVC (Internal & External)
             </h3>
-            <RadioGroup value={selectedCPVC} onValueChange={setSelectedCPVC}>
+            <RadioGroup value={selectedCPVC} onValueChange={handleCPVC}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {PLUMBING_QUANTITY["CPVC-(INTERNAL & EXTERNAL)"].map(
                   (item, index) => (
@@ -95,7 +137,7 @@ export const Plumbing = () => {
             <h3 className="text-lg font-medium mb-4">CP-Vitreous</h3>
             <RadioGroup
               value={selectedVitreous}
-              onValueChange={setSelectedVitreous}
+              onValueChange={handleCPVitreous}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (

@@ -6,19 +6,38 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { CEMENT_CATEGORY } from "@/lib/constants";
+import { useDataStore } from "@/store/useDataStore";
 
 export const Cement = () => {
   const { nextStep, prevStep } = useStepStore();
   const [selectedBrand, setSelectedBrand] = useState("");
+  const {
+    constructionData: { total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
   const brands = ["UltraTech or Ambhuja", "JK", "Wonder or shree"];
-  const calculateCementPrice = () => {
-    const per_unit_rate = 340;
-    const ground_floor_area = 2000;
-    const standard_quantity = 0.17;
-    const total_build_up_area = 10000; // ground_floor_area * total_no_of_floors = 2000*5
+  const calculateCementPrice = (name, per_unit_rate, standard_quantity) => {
+    // const per_unit_rate = 340;
+    // const ground_floor_area = 2000;
+    // const standard_quantity = 0.17;
+    // const total_build_up_area = 10000; // ground_floor_area * total_no_of_floors = 2000*5
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = total_quantity * per_unit_rate;
+    addAndCalculate({ NAME: "CEMENT", AMOUNT: amount, BRAND: name });
     return amount;
+  };
+  const handleCementPrice = (brandName) => {
+    setSelectedBrand(brandName);
+    const selectedBrandData = CEMENT_CATEGORY.BRANDS.find(
+      (brand) => brand.NAME === brandName
+    );
+    if (selectedBrandData) {
+      calculateCementPrice(
+        selectedBrandData.NAME,
+        selectedBrandData.PER_UNIT_RATE,
+        selectedBrandData.STANDARD_QUANTITY
+      );
+    }
   };
   return (
     <Card className="w-full">
@@ -30,7 +49,7 @@ export const Cement = () => {
       <CardContent className="p-6">
         <div className="mb-4">
           <h3 className="text-lg font-medium mb-4">Select Brand</h3>
-          <RadioGroup value={selectedBrand} onValueChange={setSelectedBrand}>
+          <RadioGroup value={selectedBrand} onValueChange={handleCementPrice}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
                 <div key={index} className="relative">

@@ -6,22 +6,39 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { STONE_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const Stone = () => {
   const [selectedStone, setSelectedStone] = useState("");
   const { nextStep, prevStep } = useStepStore();
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
+  const calculateStonePrice = (name, per_unit_rate, standard_quantity) => {
+    // const per_unit_rate = 750;
+    // const standard_quantity = 0.05;
 
-  const calculateStonePrice = () => {
-    const per_unit_rate = 750;
-    const standard_quantity = 0.05;
-
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
 
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;
-    return amount;
+    addAndCalculate({ NAME: "STONE", AMOUNT: amount, BRAND: name });
+    // return amount;
   };
+
+  const handleStonePrice = (name) => {
+    const selected = STONE_QUANTITY.BRANDS.find((stone) => stone.NAME === name);
+    if (selected) {
+      calculateStonePrice(
+        selected?.NAME,
+        selected?.PER_UNIT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+
   return (
     <div>
       <Card className="w-full">
@@ -33,7 +50,7 @@ export const Stone = () => {
         <CardContent className="p-6">
           <div>
             <h3 className="text-lg font-medium mb-4">Stone Type</h3>
-            <RadioGroup value={selectedStone} onValueChange={setSelectedStone}>
+            <RadioGroup value={selectedStone} onValueChange={handleStonePrice}>
               <div className="grid grid-cols-1 gap-4">
                 {STONE_QUANTITY.BRANDS.map((item, index) => (
                   <div key={index} className="relative">

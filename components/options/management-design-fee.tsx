@@ -5,16 +5,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
+import { LABOUR_COST } from "@/lib/constants";
 
 export const ManagementDesignFees = () => {
   const { nextStep, prevStep } = useStepStore();
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
   const calculateManagementDesignFees = () => {
-    const per_sqft_rate = 249;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const amount = total_build_up_area * per_sqft_rate;
-    return amount;
+    // const per_sqft_rate = 249;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const amount = total_build_up_area * LABOUR_COST.PER_SQFT_RATE;
+    addAndCalculate({
+      NAME: "MANAGEMENT-DESIGN-FEES",
+      AMOUNT: amount,
+      BRAND: "MANAGEMENT-DESIGN-FEES",
+    });
+    // return amount;
   };
   return (
     <div>

@@ -6,14 +6,29 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { KITCHEN_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const Kitchen = () => {
   const [selectedKitchen, setSelectedKitchen] = useState("");
   const { nextStep, prevStep } = useStepStore();
+  const { addAndCalculate } = useDataStore();
   const kitchenList = [
     { name: "basic", price: "100000" },
     { name: "premium", price: "150000" },
     { name: "classic", price: "200000" },
   ];
+  const calculateKitchenPrice = (name, amount) => {
+    // const amount = 0;
+    addAndCalculate({ NAME: "KITCHEN", AMOUNT: amount, BRAND: name });
+  };
+  const handleKitchenPrice = (name) => {
+    setSelectedKitchen(name);
+    const selected = KITCHEN_CATEGORY.BRANDS.find(
+      (kitchen) => kitchen.NAME === name
+    );
+    if (selected) {
+      calculateKitchenPrice(selected?.NAME, selected?.PER_UNIT_RATE);
+    }
+  };
   return (
     <div>
       <Card className="w-full">
@@ -27,7 +42,7 @@ export const Kitchen = () => {
             <h3 className="text-lg font-medium mb-4">Kitchen Type</h3>
             <RadioGroup
               value={selectedKitchen}
-              onValueChange={setSelectedKitchen}
+              onValueChange={handleKitchenPrice}
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {KITCHEN_CATEGORY.BRANDS.map((item, index) => (

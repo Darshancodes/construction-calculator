@@ -4,18 +4,26 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { LABOUR_COST } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 
 export const LabourCost = () => {
   const { nextStep, prevStep } = useStepStore();
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
   const calculatelaboutCost = () => {
-    const per_sqft_rate = 290;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const amount = total_build_up_area * per_sqft_rate;
-    return amount;
+    // const per_sqft_rate = 290;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const amount = total_build_up_area * LABOUR_COST.PER_SQFT_RATE;
+    addAndCalculate({ NAME: "LABOUR-COST", AMOUNT: amount, BRAND: "WORKING" });
+    // return amount;
   };
+
   return (
     <div>
       LabourCost

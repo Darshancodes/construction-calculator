@@ -6,34 +6,91 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { BRICKS_CATEGORY } from "@/lib/constants";
+import { useDataStore } from "@/store/useDataStore";
 
 export const Bricks = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [waterProofing, setWaterProofing] = useState("");
   const [termiteSolution, setTermiteSolution] = useState("");
-
+  const {
+    constructionData: { ground_floor_area, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
   const { nextStep, prevStep } = useStepStore();
   const brands = [
     "fly ash bricks",
     "renwal or other red clay brick",
     "kanota or hanumargarah",
   ];
-  const calculateWaterProofing = () => {
-    const per_sqft_rate = 40;
-    const standard_quantity = 0.3;
-    const ground_floor_area = 2000;
+
+  const calculateBricks = (name, per_unit_rate, standard_quantity) => {
+    const total_quantity = standard_quantity * total_build_up_area;
+    const amount = per_unit_rate * total_quantity;
+    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
+  };
+  const calculateWaterProofing = (name, per_sqft_rate, standard_quantity) => {
+    // const per_sqft_rate = 40;
+    // const standard_quantity = 0.3;
+
     const total_quantity = standard_quantity * ground_floor_area;
     const amount = per_sqft_rate * total_quantity;
+    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
     return amount;
   };
-  const calculateTermiteSolution = () => {
-    const per_sqft_rate = 15;
-    const standard_quantity = 0.9;
-    const ground_floor_area = 2000;
+  const calculateTermiteSolution = (name, per_sqft_rate, standard_quantity) => {
+    // const per_sqft_rate = 15;
+    // const standard_quantity = 0.9;
     const total_quantity = standard_quantity * ground_floor_area;
     const amount = per_sqft_rate * total_quantity;
+    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
     return amount;
   };
+
+  // Handle brand selection and calculation
+  const handleBrandChange = (brandName) => {
+    setSelectedBrand(brandName);
+    const selectedBrandData = BRICKS_CATEGORY.BRANDS.find(
+      (brand) => brand.NAME === brandName
+    );
+    if (selectedBrandData) {
+      calculateBricks(
+        selectedBrandData.NAME,
+        selectedBrandData.PER_UNIT_RATE,
+        selectedBrandData.STANDARD_QUANTITY
+      );
+    }
+  };
+
+  // Handle water proofing selection and calculation
+  const handleWaterProofingChange = (optionName) => {
+    setWaterProofing(optionName);
+    const selectedOption = BRICKS_CATEGORY.WATER_PROOFING.find(
+      (option) => option.NAME === optionName
+    );
+    if (selectedOption && selectedOption.PER_SQFT_RATE > 0) {
+      calculateWaterProofing(
+        selectedOption.NAME,
+        selectedOption.PER_SQFT_RATE,
+        selectedOption.STANDARD_QUANTITY
+      );
+    }
+  };
+
+  // Handle termite solution selection and calculation
+  const handleTermiteSolutionChange = (optionName) => {
+    setTermiteSolution(optionName);
+    const selectedOption = BRICKS_CATEGORY.TERMITE_SOLUTION.find(
+      (option) => option.NAME === optionName
+    );
+    if (selectedOption && selectedOption.PER_SQFT_RATE > 0) {
+      calculateTermiteSolution(
+        selectedOption.NAME,
+        selectedOption.PER_SQFT_RATE,
+        selectedOption.STANDARD_QUANTITY
+      );
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="bg-yellow-50">
@@ -44,7 +101,7 @@ export const Bricks = () => {
       <CardContent className="p-6">
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-4">Select Brand</h3>
-          <RadioGroup value={selectedBrand} onValueChange={setSelectedBrand}>
+          <RadioGroup value={selectedBrand} onValueChange={handleBrandChange}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
                 <div key={index} className="relative">
@@ -79,7 +136,10 @@ export const Bricks = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <h3 className="text-lg font-medium mb-3">Water proofing</h3>
-            <RadioGroup value={waterProofing} onValueChange={setWaterProofing}>
+            <RadioGroup
+              value={waterProofing}
+              onValueChange={handleWaterProofingChange}
+            >
               <div className="flex gap-4">
                 {BRICKS_CATEGORY.WATER_PROOFING.map((option, index) => (
                   <div key={index} className="flex items-center space-x-2">
@@ -105,7 +165,7 @@ export const Bricks = () => {
             <h3 className="text-lg font-medium mb-3">Termite solution</h3>
             <RadioGroup
               value={termiteSolution}
-              onValueChange={setTermiteSolution}
+              onValueChange={handleTermiteSolutionChange}
             >
               <div className="flex gap-4">
                 {BRICKS_CATEGORY.TERMITE_SOLUTION.map((option, index) => (

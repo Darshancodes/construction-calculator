@@ -346,7 +346,17 @@ export const PLUMBING_QUANTITY = {
     { NAME: "KISAN", PER_SQRT_RATE: 35 },
   ],
   "CP-VITREOUS": [
-    { NAME: "35K", PER_UNIT_RATE: 35000, PER_UNIT: "NOS" },
-    { NAME: "50K", PER_UNIT_RATE: 50000, PER_UNIT: "NOS" },
+    {
+      NAME: "35K",
+      PER_UNIT_RATE: 35000,
+      PER_UNIT: "NOS",
+      STANDARD_QUANTITY: 2,
+    },
+    {
+      NAME: "50K",
+      PER_UNIT_RATE: 50000,
+      PER_UNIT: "NOS",
+      STANDARD_QUANTITY: 2,
+    },
   ],
 };

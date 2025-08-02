@@ -5,11 +5,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 
 export const MiscallenousCost = () => {
   const { nextStep, prevStep } = useStepStore();
+  const {
+    total_prices,
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
   const calculateMiscallenousCost = () => {
     // 5% of total material cost
+    const total = total_prices * 0.05;
+    addAndCalculate({
+      NAME: "MISCALLENOUS",
+      AMOUNT: total,
+      BRAND: "MISCALLENOUS",
+    });
   };
   return (
     <div>

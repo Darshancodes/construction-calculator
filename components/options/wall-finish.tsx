@@ -6,41 +6,97 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { WALL_FINISHES } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const WallFinishes = () => {
   const { nextStep, prevStep } = useStepStore();
-  const calculatePopFalseCeiling = () => {
-    const per_sqft_rate = 120;
-    const standard_quantity = 0.7;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const total_quantity = total_build_up_area * standard_quantity;
-    const amount = per_sqft_rate * total_quantity;
-    return amount;
-  };
-  const calculatePopInWalls = () => {
-    const per_sqft_rate = 18;
-    const standard_quantity = 3;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const total_quantity = total_build_up_area * standard_quantity;
-    const amount = per_sqft_rate * total_quantity;
-    return amount;
-  };
-  const calculateInternalWallPaint = () => {
-    const per_sqft_rate = 45;
-    const standard_quantity = 3.5;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const total_quantity = total_build_up_area * standard_quantity;
-    const amount = per_sqft_rate * total_quantity;
-    return amount;
-  };
+  const {
+    addAndCalculate,
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+  } = useDataStore();
   const [selectedCeiling, setSelectedCeiling] = useState("");
   const [selectedWalls, setSelectedWalls] = useState("");
   const [selectedPaint, setSelectedPaint] = useState("");
+
+  const calculatePopFalseCeiling = (name, per_sqft_rate, standard_quantity) => {
+    // const per_sqft_rate = 120;
+    // const standard_quantity = 0.7;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const total_quantity = total_build_up_area * standard_quantity;
+    const amount = per_sqft_rate * total_quantity;
+    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    // return amount;
+  };
+  const calculatePopInWalls = (name, per_sqft_rate, standard_quantity) => {
+    // const per_sqft_rate = 18;
+    // const standard_quantity = 3;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const total_quantity = total_build_up_area * standard_quantity;
+    const amount = per_sqft_rate * total_quantity;
+    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    // return amount;
+  };
+  const calculateInternalWallPaint = (
+    name,
+    per_sqft_rate,
+    standard_quantity
+  ) => {
+    // const per_sqft_rate = 45;
+    // const standard_quantity = 3.5;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const total_quantity = total_build_up_area * standard_quantity;
+    const amount = per_sqft_rate * total_quantity;
+    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    // return amount;
+  };
+
+  const handlePopFalseCeiling = (name) => {
+    setSelectedCeiling(name);
+    const selected = WALL_FINISHES.POP_FALSE_CEILING.find(
+      (wall) => wall.NAME === name
+    );
+    if (selected) {
+      calculatePopFalseCeiling(
+        selected?.NAME,
+        selected?.PER_SQFT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+
+  const handlePopInWalls = (name) => {
+    setSelectedWalls(name);
+    const selected = WALL_FINISHES.POP_IN_WALLS.find(
+      (wall) => wall.NAME === name
+    );
+    if (selected) {
+      calculatePopInWalls(
+        selected?.NAME,
+        selected?.PER_SQFT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+
+  const handleWallPaint = (name) => {
+    setSelectedPaint(name);
+    const selected = WALL_FINISHES.INTERMNAL_WALL_PAINT.find(
+      (wall) => wall.NAME === name
+    );
+    if (selected) {
+      calculateInternalWallPaint(
+        selected?.NAME,
+        selected?.PER_SQRT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+
   return (
     <div>
       <Card className="w-full">

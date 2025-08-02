@@ -6,19 +6,34 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { WINDOWS_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 
 export const Windows = () => {
   const [selectedMaterial, setSelectedMaterial] = useState("");
   const { nextStep, prevStep } = useStepStore();
-  const calculateMaterial = () => {
+  const {
+    addAndCalculate,
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+  } = useDataStore();
+  const calculateMaterial = (name, per_sqft_rate) => {
     const upvc = 65;
     const aluminium = 55;
     const wooden = 65;
-    const ground_floor_area = 2000;
-    const no_of_floors = 5;
-    const total_build_up_area = ground_floor_area * no_of_floors;
-    const amount = total_build_up_area * upvc;
+    // const ground_floor_area = 2000;
+    // const no_of_floors = 5;
+    // const total_build_up_area = ground_floor_area * no_of_floors;
+    const amount = total_build_up_area * per_sqft_rate;
+    addAndCalculate({ NAME: "WINDOW", AMOUNT: amount, BRAND: name });
     return amount;
+  };
+  const handleMaterial = (name) => {
+    setSelectedMaterial(name);
+    const selected = WINDOWS_CATEGORY.MATERIAL.find(
+      (material) => material.NAME === name
+    );
+    if (selected) {
+      calculateMaterial(selected?.NAME, selected?.PER_SQFT_RATE);
+    }
   };
   return (
     <div>

@@ -6,25 +6,59 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { HANDRAILS } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
+import { useDataStore } from "@/store/useDataStore";
 export const HandRails = () => {
   const [selectedStair, setSelectedStair] = useState("");
   const [selectedBalcony, setSelectedBalcony] = useState("");
   const { nextStep, prevStep } = useStepStore();
-  const calculateStairHandRail = () => {
-    const per_unit_rate = 400; //rft
-    const standard_quantity = 30;
-    const total_no_of_floors = 5;
-    const total_quantity = standard_quantity * total_no_of_floors;
+  const {
+    constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
+    addAndCalculate,
+  } = useDataStore();
+  const calculateStairHandRail = (name, per_unit_rate, standard_quantity) => {
+    // const per_unit_rate = 400; //rft
+    // const standard_quantity = 30;
+    // const total_no_of_floors = no_of_floors;
+    const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    return amount;
+    addAndCalculate({ NAME: "HANDRAIL", AMOUNT: amount, BRAND: name });
+    // return amount;
   };
-  const calculateBalconyHandRail = () => {
-    const per_unit_rate = 1200; //rft
-    const standard_quantity = 35;
-    const total_no_of_floors = 5;
-    const total_quantity = standard_quantity * total_no_of_floors;
+  const calculateBalconyHandRail = (name, per_unit_rate, standard_quantity) => {
+    // const per_unit_rate = 1200; //rft
+    // const standard_quantity = 35;
+    // const total_no_of_floors = no_of_floors;
+    const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    return amount;
+    addAndCalculate({ NAME: "HANDRAIL", AMOUNT: amount, BRAND: name });
+    // return amount;
+  };
+
+  const handleStairHandRail = (name) => {
+    setSelectedStair(name);
+    const selected = HANDRAILS.STAIR_HANDRAIL.find(
+      (hand) => hand.NAME === name
+    );
+    if (selected) {
+      calculateStairHandRail(
+        selected?.NAME,
+        selected?.PER_UNIT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
+  };
+  const handleBalconyHandRail = (name) => {
+    setSelectedBalcony(name);
+    const selected = HANDRAILS.STAIR_HANDRAIL.find(
+      (hand) => hand?.NAME === name
+    );
+    if (selected) {
+      calculateBalconyHandRail(
+        selected?.NAME,
+        selected?.PER_UNIT_RATE,
+        selected?.STANDARD_QUANTITY
+      );
+    }
   };
   return (
     <div>
@@ -37,7 +71,10 @@ export const HandRails = () => {
         <CardContent className="p-6 space-y-6">
           <div>
             <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
-            <RadioGroup value={selectedStair} onValueChange={setSelectedStair}>
+            <RadioGroup
+              value={selectedStair}
+              onValueChange={handleStairHandRail}
+            >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
                   <div key={index} className="flex items-center space-x-2">
@@ -58,7 +95,7 @@ export const HandRails = () => {
             <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
             <RadioGroup
               value={selectedBalcony}
-              onValueChange={setSelectedBalcony}
+              onValueChange={handleBalconyHandRail}
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
