@@ -10,7 +10,7 @@ export const TOTAL_NO_OF_FLOORS = 5;
 export const TOTAL_BUILDUP_AREA = GROUND_FLOOR_AREA * TOTAL_NO_OF_FLOORS;
 
 export const TMT_STEEL_CATEGORY = {
-  PRODUCTS: [
+  BRANDS: [
     {
       NAME: "TATA TISCON",
       PER_UNIT_RATE: 75,
@@ -36,7 +36,7 @@ export const TMT_STEEL_CATEGORY = {
 };
 
 export const BRICKS_CATEGORY = {
-  PRODUCTS: [
+  BRANDS: [
     {
       NAME: "FLY ASH BRICKS",
       PER_UNIT_RATE: 8,
@@ -90,7 +90,7 @@ export const BRICKS_CATEGORY = {
 };
 
 export const CEMENT_CATEGORY = {
-  PRODUCTS: [
+  BRANDS: [
     {
       NAME: "ULTRATECH OR AMBHUJA",
       PER_UNIT_RATE: 340,
@@ -264,7 +264,7 @@ export const HANDRAILS = {
 
 export const WATER_TANK_CATEGORY = {
   RATE: 10,
-  PRODUCTS: [
+  BRANDS: [
     { NAME: "500L*2", PER_UNIT_RATE: 10000, PER_UNIT: "RS" },
     { NAME: "1000L+500L", PER_UNIT_RATE: 15000, PER_UNIT: "RS" },
     { NAME: "5000L", PER_UNIT_RATE: 50000, PER_UNIT: "RS" },
@@ -274,7 +274,7 @@ export const WATER_TANK_CATEGORY = {
 };
 
 export const KITCHEN_CATEGORY = {
-  PRODUCTS: [
+  BRANDS: [
     { NAME: "BASIC", PER_UNIT_RATE: 100000, PER_UNIT: "RS" },
     { NAME: "PREMIUM", PER_UNIT_RATE: 150000, PER_UNIT: "RS" },
     { NAME: "CLASSIC", PER_UNIT_RATE: 200000, PER_UNIT: "RS" },
@@ -307,7 +307,7 @@ export const MIX_CONCRETE_CATEGORY = {
 };
 
 export const SAND_QUANTITY = {
-  PRODUCTS: [
+  BRANDS: [
     {
       NAME: "RIVER SAND",
       PER_UNIT_RATE: 1250,
@@ -324,7 +324,7 @@ export const SAND_QUANTITY = {
 };
 
 export const STONE_QUANTITY = {
-  PRODUCTS: [
+  BRANDS: [
     {
       NAME: "STONE",
       PER_UNIT_RATE: 750,

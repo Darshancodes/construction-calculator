@@ -1,8 +1,10 @@
 import { TMT_STEEL_CATEGORY } from "@/lib/constants";
+import { useDataStore } from "@/store/useDataStore";
 import { useStepStore } from "@/store/useStepStore";
 
 export const Steel = () => {
   const { nextStep, prevStep } = useStepStore();
+  const { addAndCalculate, total_prices } = useDataStore();
   const steelBrands = ["tata tiscon", "jindal Panther", "ambhuja", "ultratech"];
   const calculateSteelPrice = () => {
     const ground_floor_area = 2000;
@@ -12,15 +14,23 @@ export const Steel = () => {
     const standard_quantity = 3.5;
     const total_quantity = total_buildup_area * standard_quantity;
     const totalAmount = total_quantity * single_unit_rate;
+    addAndCalculate({ NAME: "CEMENT", AMOUNT: 3440 });
   };
   return (
     <div>
       <h2>Select Brand</h2>
       <div className="grid grid-cols-3">
-        {TMT_STEEL_CATEGORY.PRODUCTS.map((product) => (
-          <Card index={product?.NAME} product={product} />
+        {TMT_STEEL_CATEGORY.BRANDS.map((product) => (
+          <Card key={product?.NAME} index={product?.NAME} product={product} />
         ))}
       </div>
+      {total_prices}
+      <button
+        className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+        onClick={calculateSteelPrice}
+      >
+        calculate steel price
+      </button>
       {/* {steelBrands?.map((steel) => (
         <h3 key={steel}>{steel}</h3>
       ))} */}
