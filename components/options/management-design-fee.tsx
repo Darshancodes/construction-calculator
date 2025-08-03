@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
-import { LABOUR_COST } from "@/lib/constants";
+import { CATEGORY_NAMES, LABOUR_COST, MANAGEMENT_COST } from "@/lib/constants";
 
 export const ManagementDesignFees = () => {
   const { nextStep, prevStep } = useStepStore();
@@ -19,9 +19,9 @@ export const ManagementDesignFees = () => {
     // const ground_floor_area = 2000;
     // const no_of_floors = 5;
     // const total_build_up_area = ground_floor_area * no_of_floors;
-    const amount = total_build_up_area * LABOUR_COST.PER_SQFT_RATE;
+    const amount = total_build_up_area * MANAGEMENT_COST.PER_SQFT_RATE;
     addAndCalculate({
-      NAME: "MANAGEMENT-DESIGN-FEES",
+      NAME: CATEGORY_NAMES["MANAGEMENT-ND-DESIGN-FEES"],
       AMOUNT: amount,
       BRAND: "MANAGEMENT-DESIGN-FEES",
     });

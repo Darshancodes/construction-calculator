@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { HANDRAILS } from "@/lib/constants";
+import { CATEGORY_NAMES, HANDRAILS } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const HandRails = () => {
@@ -21,7 +21,11 @@ export const HandRails = () => {
     // const total_no_of_floors = no_of_floors;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "HANDRAIL", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["STAIR-HANDRAIL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculateBalconyHandRail = (name, per_unit_rate, standard_quantity) => {
@@ -30,7 +34,11 @@ export const HandRails = () => {
     // const total_no_of_floors = no_of_floors;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "HANDRAIL", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["BALCONY-HANDRAIL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
 

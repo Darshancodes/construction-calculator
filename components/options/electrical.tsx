@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ELECTRICAL_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, ELECTRICAL_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Electrical = () => {
@@ -23,7 +23,11 @@ export const Electrical = () => {
     // const ground_floor_area = 2000;
     // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["ELECTRICAL-SLAB-AND-WALL-MATERIAL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateWiresCables = (name, per_sqft_rate) => {
@@ -31,7 +35,11 @@ export const Electrical = () => {
     // const ground_floor_area = 2000;
     // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WIRES-AND-CABLES-EWC0100-FLAT"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateSheetsSwitches = (name, per_sqft_rate) => {
@@ -39,7 +47,11 @@ export const Electrical = () => {
     // const ground_floor_area = 2000;
     // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "ELECTRICAL", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["SHEET-AND-SWITCHES-EWC0100-FLAT"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
 

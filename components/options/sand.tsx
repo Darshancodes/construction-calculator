@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { SAND_QUANTITY } from "@/lib/constants";
+import { CATEGORY_NAMES, SAND_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Sand = () => {
@@ -24,7 +24,7 @@ export const Sand = () => {
 
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "SAND", AMOUNT: amount, BRAND: name });
+    addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
     // return amount;
   };
   const calculateMESand = (name, per_unit_rate, standard_quantity) => {
@@ -37,7 +37,7 @@ export const Sand = () => {
 
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "SAND", AMOUNT: amount, BRAND: name });
+    addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
     // return amount;
   };
 

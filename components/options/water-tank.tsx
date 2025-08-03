@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { WATER_TANK_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, WATER_TANK_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const WaterTank = () => {
@@ -14,15 +14,19 @@ export const WaterTank = () => {
     addAndCalculate,
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
   } = useDataStore();
-  const calculateTankPrice = (name, price) => {
+  const calculateTankPrice = (name: string, price: number) => {
     // (rs.10/L)
     const tankList = ["500L*2", "1000L+500L", "5000L", "10000L", "50000L"];
     const priceList = ["10000", "15000", "50000", "100000", "500000"];
 
-    addAndCalculate({ NAME: "WATER-TANK", AMOUNT: price, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WATER-TANK"],
+      AMOUNT: price,
+      BRAND: name,
+    });
   };
 
-  const handleTank = (name) => {
+  const handleTank = (name: string) => {
     setSelectedTank(name);
     const selected = WATER_TANK_CATEGORY.BRANDS.find(
       (tank) => tank.NAME === name
@@ -42,7 +46,7 @@ export const WaterTank = () => {
         <CardContent className="p-6">
           <div>
             <h3 className="text-lg font-medium mb-4">Tank Capacity</h3>
-            <RadioGroup value={selectedTank} onValueChange={setSelectedTank}>
+            <RadioGroup value={selectedTank} onValueChange={handleTank}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {WATER_TANK_CATEGORY.BRANDS.map((item, index) => (
                   <div key={index} className="relative">

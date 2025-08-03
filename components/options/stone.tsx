@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { STONE_QUANTITY } from "@/lib/constants";
+import { CATEGORY_NAMES, STONE_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Stone = () => {
@@ -24,7 +24,11 @@ export const Stone = () => {
 
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "STONE", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES.STONE,
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
 

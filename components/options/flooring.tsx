@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { FLOORING_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, FLOORING_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Flooring = () => {
@@ -22,7 +22,11 @@ export const Flooring = () => {
     // const per_sqft_rate = 50;
     // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "FLOORING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["VETRIFIED-TILES"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateCeremicWallTile = (name, per_sqft_rate, standard_quantity) => {
@@ -31,7 +35,11 @@ export const Flooring = () => {
     // const standard_quantity = 0.4;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "FLOORING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["CERAMIC-WALL-TILE-TOILED-AND-KITCHEN"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateGranite = (name, per_sqft_rate, standard_quantity) => {
@@ -40,7 +48,13 @@ export const Flooring = () => {
     // const standard_quantity = 0.2;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "FLOORING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES[
+        "GRANITE-DOOR_FRAME-WINDOW_FRAME-KITCHEN_TOP-STAIRCASE"
+      ],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateRoughStone = (name, per_sqft_rate, standard_quantity) => {
@@ -49,7 +63,11 @@ export const Flooring = () => {
     // const standard_quantity = 1.25;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "FLOORING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["ROUGH-STONE-TERRACE-AND-PARKING-AREA"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const handleVetrifiedTile = (name) => {

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
-import { CEMENT_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, CEMENT_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 
 export const Cement = () => {
@@ -23,7 +23,11 @@ export const Cement = () => {
     // const total_build_up_area = 10000; // ground_floor_area * total_no_of_floors = 2000*5
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = total_quantity * per_unit_rate;
-    addAndCalculate({ NAME: "CEMENT", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES.CEMENT,
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const handleCementPrice = (brandName) => {

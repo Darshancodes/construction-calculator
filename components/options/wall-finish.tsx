@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { WALL_FINISHES } from "@/lib/constants";
+import { CATEGORY_NAMES, WALL_FINISHES } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const WallFinishes = () => {
@@ -25,7 +25,11 @@ export const WallFinishes = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WALL-FINISH-POP-FALSE-CEILING"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculatePopInWalls = (name, per_sqft_rate, standard_quantity) => {
@@ -36,7 +40,11 @@ export const WallFinishes = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WALL-FINISH-POP-IN-WALLS"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculateInternalWallPaint = (
@@ -51,7 +59,11 @@ export const WallFinishes = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "WALL-FINISH", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WALL-FINISH-INTERNAL-WALL-PAINT"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
 

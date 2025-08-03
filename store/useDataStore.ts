@@ -70,8 +70,24 @@ export const useDataStore = create<DataStore>((set, get) => ({
   // Combined method that adds and then calculates total
   addAndCalculate: (newItem: PriceItem) =>
     set((state) => {
-      const updatedPrices = [...state.all_prices, newItem];
+      // Check if an item with the same NAME already exists
+      const existingItemIndex = state.all_prices.findIndex(
+        (item) => item.NAME === newItem.NAME
+      );
+
+      let updatedPrices;
+
+      if (existingItemIndex >= 0) {
+        // If exists, replace it with the new item
+        updatedPrices = [...state.all_prices];
+        updatedPrices[existingItemIndex] = newItem;
+      } else {
+        // If doesn't exist, add the new item
+        updatedPrices = [...state.all_prices, newItem];
+      }
+
       const total = updatedPrices.reduce((sum, item) => sum + item.AMOUNT, 0);
+
       return {
         all_prices: updatedPrices,
         total_prices: total,

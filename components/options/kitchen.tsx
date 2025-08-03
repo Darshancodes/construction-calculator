@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { KITCHEN_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, KITCHEN_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Kitchen = () => {
@@ -18,7 +18,11 @@ export const Kitchen = () => {
   ];
   const calculateKitchenPrice = (name, amount) => {
     // const amount = 0;
-    addAndCalculate({ NAME: "KITCHEN", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES.KITCHEN,
+      AMOUNT: amount,
+      BRAND: name,
+    });
   };
   const handleKitchenPrice = (name) => {
     setSelectedKitchen(name);

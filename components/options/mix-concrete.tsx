@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
-import { MIX_CONCRETE_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, MIX_CONCRETE_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 export const MixConcrete = () => {
   const [selectedRMC, setSelectedRMC] = useState("");
@@ -23,7 +23,11 @@ export const MixConcrete = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const total_quantity = standard_quantity * total_build_up_area;
     const amount = total_quantity * per_unit_rate;
-    addAndCalculate({ NAME: "MIX-CONCRETE", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["MIX-CONCRETE-RMC"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculatePCC = (name, per_unit_rate, standard_quantity) => {
@@ -34,7 +38,11 @@ export const MixConcrete = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const total_quantity = standard_quantity * total_build_up_area;
     const amount = total_quantity * per_unit_rate;
-    addAndCalculate({ NAME: "MIX-CONCRETE", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["MIX-CONCRETE-PCC"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const handleRMC = (name) => {

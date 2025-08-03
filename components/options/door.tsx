@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { DOOR_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, DOOR_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Door = () => {
@@ -23,7 +23,11 @@ export const Door = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
     let name = `${per_sqft_rate}/ft`;
     const amount = total_build_up_area * per_sqft_rate;
-    addAndCalculate({ NAME: "DOOR", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["DOOR-SHUTTER"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateFrameSingleRebate = (name, per_sqft_rate) => {
@@ -33,13 +37,21 @@ export const Door = () => {
     // const total_build_up_area = ground_floor_area * no_of_floors;
 
     const amount = total_build_up_area * per_sqft_rate;
-    addAndCalculate({ NAME: "DOOR", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["DOOR-FRAME-SINGLE-REBATE-ELS0100"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateMainDoor = (name, amount) => {
     const unitDoorPrice = ["15000/door", "20000/door", "30000/door"];
     // const amount = 0;
-    addAndCalculate({ NAME: "DOOR", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["MAIN-DOOR"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
   };
   const handleShutter = (sqft_rate) => {
     setSelectedShutter(sqft_rate);

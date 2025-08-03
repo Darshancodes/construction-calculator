@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { PLUMBING_QUANTITY } from "@/lib/constants";
+import { CATEGORY_NAMES, PLUMBING_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Plumbing = () => {
@@ -22,7 +22,11 @@ export const Plumbing = () => {
     // const no_of_floors = 5;
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["PLUMBING-PVC-INTERNAL-AND-EXTERNAL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculateCPVC = (name, per_sqft_rate) => {
@@ -31,7 +35,11 @@ export const Plumbing = () => {
     // const no_of_floors = 5;
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
-    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
   const calculateCPVitreous = (name, per_unit_rate, standard_quantity) => {
@@ -40,7 +48,11 @@ export const Plumbing = () => {
     // const no_of_floors = 5;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "PLUMBING", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["PLUMBING-CP-AND-VITREOUS"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     // return amount;
   };
 

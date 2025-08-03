@@ -1,4 +1,4 @@
-import { TMT_STEEL_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, TMT_STEEL_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 import { useStepStore } from "@/store/useStepStore";
 
@@ -18,7 +18,11 @@ export const Steel = () => {
     // const standard_quantity = 3.5;
     const total_quantity = total_buildup_area * standard_quantity;
     const totalAmount = total_quantity * single_unit_rate;
-    addAndCalculate({ NAME: "CEMENT", AMOUNT: totalAmount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES.STEEL,
+      AMOUNT: totalAmount,
+      BRAND: name,
+    });
   };
   return (
     <div>

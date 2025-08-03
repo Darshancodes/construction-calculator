@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { WINDOWS_CATEGORY } from "@/lib/constants";
+import { CATEGORY_NAMES, WINDOWS_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 
@@ -23,7 +23,11 @@ export const Windows = () => {
     // const no_of_floors = 5;
     // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = total_build_up_area * per_sqft_rate;
-    addAndCalculate({ NAME: "WINDOW", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WINDOW-MATERIAL"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const handleMaterial = (name) => {

@@ -6,6 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { CATEGORY_NAMES } from "@/lib/constants";
 
 export const MiscallenousCost = () => {
   const { nextStep, prevStep } = useStepStore();
@@ -18,7 +19,7 @@ export const MiscallenousCost = () => {
     // 5% of total material cost
     const total = total_prices * 0.05;
     addAndCalculate({
-      NAME: "MISCALLENOUS",
+      NAME: CATEGORY_NAMES["MISCALLENOUS-COST"],
       AMOUNT: total,
       BRAND: "MISCALLENOUS",
     });

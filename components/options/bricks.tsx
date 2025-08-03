@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
-import { BRICKS_CATEGORY } from "@/lib/constants";
+import { BRICKS_CATEGORY, CATEGORY_NAMES } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 
 export const Bricks = () => {
@@ -26,7 +26,11 @@ export const Bricks = () => {
   const calculateBricks = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = standard_quantity * total_build_up_area;
     const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES.BRICKS,
+      AMOUNT: amount,
+      BRAND: name,
+    });
   };
   const calculateWaterProofing = (name, per_sqft_rate, standard_quantity) => {
     // const per_sqft_rate = 40;
@@ -34,7 +38,11 @@ export const Bricks = () => {
 
     const total_quantity = standard_quantity * ground_floor_area;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["WATER-PROOFING"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
   const calculateTermiteSolution = (name, per_sqft_rate, standard_quantity) => {
@@ -42,7 +50,11 @@ export const Bricks = () => {
     // const standard_quantity = 0.9;
     const total_quantity = standard_quantity * ground_floor_area;
     const amount = per_sqft_rate * total_quantity;
-    addAndCalculate({ NAME: "BRICKS", AMOUNT: amount, BRAND: name });
+    addAndCalculate({
+      NAME: CATEGORY_NAMES["TERMITE-SOLUTION"],
+      AMOUNT: amount,
+      BRAND: name,
+    });
     return amount;
   };
 
