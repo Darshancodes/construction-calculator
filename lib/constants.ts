@@ -56,6 +56,7 @@ export const TMT_STEEL_CATEGORY = {
       PER_UNIT: "KG",
       STANDARD_QUANTITY: 3.5,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/tata-tiscon.svg",
     },
     {
       NAME: "JINDAL PANTHER",
@@ -63,6 +64,7 @@ export const TMT_STEEL_CATEGORY = {
       PER_UNIT: "KG",
       STANDARD_QUANTITY: 3.5,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/jindal-panther.svg",
     },
     {
       NAME: "JSW OR RATHI",
@@ -70,6 +72,7 @@ export const TMT_STEEL_CATEGORY = {
       PER_UNIT: "KG",
       STANDARD_QUANTITY: 3.5,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/jsw.svg",
     },
   ],
 };
@@ -82,6 +85,7 @@ export const BRICKS_CATEGORY = {
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 12,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/fly-ash-bricks.svg",
     },
     {
       NAME: "RENWEL OR OTHER CLAY BRICKS",
@@ -89,6 +93,7 @@ export const BRICKS_CATEGORY = {
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 12,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/renwal.svg",
     },
     {
       NAME: "KANOTA OR HANUMANGARH",
@@ -96,6 +101,7 @@ export const BRICKS_CATEGORY = {
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 12,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/kanota.svg",
     },
   ],
   WATER_PROOFING: [
@@ -136,6 +142,7 @@ export const CEMENT_CATEGORY = {
       PER_UNIT: "BAG",
       STANDARD_QUANTITY: 0.17,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/ultratech.svg",
     },
     {
       NAME: "JK",
@@ -143,6 +150,7 @@ export const CEMENT_CATEGORY = {
       PER_UNIT: "BAG",
       STANDARD_QUANTITY: 0.17,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/jk.svg",
     },
     {
       NAME: "WONDER OR SHREE",
@@ -150,6 +158,7 @@ export const CEMENT_CATEGORY = {
       PER_UNIT: "BAG",
       STANDARD_QUANTITY: 0.17,
       STANDARD_QUANTITY_UNIT: "SQFT",
+      IMAGE: "/brand-images/shree.svg",
     },
   ],
 };
@@ -159,54 +168,65 @@ export const ELECTRICAL_CATEGORY = {
     {
       NAME: "SHIVA OR JINDAL",
       PER_SQFT_RATE: 20,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "OTHER BRANDS",
       PER_SQFT_RATE: 17,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
   "WIRES_AND_CABLES_EWC0100-FLAT": [
     {
       NAME: "SHIVA OR JINDAL",
       PER_SQFT_RATE: 70,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "OTHER BRANDS",
       PER_SQFT_RATE: 60,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
   "SHEET-AND-SWITCHES_EWC0100-FLAT": [
     {
       NAME: "ANCHOR PENTA",
       PER_SQFT_RATE: 12,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "HAVELLS",
       PER_SQFT_RATE: 18,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "SCHNEIDER/GM",
       PER_SQFT_RATE: 18,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
 };
 
 export const FLOORING_CATEGORY = {
+  VETRIFIED_IMAGE: "/brand-images/vetrified.svg",
   VETRIFIED_TILES: [
     { NAME: "50RS/SQFT", PER_SQFT_RATE: 50 },
     { NAME: "80RS/SQFT", PER_SQFT_RATE: 80 },
     { NAME: "120RS/SQFT", PER_SQFT_RATE: 120 },
   ],
+  CERAMIC_WALL_TILE_IMAGE: "/brand-images/ceramic-wall-tile.svg",
   CERAMIC_WALL_TILE_TOILET_KITCHEN: [
     { NAME: "50RS/SQFT", PER_SQFT_RATE: 50, STANDARD_QUANTITY: 0.4 },
     { NAME: "80RS/SQFT", PER_SQFT_RATE: 80, STANDARD_QUANTITY: 0.4 },
     { NAME: "120RS/SQFT", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.4 },
   ],
+  GRANITE_DOORFRAME_IMAGE: "/brand-images/granite.svg",
   GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE: [
     { NAME: "75RS/SQFT", PER_SQFT_RATE: 75, STANDARD_QUANTITY: 0.2 },
     { NAME: "90RS/SQFT", PER_SQFT_RATE: 90, STANDARD_QUANTITY: 0.2 },
     { NAME: "120RS/SQFT", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.2 },
   ],
+  ROUGH_STONE_IMAGE: "/brand-images/rough-stone.svg",
   ROUGH_STONE_TERRACE_PARKINGAREA: [
     { NAME: "40RS/SQFT", PER_SQFT_RATE: 40, STANDARD_QUANTITY: 1.25 },
     { NAME: "60RS/SQFT", PER_SQFT_RATE: 60, STANDARD_QUANTITY: 1.25 },
@@ -221,9 +241,9 @@ export const DOOR_CATEGORY = {
     { PER_SQFT_RATE: 65 },
   ],
   DOOR_FRAME_SINGLE_REBATE_ELS0100: [
-    { NAME: "WOODEN", PER_SQFT_RATE: 35 },
-    { NAME: "GRANITE", PER_SQFT_RATE: 20 },
-    { NAME: "KAROLI STONE", PER_SQFT_RATE: 8 },
+    { NAME: "WOODEN", PER_SQFT_RATE: 35, IMAGE: "/brand-images/acc.svg" },
+    { NAME: "GRANITE", PER_SQFT_RATE: 20, IMAGE: "/brand-images/acc.svg" },
+    { NAME: "KAROLI STONE", PER_SQFT_RATE: 8, IMAGE: "/brand-images/acc.svg" },
   ],
   MAIN_DOOR: [
     { NAME: "15000/DOOR", PER_RATE_UNIT: 15000, PER_UNIT: "DOOR" },
@@ -234,27 +254,72 @@ export const DOOR_CATEGORY = {
 
 export const WINDOWS_CATEGORY = {
   MATERIAL: [
-    { NAME: "UPVC", PER_SQFT_RATE: 65 },
-    { NAME: "ALUMINIUM", PER_SQFT_RATE: 55 },
-    { NAME: "WOODEN", PER_SQFT_RATE: 65 },
+    { NAME: "UPVC", PER_SQFT_RATE: 65, IMAGE: "/brand-images/acc.svg" },
+    { NAME: "ALUMINIUM", PER_SQFT_RATE: 55, IMAGE: "/brand-images/acc.svg" },
+    { NAME: "WOODEN", PER_SQFT_RATE: 65, IMAGE: "/brand-images/acc.svg" },
   ],
 };
 
 export const WALL_FINISHES = {
   POP_FALSE_CEILING: [
-    { NAME: "SACARNI/BIRLA", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.7 },
-    { NAME: "JK SUPER", PER_SQFT_RATE: 120, STANDARD_QUANTITY: 0.7 },
-    { NAME: "OTHER BRANDS", PER_SQFT_RATE: 110, STANDARD_QUANTITY: 0.7 },
+    {
+      NAME: "SACARNI/BIRLA",
+      PER_SQFT_RATE: 120,
+      STANDARD_QUANTITY: 0.7,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "JK SUPER",
+      PER_SQFT_RATE: 120,
+      STANDARD_QUANTITY: 0.7,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "OTHER BRANDS",
+      PER_SQFT_RATE: 110,
+      STANDARD_QUANTITY: 0.7,
+      IMAGE: "/brand-images/acc.svg",
+    },
   ],
   POP_IN_WALLS: [
-    { NAME: "PLUMB", PER_SQFT_RATE: 18, STANDARD_QUANTITY: 3 },
-    { NAME: "PHANTI", PER_SQFT_RATE: 15, STANDARD_QUANTITY: 3 },
-    { NAME: "PUNNING", PER_SQFT_RATE: 10, STANDARD_QUANTITY: 3 },
+    {
+      NAME: "PLUMB",
+      PER_SQFT_RATE: 18,
+      STANDARD_QUANTITY: 3,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "PHANTI",
+      PER_SQFT_RATE: 15,
+      STANDARD_QUANTITY: 3,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "PUNNING",
+      PER_SQFT_RATE: 10,
+      STANDARD_QUANTITY: 3,
+      IMAGE: "/brand-images/acc.svg",
+    },
   ],
   INTERMNAL_WALL_PAINT: [
-    { NAME: "ROYAL MATT", PER_SQRT_RATE: 45, STANDARD_QUANTITY: 3.5 },
-    { NAME: "PREMIUM", PER_SQRT_RATE: 25, STANDARD_QUANTITY: 3.5 },
-    { NAME: "TRACTOR EMULSION", PER_SQRT_RATE: 20, STANDARD_QUANTITY: 3.5 },
+    {
+      NAME: "ROYAL MATT",
+      PER_SQRT_RATE: 45,
+      STANDARD_QUANTITY: 3.5,
+      IMAGE: "/brand-images/asian-paints.svg",
+    },
+    {
+      NAME: "PREMIUM",
+      PER_SQRT_RATE: 25,
+      STANDARD_QUANTITY: 3.5,
+      IMAGE: "/brand-images/asian-paints-premium.svg",
+    },
+    {
+      NAME: "TRACTOR EMULSION",
+      PER_SQRT_RATE: 20,
+      STANDARD_QUANTITY: 3.5,
+      IMAGE: "/brand-images/tractor-emulsion.svg",
+    },
   ],
 };
 
@@ -265,29 +330,34 @@ export const HANDRAILS = {
       PER_UNIT_RATE: 400,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 30,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "MS RAILING",
       PER_UNIT_RATE: 1000,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 30,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "SS RAILING",
       PER_UNIT_RATE: 1200,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 30,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
   BALCONY_HANDRAIL: [
     {
       NAME: "SS RAILING GLASS",
       PER_UNIT_RATE: 1200,
+      IMAGE: "/brand-images/ss-railing.svg",
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,
     },
     {
       NAME: "SS RAILING GLASS",
+      IMAGE: "/brand-images/ss-railing.svg",
       PER_UNIT_RATE: 1500,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,
@@ -297,12 +367,14 @@ export const HANDRAILS = {
       PER_UNIT_RATE: 1000,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
 };
 
 export const WATER_TANK_CATEGORY = {
   RATE: 10,
+  IMAGE: "/brand-images/water-tank.svg",
   BRANDS: [
     { NAME: "500L*2", PER_UNIT_RATE: 10000, PER_UNIT: "RS" },
     { NAME: "1000L+500L", PER_UNIT_RATE: 15000, PER_UNIT: "RS" },
@@ -314,9 +386,24 @@ export const WATER_TANK_CATEGORY = {
 
 export const KITCHEN_CATEGORY = {
   BRANDS: [
-    { NAME: "BASIC", PER_UNIT_RATE: 100000, PER_UNIT: "RS" },
-    { NAME: "PREMIUM", PER_UNIT_RATE: 150000, PER_UNIT: "RS" },
-    { NAME: "CLASSIC", PER_UNIT_RATE: 200000, PER_UNIT: "RS" },
+    {
+      NAME: "BASIC",
+      PER_UNIT_RATE: 100000,
+      PER_UNIT: "RS",
+      IMAGE: "/brand-images/kitchen.svg",
+    },
+    {
+      NAME: "PREMIUM",
+      PER_UNIT_RATE: 150000,
+      PER_UNIT: "RS",
+      IMAGE: "/brand-images/kitchen.svg",
+    },
+    {
+      NAME: "CLASSIC",
+      PER_UNIT_RATE: 200000,
+      PER_UNIT: "RS",
+      IMAGE: "/brand-images/kitchen.svg",
+    },
   ],
 };
 
@@ -327,12 +414,14 @@ export const MIX_CONCRETE_CATEGORY = {
       PER_UNIT_RATE: 4200,
       PER_UNIT: "CUM",
       STANDARD_QUANTITY: 0.04,
+      IMAGE: "/brand-images/ppc.svg",
     },
     {
       NAME: "M20",
       PER_UNIT_RATE: 4000,
       PER_UNIT: "CUM",
       STANDARD_QUANTITY: 0.04,
+      IMAGE: "/brand-images/ppc.svg",
     },
   ],
   PCC: [
@@ -341,6 +430,7 @@ export const MIX_CONCRETE_CATEGORY = {
       PER_UNIT_RATE: 2800,
       PER_UNIT: "CUM",
       STANDARD_QUANTITY: 0.012,
+      IMAGE: "/brand-images/ppc.svg",
     },
   ],
 };
@@ -352,12 +442,14 @@ export const SAND_QUANTITY = {
       PER_UNIT_RATE: 1250,
       PER_UNIT: "TON",
       STANDARD_QUANTITY: 0.05,
+      IMAGE: "/brand-images/sand.svg",
     },
     {
       NAME: "M/E SAND",
       PER_UNIT_RATE: 900,
       PER_UNIT: "TON",
       STANDARD_QUANTITY: 0.05,
+      IMAGE: "/brand-images/sand.svg",
     },
   ],
 };
@@ -375,14 +467,30 @@ export const STONE_QUANTITY = {
 
 export const PLUMBING_QUANTITY = {
   "PVC-(INTERNAL & EXTERNAL)": [
-    { NAME: "ASHIRVAD/ASTRAL", PER_SQRT_RATE: 35 },
-    { NAME: "SUPREME/PRINCE", PER_SQRT_RATE: 30 },
-    { NAME: "KISAN", PER_SQRT_RATE: 35 },
+    {
+      NAME: "ASHIRVAD/ASTRAL",
+      PER_SQRT_RATE: 35,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "SUPREME/PRINCE",
+      PER_SQRT_RATE: 30,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    { NAME: "KISAN", PER_SQRT_RATE: 35, IMAGE: "/brand-images/acc.svg" },
   ],
   "CPVC-(INTERNAL & EXTERNAL)": [
-    { NAME: "ASHIRVAD/ASTRAL", PER_SQRT_RATE: 35 },
-    { NAME: "SUPREME/PRINCE", PER_SQRT_RATE: 30 },
-    { NAME: "KISAN", PER_SQRT_RATE: 35 },
+    {
+      NAME: "ASHIRVAD/ASTRAL",
+      PER_SQRT_RATE: 35,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    {
+      NAME: "SUPREME/PRINCE",
+      PER_SQRT_RATE: 30,
+      IMAGE: "/brand-images/acc.svg",
+    },
+    { NAME: "KISAN", PER_SQRT_RATE: 35, IMAGE: "/brand-images/acc.svg" },
   ],
   "CP-VITREOUS": [
     {
@@ -390,12 +498,33 @@ export const PLUMBING_QUANTITY = {
       PER_UNIT_RATE: 35000,
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 2,
+      IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "50K",
       PER_UNIT_RATE: 50000,
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 2,
+      IMAGE: "/brand-images/acc.svg",
     },
   ],
 };
+
+export const STEPS_IMAGES = {
+  BRICKS: "/steps-images/bricks.svg",
+  CEMENT: "/steps-images/cement.svg",
+  DOOR: "/steps-images/door.svg",
+  ELECTRICAL: "/steps-images/electrical.svg",
+  FLOORING: "/steps-images/flooring.svg",
+  MIX_CONCRETE: "/steps-images/mix-concrete.svg",
+  PLUMBING: "/steps-images/plumbing.svg",
+  RAILINGS: "/steps-images/railings.svg",
+  TMT_STEEL: "/steps-images/tmt-steel.svg",
+  WALL_FINISH: "/steps-images/wall-finish.svg",
+  WINDOWS: "/steps-images/windows.svg",
+  KITCHEN: "/steps-images/kitchen.svg",
+  WATER_TANK: "/steps-images/water-tank.svg",
+  SAND: "/steps-images/sand.svg",
+};
+
+export const BRAND_IMAGES = {};

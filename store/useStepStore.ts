@@ -10,6 +10,7 @@ interface StepStoreState {
 interface StepStoreActions {
   nextStep: () => void;
   prevStep: () => void;
+  stepChange: (id: number) => void;
 }
 
 // Combined step store type
@@ -19,7 +20,7 @@ type StepStore = StepStoreState & StepStoreActions;
 export const useStepStore = create<StepStore>((set) => ({
   currentStep: 1,
   maxStep: 16,
-
+  stepChange: (id) => set((state) => ({ currentStep: id })),
   // Navigate to next step
   nextStep: () =>
     set((state) => ({

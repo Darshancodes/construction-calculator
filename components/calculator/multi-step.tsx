@@ -18,6 +18,8 @@ import { LabourCost } from "../options/labour-cost";
 import { ManagementDesignFees } from "../options/management-design-fee";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import StepNavigation from "./step-navigation";
+import { Stone } from "../options/stone";
 
 export const MultiStep = () => {
   const { currentStep } = useStepStore();
@@ -53,17 +55,18 @@ export const MultiStep = () => {
       case 14:
         return <Plumbing />;
       case 15:
-        return <MiscallenousCost />;
-      case 16:
-        return <LabourCost />;
-      case 17:
-        return <ManagementDesignFees />;
+        return <Stone />;
+      // case 16:
+      //   return <LabourCost />;
+      // case 17:
+      //   return <ManagementDesignFees />;
     }
   };
 
   return (
     <div>
-      {currentStep}
+      <h2>{currentStep}</h2>
+      <StepNavigation />
       <div>{JSON.stringify(all_prices)}</div>
       {render()}
       <div className="text-xl font-bold">{total_prices}</div>
