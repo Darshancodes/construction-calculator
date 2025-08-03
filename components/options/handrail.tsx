@@ -85,12 +85,25 @@ export const HandRails = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`stair-${index}`} />
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedStair === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleStairHandRail(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`stair-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <Label
                       htmlFor={`stair-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item.IMAGE} />
                       {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                     </Label>
                   </div>
@@ -107,12 +120,25 @@ export const HandRails = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`balcony-${index}`} />
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedBalcony === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleBalconyHandRail(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`balcony-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <Label
                       htmlFor={`balcony-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item.IMAGE} />
                       {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                     </Label>
                   </div>

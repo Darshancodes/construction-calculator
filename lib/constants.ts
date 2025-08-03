@@ -349,21 +349,21 @@ export const HANDRAILS = {
   ],
   BALCONY_HANDRAIL: [
     {
-      NAME: "SS RAILING GLASS",
+      NAME: "SS RAILING GLASS -1200",
       PER_UNIT_RATE: 1200,
       IMAGE: "/brand-images/ss-railing.svg",
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,
     },
     {
-      NAME: "SS RAILING GLASS",
+      NAME: "SS RAILING GLASS -1500",
       IMAGE: "/brand-images/ss-railing.svg",
       PER_UNIT_RATE: 1500,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,
     },
     {
-      NAME: "SS RAILING GLASS",
+      NAME: "SS RAILING GLASS -1000",
       PER_UNIT_RATE: 1000,
       PER_UNIT: "RFT",
       STANDARD_QUANTITY: 35,

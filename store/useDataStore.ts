@@ -23,6 +23,17 @@ interface DataStoreState {
   all_prices: PriceItem[];
   constructionData: ConstructionData;
   readonly total_prices: number;
+
+  // Constants
+  MISCELLANEOUS_COST_PERCENT: number;
+  LABOUR_COST_PER_SQFT: number;
+  MANAGEMENT_COST_PER_SQFT: number;
+
+  // Derived values
+  miscellaneous_cost: number;
+  labour_cost: number;
+  management_cost: number;
+  total_final_cost: number;
 }
 
 // Data store actions interface
@@ -47,6 +58,10 @@ export const useDataStore = create<DataStore>((set, get) => ({
       return this.ground_floor_area * this.no_of_floors;
     },
   },
+  // Cost constants
+  MISCELLANEOUS_COST_PERCENT: 5,
+  LABOUR_COST_PER_SQFT: 290,
+  MANAGEMENT_COST_PER_SQFT: 249,
 
   // Method to add a new price object
   addPrice: (newItem: PriceItem) =>
@@ -88,11 +103,31 @@ export const useDataStore = create<DataStore>((set, get) => ({
 
       const total = updatedPrices.reduce((sum, item) => sum + item.AMOUNT, 0);
 
+      const buildUpArea = get().constructionData.total_build_up_area;
+      const miscPercent = get().MISCELLANEOUS_COST_PERCENT;
+      const labourRate = get().LABOUR_COST_PER_SQFT;
+      const managementRate = get().MANAGEMENT_COST_PER_SQFT;
+
+      const miscellaneous = (miscPercent / 100) * total;
+      const labour = buildUpArea * labourRate;
+      const management = buildUpArea * managementRate;
+      const final = total + miscellaneous + labour + management;
+
       return {
         all_prices: updatedPrices,
         total_prices: total,
+        miscellaneous_cost: miscellaneous,
+        labour_cost: labour,
+        management_cost: management,
+        total_final_cost: final,
       };
     }),
+  // Initial values for computed fields
+
+  miscellaneous_cost: 0,
+  labour_cost: 0,
+  management_cost: 0,
+  total_final_cost: 0,
 }));
 
 // Optional: Export types for use in components

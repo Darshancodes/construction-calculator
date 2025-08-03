@@ -44,8 +44,8 @@ export const Cement = () => {
     }
   };
   return (
-    <Card className="w-full">
-      <CardHeader className="bg-yellow-50">
+    <Card className="w-full bg-yellow-50">
+      <CardHeader className="">
         <CardTitle className="text-xl font-semibold text-gray-800">
           Cement
         </CardTitle>
@@ -57,19 +57,25 @@ export const Cement = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
                 <div key={index} className="relative">
-                  <RadioGroupItem
-                    value={brand.NAME}
-                    id={`cement-${index}`}
-                    className="peer sr-only"
-                  />
+                  <div className="absolute top-3 right-3">
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        selectedBrand === brand.NAME
+                          ? "border-blue-500 bg-blue-500"
+                          : "border-gray-300"
+                      }`}
+                    >
+                      {selectedBrand === brand.NAME && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                  </div>
                   <Label
                     htmlFor={`cement-${index}`}
                     className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                   >
-                    <div className="w-16 h-16 bg-gray-300 rounded-lg mb-3 flex items-center justify-center">
-                      <span className="text-xs font-bold text-gray-700 text-center">
-                        {brand.NAME.split(" ")[0]}
-                      </span>
+                    <div className=" bg-gray-300 rounded-lg mb-3 flex items-center justify-center">
+                      <img src={brand?.IMAGE} />
                     </div>
                     <span className="text-sm font-medium text-center">
                       {brand.NAME}

@@ -107,12 +107,21 @@ export const Plumbing = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {PLUMBING_QUANTITY["PVC-(INTERNAL & EXTERNAL)"].map(
                   (item, index) => (
-                    <div key={index} className="flex items-center space-x-2">
+                    <div
+                      key={index}
+                      className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedPVC === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handlePVC(item.NAME)}
+                    >
                       <RadioGroupItem value={item.NAME} id={`pvc-${index}`} />
                       <Label
                         htmlFor={`pvc-${index}`}
                         className="cursor-pointer"
                       >
+                        <img src={item?.IMAGE} />
                         {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                       </Label>
                     </div>
@@ -130,12 +139,21 @@ export const Plumbing = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {PLUMBING_QUANTITY["CPVC-(INTERNAL & EXTERNAL)"].map(
                   (item, index) => (
-                    <div key={index} className="flex items-center space-x-2">
+                    <div
+                      key={index}
+                      className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedCPVC === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handleCPVC(item.NAME)}
+                    >
                       <RadioGroupItem value={item.NAME} id={`cpvc-${index}`} />
                       <Label
                         htmlFor={`cpvc-${index}`}
                         className="cursor-pointer"
                       >
+                        <img src={item?.IMAGE} />
                         {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                       </Label>
                     </div>
@@ -153,7 +171,15 @@ export const Plumbing = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedVitreous === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleCPVitreous(item.NAME)}
+                  >
                     <RadioGroupItem
                       value={item.NAME}
                       id={`vitreous-${index}`}
@@ -162,6 +188,7 @@ export const Plumbing = () => {
                       htmlFor={`vitreous-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item?.IMAGE} />
                       {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
                       {item.PER_UNIT}
                     </Label>

@@ -8,7 +8,7 @@ import { CATEGORY_NAMES, DOOR_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 export const Door = () => {
-  const [selectedShutter, setSelectedShutter] = useState("");
+  const [selectedShutter, setSelectedShutter] = useState<number>();
   const [selectedFrame, setSelectedFrame] = useState("");
   const [selectedMainDoor, setSelectedMainDoor] = useState("");
   const { nextStep, prevStep } = useStepStore();
@@ -89,10 +89,21 @@ export const Door = () => {
         <CardContent className="p-6 space-y-6">
           <div>
             <h3 className="text-lg font-medium mb-4">Door Shutter</h3>
-            <RadioGroup value={selectedShutter} onValueChange={handleShutter}>
+            <RadioGroup
+              value={selectedShutter?.toString()}
+              onValueChange={handleShutter}
+            >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {DOOR_CATEGORY.DOOR_SHUTTER.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedShutter === item.PER_SQFT_RATE
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleShutter(item.PER_SQFT_RATE)}
+                  >
                     <RadioGroupItem
                       value={`option-${index}`}
                       id={`shutter-${index}`}
@@ -120,8 +131,17 @@ export const Door = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {DOOR_CATEGORY.DOOR_FRAME_SINGLE_REBATE_ELS0100.map(
                   (item, index) => (
-                    <div key={index} className="flex items-center space-x-2">
+                    <div
+                      key={index}
+                      className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedFrame === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handleFrameSingleRebate(item.NAME)}
+                    >
                       <RadioGroupItem value={item.NAME} id={`frame-${index}`} />
+                      <img src={item?.IMAGE} />
                       <Label
                         htmlFor={`frame-${index}`}
                         className="cursor-pointer"
@@ -140,8 +160,17 @@ export const Door = () => {
             <RadioGroup value={selectedMainDoor} onValueChange={handleMainDoor}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {DOOR_CATEGORY.MAIN_DOOR.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedMainDoor === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleMainDoor(item.NAME)}
+                  >
                     <RadioGroupItem value={item.NAME} id={`main-${index}`} />
+
                     <Label htmlFor={`main-${index}`} className="cursor-pointer">
                       {item.NAME}
                     </Label>

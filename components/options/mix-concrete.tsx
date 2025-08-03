@@ -87,8 +87,17 @@ export const MixConcrete = () => {
             <RadioGroup value={selectedRMC} onValueChange={handleRMC}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {MIX_CONCRETE_CATEGORY.RMC.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedRMC === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleRMC(item.NAME)}
+                  >
                     <RadioGroupItem value={item.NAME} id={`rmc-${index}`} />
+                    <img src={item?.IMAGE} />
                     <Label htmlFor={`rmc-${index}`} className="cursor-pointer">
                       {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                     </Label>
@@ -105,8 +114,17 @@ export const MixConcrete = () => {
             <RadioGroup value={selectedPCC} onValueChange={handlePCC}>
               <div className="grid grid-cols-1 gap-4">
                 {MIX_CONCRETE_CATEGORY.PCC.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedPCC === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePCC(item.NAME)}
+                  >
                     <RadioGroupItem value={item.NAME} id={`pcc-${index}`} />
+                    <img src={item.IMAGE} />
                     <Label htmlFor={`pcc-${index}`} className="cursor-pointer">
                       {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                     </Label>

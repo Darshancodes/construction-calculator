@@ -83,14 +83,14 @@ export const Electrical = () => {
     }
   };
   return (
-    <Card className="w-full">
-      <CardHeader className="bg-yellow-50">
+    <Card className="w-full bg-yellow-50">
+      <CardHeader className="">
         <CardTitle className="text-xl font-semibold text-gray-800">
           Electrical
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6 space-y-6">
-        <div>
+        <div className="">
           <h3 className="text-lg font-medium mb-4">Electrical/Wall Material</h3>
           <RadioGroup
             value={selectedWallMaterial}
@@ -99,8 +99,16 @@ export const Electrical = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ELECTRICAL_CATEGORY.ELECTRICAL_OR_WALL_MATERIAL.map(
                 (item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`wall-${index}`} />
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 bg-white py-2 flex-col relative"
+                  >
+                    <img src={item?.IMAGE} />
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`wall-${index}`}
+                      className="absolute top-0 right-0"
+                    />
                     <Label htmlFor={`wall-${index}`} className="cursor-pointer">
                       {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                     </Label>
@@ -120,8 +128,16 @@ export const Electrical = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ELECTRICAL_CATEGORY["WIRES_AND_CABLES_EWC0100-FLAT"].map(
                 (item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`wires-${index}`} />
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 bg-white flex-col relative"
+                  >
+                    <img src={item?.IMAGE} />
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`wires-${index}`}
+                      className="absolute top-0 right-0"
+                    />
                     <Label
                       htmlFor={`wires-${index}`}
                       className="cursor-pointer"
@@ -144,10 +160,15 @@ export const Electrical = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ELECTRICAL_CATEGORY["SHEET-AND-SWITCHES_EWC0100-FLAT"].map(
                 (item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 bg-white flex-col relative"
+                  >
+                    <img src={item?.IMAGE} />
                     <RadioGroupItem
                       value={item.NAME}
                       id={`switches-${index}`}
+                      className="absolute top-0 right-0"
                     />
                     <Label
                       htmlFor={`switches-${index}`}

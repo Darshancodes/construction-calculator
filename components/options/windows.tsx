@@ -15,7 +15,7 @@ export const Windows = () => {
     addAndCalculate,
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
   } = useDataStore();
-  const calculateMaterial = (name, per_sqft_rate) => {
+  const calculateMaterial = (name: string, per_sqft_rate: number) => {
     const upvc = 65;
     const aluminium = 55;
     const wooden = 65;
@@ -30,7 +30,7 @@ export const Windows = () => {
     });
     return amount;
   };
-  const handleMaterial = (name) => {
+  const handleMaterial = (name: string) => {
     setSelectedMaterial(name);
     const selected = WINDOWS_CATEGORY.MATERIAL.find(
       (material) => material.NAME === name
@@ -56,24 +56,28 @@ export const Windows = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {WINDOWS_CATEGORY.MATERIAL.map((item, index) => (
-                  <div key={index} className="relative">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedMaterial === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleMaterial(item.NAME)}
+                  >
                     <RadioGroupItem
                       value={item.NAME}
                       id={`window-${index}`}
-                      className="peer sr-only"
+                      className="absolute top-0 right-0"
                     />
-                    <Label
-                      htmlFor={`window-${index}`}
-                      className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
-                    >
-                      <div className="w-16 h-12 bg-blue-100 rounded mb-3 flex items-center justify-center">
-                        <div className="w-12 h-8 border-2 border-blue-300 rounded-sm"></div>
-                      </div>
-                      <span className="text-sm font-medium">{item.NAME}</span>
-                      <span className="text-xs text-gray-500 mt-1">
-                        ₹{item.PER_SQFT_RATE}/sqft
-                      </span>
-                    </Label>
+
+                    <div className=" bg-blue-100 rounded mb-3 flex items-center justify-center">
+                      <img src={item?.IMAGE} />
+                    </div>
+                    <span className="text-sm font-medium">{item.NAME}</span>
+                    <span className="text-xs text-gray-500 mt-1">
+                      ₹{item.PER_SQFT_RATE}/sqft
+                    </span>
                   </div>
                 ))}
               </div>

@@ -20,6 +20,7 @@ import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 import StepNavigation from "./step-navigation";
 import { Stone } from "../options/stone";
+import { TotalCost } from "../options/total-cost";
 
 export const MultiStep = () => {
   const { currentStep } = useStepStore();
@@ -56,10 +57,8 @@ export const MultiStep = () => {
         return <Plumbing />;
       case 15:
         return <Stone />;
-      // case 16:
-      //   return <LabourCost />;
-      // case 17:
-      //   return <ManagementDesignFees />;
+      case 16:
+        return <TotalCost />;
     }
   };
 

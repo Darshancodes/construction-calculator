@@ -50,24 +50,28 @@ export const Kitchen = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {KITCHEN_CATEGORY.BRANDS.map((item, index) => (
-                  <div key={index} className="relative">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedKitchen === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleKitchenPrice(item.NAME)}
+                  >
                     <RadioGroupItem
                       value={item.NAME}
                       id={`kitchen-${index}`}
                       className="peer sr-only"
                     />
-                    <Label
-                      htmlFor={`kitchen-${index}`}
-                      className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
-                    >
-                      <div className="w-16 h-16 bg-orange-200 rounded-lg mb-3 flex items-center justify-center">
-                        <div className="w-10 h-10 bg-orange-400 rounded"></div>
-                      </div>
-                      <span className="text-sm font-medium">{item.NAME}</span>
-                      <span className="text-xs text-gray-500 mt-1">
-                        ₹{item.PER_UNIT_RATE.toLocaleString()}
-                      </span>
-                    </Label>
+
+                    <div className="w-16 h-16 bg-orange-200 rounded-lg mb-3 flex items-center justify-center">
+                      <div className="w-10 h-10 bg-orange-400 rounded"></div>
+                    </div>
+                    <span className="text-sm font-medium">{item.NAME}</span>
+                    <span className="text-xs text-gray-500 mt-1">
+                      ₹{item.PER_UNIT_RATE.toLocaleString()}
+                    </span>
                   </div>
                 ))}
               </div>

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, FLOORING_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+
 export const Flooring = () => {
   const [selectedVitrified, setSelectedVitrified] = useState("");
   const [selectedCeramic, setSelectedCeramic] = useState("");
@@ -18,7 +19,7 @@ export const Flooring = () => {
     addAndCalculate,
   } = useDataStore();
 
-  const calculateVetrifiedTile = (name, per_sqft_rate) => {
+  const calculateVetrifiedTile = (name: string, per_sqft_rate: number) => {
     // const per_sqft_rate = 50;
     // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
@@ -29,7 +30,11 @@ export const Flooring = () => {
     });
     return amount;
   };
-  const calculateCeremicWallTile = (name, per_sqft_rate, standard_quantity) => {
+  const calculateCeremicWallTile = (
+    name: string,
+    per_sqft_rate: number,
+    standard_quantity: number
+  ) => {
     // const per_sqft_rate = 50;
     // const total_build_up_area = 10000;
     // const standard_quantity = 0.4;
@@ -42,7 +47,11 @@ export const Flooring = () => {
     });
     return amount;
   };
-  const calculateGranite = (name, per_sqft_rate, standard_quantity) => {
+  const calculateGranite = (
+    name: string,
+    per_sqft_rate: number,
+    standard_quantity: number
+  ) => {
     // const per_sqft_rate = 75;
     // const total_build_up_area = 10000;
     // const standard_quantity = 0.2;
@@ -57,7 +66,11 @@ export const Flooring = () => {
     });
     return amount;
   };
-  const calculateRoughStone = (name, per_sqft_rate, standard_quantity) => {
+  const calculateRoughStone = (
+    name: string,
+    per_sqft_rate: number,
+    standard_quantity: number
+  ) => {
     // const per_sqft_rate = 40;
     // const total_build_up_area = 10000;
     // const standard_quantity = 1.25;
@@ -70,7 +83,7 @@ export const Flooring = () => {
     });
     return amount;
   };
-  const handleVetrifiedTile = (name) => {
+  const handleVetrifiedTile = (name: string) => {
     setSelectedVitrified(name);
     const selected = FLOORING_CATEGORY.VETRIFIED_TILES.find(
       (tile) => tile?.NAME === name
@@ -79,7 +92,7 @@ export const Flooring = () => {
       calculateVetrifiedTile(selected?.NAME, selected?.PER_SQFT_RATE);
     }
   };
-  const handleCeremicWall = (name) => {
+  const handleCeremicWall = (name: string) => {
     setSelectedCeramic(name);
     const selected = FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN.find(
       (tile) => tile.NAME === name
@@ -92,7 +105,7 @@ export const Flooring = () => {
       );
     }
   };
-  const handleRoughStone = (name) => {
+  const handleRoughStone = (name: string) => {
     setSelectedRoughStone(name);
     const selected = FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA.find(
       (tile) => tile.NAME === name
@@ -105,7 +118,7 @@ export const Flooring = () => {
       );
     }
   };
-  const handleGranite = (name) => {
+  const handleGranite = (name: string) => {
     setSelectedGranite(name);
     const selected =
       FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.find(
@@ -120,7 +133,235 @@ export const Flooring = () => {
     }
   };
   return (
-    <div>
+    <div className="max-w-4xl mx-auto p-6 space-y-4">
+      {/* Vitrified Tiles */}
+      <div className="bg-yellow-50 rounded-lg p-4">
+        <div className="flex items-center gap-6">
+          <div className="flex-shrink-0">
+            <div className="text-sm font-medium text-gray-700 mb-2">
+              Verified tiles
+            </div>
+            <img
+              src={FLOORING_CATEGORY.VETRIFIED_IMAGE || "/placeholder.svg"}
+              alt="Vitrified tiles"
+              className="w-20 h-20 object-cover rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <RadioGroup
+              value={selectedVitrified}
+              onValueChange={handleVetrifiedTile}
+            >
+              <div className="grid grid-cols-3 gap-4">
+                {FLOORING_CATEGORY.VETRIFIED_TILES.map((item, index) => (
+                  <div key={index} className="relative">
+                    <div
+                      className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedVitrified === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handleVetrifiedTile(item.NAME)}
+                    >
+                      <RadioGroupItem
+                        value={item.NAME}
+                        id={`vitrified-${index}`}
+                        className="absolute top-2 right-2"
+                      />
+                      <div className="text-center">
+                        <div className="text-xs text-gray-500 mb-1">Upto</div>
+                        <div className="text-lg font-bold">
+                          ₹{item.PER_SQFT_RATE}
+                        </div>
+                        <div className="text-xs text-gray-500">per sqft.</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
+        </div>
+      </div>
+
+      {/* Ceramic Wall Tile */}
+      <div className="bg-yellow-50 rounded-lg p-4">
+        <div className="flex items-center gap-6">
+          <div className="flex-shrink-0">
+            <div className="text-sm font-medium text-gray-700 mb-2">
+              Ceramic wall tile
+            </div>
+            <img
+              src={
+                FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE || "/placeholder.svg"
+              }
+              alt="Ceramic wall tile"
+              className="w-20 h-20 object-cover rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <RadioGroup
+              value={selectedCeramic}
+              onValueChange={handleCeremicWall}
+            >
+              <div className="grid grid-cols-3 gap-4">
+                {FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN.map(
+                  (item, index) => (
+                    <div key={index} className="relative">
+                      <div
+                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                          selectedCeramic === item.NAME
+                            ? "border-black"
+                            : "border-gray-200 hover:border-gray-300"
+                        }`}
+                        onClick={() => handleCeremicWall(item.NAME)}
+                      >
+                        <RadioGroupItem
+                          value={item.NAME}
+                          id={`ceramic-${index}`}
+                          className="absolute top-2 right-2"
+                        />
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500 mb-1">Upto</div>
+                          <div className="text-lg font-bold">
+                            ₹{item.PER_SQFT_RATE}
+                          </div>
+                          <div className="text-xs text-gray-500">per sqft.</div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </RadioGroup>
+          </div>
+        </div>
+      </div>
+
+      {/* Granite */}
+      <div className="bg-yellow-50 rounded-lg p-4">
+        <div className="flex items-center gap-6">
+          <div className="flex-shrink-0">
+            <div className="text-sm font-medium text-gray-700 mb-2">
+              Granite
+            </div>
+            <img
+              src={
+                FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE || "/placeholder.svg"
+              }
+              alt="Granite"
+              className="w-20 h-20 object-cover rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <RadioGroup value={selectedGranite} onValueChange={handleGranite}>
+              <div className="grid grid-cols-3 gap-4">
+                {FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.map(
+                  (item, index) => (
+                    <div key={index} className="relative">
+                      <div
+                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                          selectedGranite === item.NAME
+                            ? "border-black"
+                            : "border-gray-200 hover:border-gray-300"
+                        }`}
+                        onClick={() => handleGranite(item.NAME)}
+                      >
+                        <RadioGroupItem
+                          value={item.NAME}
+                          id={`granite-${index}`}
+                          className="absolute top-2 right-2"
+                        />
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500 mb-1">Upto</div>
+                          <div className="text-lg font-bold">
+                            ₹{item.PER_SQFT_RATE}
+                          </div>
+                          <div className="text-xs text-gray-500">per sqft.</div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </RadioGroup>
+          </div>
+        </div>
+      </div>
+
+      {/* Rough Stone */}
+      <div className="bg-yellow-50 rounded-lg p-4">
+        <div className="flex items-center gap-6">
+          <div className="flex-shrink-0">
+            <div className="text-sm font-medium text-gray-700 mb-2">
+              Rough stone
+            </div>
+            <img
+              src={FLOORING_CATEGORY.ROUGH_STONE_IMAGE || "/placeholder.svg"}
+              alt="Rough stone"
+              className="w-20 h-20 object-cover rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <RadioGroup
+              value={selectedRoughStone}
+              onValueChange={handleRoughStone}
+            >
+              <div className="grid grid-cols-3 gap-4">
+                {FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA.map(
+                  (item, index) => (
+                    <div key={index} className="relative">
+                      <div
+                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                          selectedRoughStone === item.NAME
+                            ? "border-black"
+                            : "border-gray-200 hover:border-gray-300"
+                        }`}
+                        onClick={() => handleRoughStone(item.NAME)}
+                      >
+                        <RadioGroupItem
+                          value={item.NAME}
+                          id={`stone-${index}`}
+                          className="absolute top-2 right-2"
+                        />
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500 mb-1">Upto</div>
+                          <div className="text-lg font-bold">
+                            ₹{item.PER_SQFT_RATE}
+                          </div>
+                          <div className="text-xs text-gray-500">per sqft.</div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </RadioGroup>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex gap-4 pt-6">
+        <button
+          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
+          onClick={prevStep}
+        >
+          Previous Step
+        </button>
+        <button
+          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
+          onClick={nextStep}
+        >
+          Next Step
+        </button>
+      </div>
+    </div>
+  );
+};
+
+{
+  /* <div>
       <Card className="w-full">
         <CardHeader className="bg-yellow-50">
           <CardTitle className="text-xl font-semibold text-gray-800">
@@ -135,12 +376,15 @@ export const Flooring = () => {
               onValueChange={handleVetrifiedTile}
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <img src={FLOORING_CATEGORY.VETRIFIED_IMAGE} />
+                </div>
                 {FLOORING_CATEGORY.VETRIFIED_TILES.map((item, index) => (
                   <div key={index} className="relative">
                     <RadioGroupItem
                       value={item.NAME}
                       id={`vitrified-${index}`}
-                      className="peer sr-only"
+                      className="absolute top-1 right-1"
                     />
                     <Label
                       htmlFor={`vitrified-${index}`}
@@ -159,6 +403,9 @@ export const Flooring = () => {
             <h3 className="text-lg font-medium mb-4">
               Ceramic Wall Tiles (Toilet/Kitchen)
             </h3>
+            <div>
+              <img src={FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE} />
+            </div>
             <RadioGroup
               value={selectedCeramic}
               onValueChange={handleCeremicWall}
@@ -170,6 +417,7 @@ export const Flooring = () => {
                       <RadioGroupItem
                         value={item.NAME}
                         id={`ceramic-${index}`}
+                        className="absolute top-1 right-1"
                       />
                       <Label
                         htmlFor={`ceramic-${index}`}
@@ -184,18 +432,22 @@ export const Flooring = () => {
             </RadioGroup>
           </div>
 
-          <div>
+          <div className="">
             <h3 className="text-lg font-medium mb-4">
               Granite (Door/Window Frame, Kitchen Top, Staircase)
             </h3>
             <RadioGroup value={selectedGranite} onValueChange={handleGranite}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <img src={FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE} />
+                </div>
                 {FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.map(
                   (item, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <RadioGroupItem
                         value={item.NAME}
                         id={`granite-${index}`}
+                        className="absolute top-1 right-1"
                       />
                       <Label
                         htmlFor={`granite-${index}`}
@@ -214,6 +466,9 @@ export const Flooring = () => {
             <h3 className="text-lg font-medium mb-4">
               Rough Stone (Terrace/Parking Area)
             </h3>
+            <div>
+              <img src={FLOORING_CATEGORY.ROUGH_STONE_IMAGE} />
+            </div>
             <RadioGroup
               value={selectedRoughStone}
               onValueChange={handleRoughStone}
@@ -249,10 +504,8 @@ export const Flooring = () => {
           </button>
         </CardContent>
       </Card>
-    </div>
-  );
-};
-
+    </div> */
+}
 // flooring vetrified tile-{calculateVetrifiedTile()}
 // ceramic title-{calculateCeremicWallTile()}
 // calculate granite - {calculateGranite()}

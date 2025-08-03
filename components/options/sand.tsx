@@ -14,7 +14,7 @@ export const Sand = () => {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
   } = useDataStore();
-  const calculateRiverSand = (name, per_unit_rate, standard_quantity) => {
+  const calculateSand = (name, per_unit_rate, standard_quantity) => {
     // const per_unit_rate = 1250;
     // const standard_quantity = 0.05;
 
@@ -27,35 +27,35 @@ export const Sand = () => {
     addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
     // return amount;
   };
-  const calculateMESand = (name, per_unit_rate, standard_quantity) => {
-    // const per_unit_rate = 900;
-    // const standard_quantity = 0.05;
+  // const calculateMESand = (name, per_unit_rate, standard_quantity) => {
+  //   // const per_unit_rate = 900;
+  //   // const standard_quantity = 0.05;
 
-    // const ground_floor_area = 2000;
-    // const no_of_floors = 5;
-    // const total_build_up_area = ground_floor_area * no_of_floors;
+  //   // const ground_floor_area = 2000;
+  //   // const no_of_floors = 5;
+  //   // const total_build_up_area = ground_floor_area * no_of_floors;
 
-    const total_quantity = total_build_up_area * standard_quantity;
-    const amount = per_unit_rate * total_quantity;
-    addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
-    // return amount;
-  };
+  //   const total_quantity = total_build_up_area * standard_quantity;
+  //   const amount = per_unit_rate * total_quantity;
+  //   addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
+  //   // return amount;
+  // };
 
-  const handleRiverSand = (name) => {
+  // const handleRiverSand = (name) => {
+  //   const selected = SAND_QUANTITY.BRANDS.find((sand) => sand.NAME === name);
+  //   if (selected) {
+  //     calculateRiverSand(
+  //       selected?.NAME,
+  //       selected?.PER_UNIT_RATE,
+  //       selected?.STANDARD_QUANTITY
+  //     );
+  //   }
+  // };
+
+  const handleSand = (name) => {
     const selected = SAND_QUANTITY.BRANDS.find((sand) => sand.NAME === name);
     if (selected) {
-      calculateRiverSand(
-        selected?.NAME,
-        selected?.PER_UNIT_RATE,
-        selected?.STANDARD_QUANTITY
-      );
-    }
-  };
-
-  const handleMeSand = (name) => {
-    const selected = SAND_QUANTITY.BRANDS.find((sand) => sand.NAME === name);
-    if (selected) {
-      calculateMESand(
+      calculateSand(
         selected?.NAME,
         selected?.PER_UNIT_RATE,
         selected?.STANDARD_QUANTITY
@@ -65,19 +65,26 @@ export const Sand = () => {
 
   return (
     <div>
-      <Card className="w-full">
-        <CardHeader className="bg-yellow-50">
+      <Card className="w-full bg-yellow-50">
+        <CardHeader className="">
           <CardTitle className="text-xl font-semibold text-gray-800">
             Sand
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <div>
-            <h3 className="text-lg font-medium mb-4">Sand Type</h3>
             <RadioGroup value={selectedSand} onValueChange={setSelectedSand}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SAND_QUANTITY.BRANDS.map((item, index) => (
-                  <div key={index} className="relative">
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedSand === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleSand(item.NAME)}
+                  >
                     <RadioGroupItem
                       value={item.NAME}
                       id={`sand-${index}`}
@@ -87,9 +94,8 @@ export const Sand = () => {
                       htmlFor={`sand-${index}`}
                       className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                     >
-                      <div className="w-16 h-16 bg-yellow-200 rounded-lg mb-3 flex items-center justify-center">
-                        <div className="w-10 h-10 bg-yellow-400 rounded-full"></div>
-                      </div>
+                      <img src={item?.IMAGE} />
+
                       <span className="text-sm font-medium">{item.NAME}</span>
                       <span className="text-xs text-gray-500 mt-1">
                         ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}

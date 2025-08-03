@@ -104,8 +104,8 @@ export const Bricks = () => {
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="bg-yellow-50">
+    <Card className="w-full bg-yellow-50">
+      <CardHeader className="">
         <CardTitle className="text-xl font-semibold text-gray-800">
           Bricks
         </CardTitle>
@@ -117,17 +117,29 @@ export const Bricks = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
                 <div key={index} className="relative">
-                  <RadioGroupItem
-                    value={brand.NAME}
-                    id={`brick-${index}`}
-                    className="peer sr-only"
-                  />
+                  <div className="absolute top-3 right-3">
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        selectedBrand === brand.NAME
+                          ? "border-blue-500 bg-blue-500"
+                          : "border-gray-300"
+                      }`}
+                    >
+                      {selectedBrand === brand.NAME && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                  </div>
+
                   <Label
                     htmlFor={`brick-${index}`}
                     className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                   >
                     <div className="w-16 h-12 bg-red-200 rounded mb-3 flex items-center justify-center">
-                      <div className="w-12 h-8 bg-red-400 rounded-sm"></div>
+                      {/* <div className="w-12 h-8 bg-red-400 rounded-sm"></div>
+                       
+                       */}
+                      <img src={brand?.IMAGE} className="w-full h-full" />
                     </div>
                     <span className="text-sm font-medium text-center">
                       {brand.NAME}
@@ -154,11 +166,14 @@ export const Bricks = () => {
             >
               <div className="flex gap-4">
                 {BRICKS_CATEGORY.WATER_PROOFING.map((option, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 bg-white py-4 px-2"
+                  >
                     <RadioGroupItem value={option.NAME} id={`water-${index}`} />
                     <Label
                       htmlFor={`water-${index}`}
-                      className="cursor-pointer"
+                      className="cursor-pointer "
                     >
                       {option.NAME}
                       {option.PER_SQFT_RATE > 0 && (
@@ -181,7 +196,10 @@ export const Bricks = () => {
             >
               <div className="flex gap-4">
                 {BRICKS_CATEGORY.TERMITE_SOLUTION.map((option, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 bg-white py-4 px-2"
+                  >
                     <RadioGroupItem
                       value={option.NAME}
                       id={`termite-${index}`}

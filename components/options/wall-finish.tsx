@@ -126,12 +126,25 @@ export const WallFinishes = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {WALL_FINISHES.POP_FALSE_CEILING.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`ceiling-${index}`} />
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedCeiling === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePopFalseCeiling(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`ceiling-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <Label
                       htmlFor={`ceiling-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item?.IMAGE} />
                       {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                     </Label>
                   </div>
@@ -145,12 +158,25 @@ export const WallFinishes = () => {
             <RadioGroup value={selectedWalls} onValueChange={setSelectedWalls}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {WALL_FINISHES.POP_IN_WALLS.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`walls-${index}`} />
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedWalls === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePopInWalls(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`walls-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <Label
                       htmlFor={`walls-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item?.IMAGE} />
                       {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                     </Label>
                   </div>
@@ -164,12 +190,25 @@ export const WallFinishes = () => {
             <RadioGroup value={selectedPaint} onValueChange={setSelectedPaint}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {WALL_FINISHES.INTERMNAL_WALL_PAINT.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.NAME} id={`paint-${index}`} />
+                  <div
+                    key={index}
+                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedPaint === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleWallPaint(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`paint-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <Label
                       htmlFor={`paint-${index}`}
                       className="cursor-pointer"
                     >
+                      <img src={item?.IMAGE} />
                       {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                     </Label>
                   </div>
