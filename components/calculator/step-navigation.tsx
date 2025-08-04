@@ -87,8 +87,9 @@ export default function StepNavigation() {
                 onClick={() => stepChange(step.id)}
                 className={`flex-shrink-0 w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
                   currentStep === step.id
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                    ? "bg-main"
+                    : // ? "border-green-500 bg-green-50"
+                      "border-gray-200 bg-white hover:border-gray-300"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center h-full p-2">
