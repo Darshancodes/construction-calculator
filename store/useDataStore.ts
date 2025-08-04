@@ -23,7 +23,7 @@ interface DataStoreState {
   all_prices: PriceItem[];
   constructionData: ConstructionData;
   readonly total_prices: number;
-
+  inclusion_settings: InclusionSettings;
   // Constants
   MISCELLANEOUS_COST_PERCENT: number;
   LABOUR_COST_PER_SQFT: number;
@@ -34,6 +34,11 @@ interface DataStoreState {
   labour_cost: number;
   management_cost: number;
   total_final_cost: number;
+  updateConstructionData: (data: Partial<ConstructionData>) => void;
+}
+
+interface InclusionSettings {
+  [key: string]: boolean; // category name -> include/exclude
 }
 
 // Data store actions interface
@@ -50,6 +55,7 @@ type DataStore = DataStoreState & DataStoreActions;
 export const useDataStore = create<DataStore>((set, get) => ({
   all_prices: [],
   // Construction data
+  inclusion_settings: {},
   constructionData: {
     ground_floor_area: 2000,
     no_of_floors: 5,
@@ -68,6 +74,45 @@ export const useDataStore = create<DataStore>((set, get) => ({
     set((state) => ({
       all_prices: [...state.all_prices, newItem],
     })),
+
+  // Method to set inclusion/exclusion for a category
+  setInclusion: (categoryName: string, include: boolean) =>
+    set((state) => {
+      const newInclusionSettings = {
+        ...state.inclusion_settings,
+        [categoryName]: include,
+      };
+
+      // If setting to false (exclude), remove the item from all_prices
+      let updatedPrices = state.all_prices;
+      if (!include) {
+        updatedPrices = state.all_prices.filter(
+          (item) => item.NAME !== categoryName
+        );
+      }
+
+      // Recalculate totals
+      const total = updatedPrices.reduce((sum, item) => sum + item.AMOUNT, 0);
+      const buildUpArea = get().constructionData.total_build_up_area;
+      const miscPercent = get().MISCELLANEOUS_COST_PERCENT;
+      const labourRate = get().LABOUR_COST_PER_SQFT;
+      const managementRate = get().MANAGEMENT_COST_PER_SQFT;
+
+      const miscellaneous = (miscPercent / 100) * total;
+      const labour = buildUpArea * labourRate;
+      const management = buildUpArea * managementRate;
+      const final = total + miscellaneous + labour + management;
+
+      return {
+        inclusion_settings: newInclusionSettings,
+        all_prices: updatedPrices,
+        total_prices: total,
+        miscellaneous_cost: miscellaneous,
+        labour_cost: labour,
+        management_cost: management,
+        total_final_cost: final,
+      };
+    }),
 
   // Derive total_prices from all_prices
   get total_prices(): number {
@@ -123,7 +168,16 @@ export const useDataStore = create<DataStore>((set, get) => ({
       };
     }),
   // Initial values for computed fields
-
+  updateConstructionData: (data: Partial<ConstructionData>) =>
+    set((state) => ({
+      constructionData: {
+        ...state.constructionData,
+        ...data,
+        total_build_up_area:
+          (data.ground_floor_area || state.constructionData.ground_floor_area) *
+          (data.no_of_floors || state.constructionData.no_of_floors),
+      },
+    })),
   miscellaneous_cost: 0,
   labour_cost: 0,
   management_cost: 0,

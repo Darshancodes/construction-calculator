@@ -21,6 +21,7 @@ import { useDataStore } from "@/store/useDataStore";
 import StepNavigation from "./step-navigation";
 import { Stone } from "../options/stone";
 import { TotalCost } from "../options/total-cost";
+import { ConstructionEstimator } from "./construction-estimator";
 
 export const MultiStep = () => {
   const { currentStep } = useStepStore();
@@ -64,7 +65,7 @@ export const MultiStep = () => {
 
   return (
     <div>
-      <h2>{currentStep}</h2>
+      <ConstructionEstimator />
       <StepNavigation />
       <div>{JSON.stringify(all_prices)}</div>
       {render()}
