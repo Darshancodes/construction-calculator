@@ -40,11 +40,11 @@ export const ConstructionEstimator = () => {
   };
 
   return (
-    <div className=" bg-white p-6">
-      <div className=" mx-auto">
+    <div className=" bg-gray-100 py-2 px-2">
+      <div className="">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <div className="">
+          <h1 className="text-2xl font-bold text-gray-900 ">
             Home construction estimator
           </h1>
           <p className="text-gray-600 text-lg">
@@ -53,16 +53,16 @@ export const ConstructionEstimator = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Left Side - Construction Detail */}
-          <Card className="bg-gray-100">
-            <CardContent className="p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+          <Card className="">
+            <CardContent className="">
+              <h2 className="text-xl font-semibold text-gray-900 ">
                 Construction detail
               </h2>
 
               {/* Location */}
-              <div className="mb-6">
+              <div className="">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Location in Rajasthan
                 </label>
@@ -80,8 +80,8 @@ export const ConstructionEstimator = () => {
               </div>
 
               {/* Built-up Area */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="">
+                <label className="block text-sm font-medium text-gray-700 ">
                   built-up area
                 </label>
                 <div className="flex items-center gap-2">
@@ -98,13 +98,13 @@ export const ConstructionEstimator = () => {
               </div>
 
               {/* Number of Floors */}
-              <div className="flex flex-col">
-                <label className="block text-sm font-medium text-gray-700 mb-4">
+              <div className="flex flex-col ">
+                <label className="block text-sm font-medium text-gray-700 ">
                   Number of floors
                 </label>
-                <div className="flex gap-4">
+                <div className="flex gap-4 ">
                   {/* Floor Counter */}
-                  <div className="flex w-1/2 items-center justify-between bg-white rounded-lg p-4 h-16">
+                  <div className="flex w-1/2 items-center justify-between bg-gray-100 rounded-lg p-4">
                     <Button
                       variant="outline"
                       size="icon"
@@ -140,43 +140,44 @@ export const ConstructionEstimator = () => {
           </Card>
 
           {/* Right Side - Summary */}
-          <div className="space-y-6">
+          <Card>
             {/* Total Built-up Area */}
-            <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-2 rounded">
-                <div className="w-4 h-4 bg-gray-400 rounded"></div>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">
-                  Total built-up area
-                </p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {constructionData.total_build_up_area.toLocaleString()} sq.ft.
-                </p>
-              </div>
-            </div>
+            <CardContent className=" flex bg-white h-full ">
+              <div className="flex flex-col gap-3 w-full py-2 px-2 justify-center ">
+                <div className="flex items-start  ">
+                  <div className="bg-gray-100 p-2 rounded">
+                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                  </div>
+                  <div>
+                    <p className="text-lg text-gray-600">Total built-up area</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {constructionData.total_build_up_area.toLocaleString()}{" "}
+                      sq.ft.
+                    </p>
+                  </div>
+                </div>
 
-            {/* Number of Floors */}
-            <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-2 rounded">
-                <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                {/* Number of Floors */}
+                <div className="flex items-start ">
+                  <div className="bg-gray-100 p-2 rounded">
+                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                  </div>
+                  <div>
+                    <p className="text-lg text-gray-600 ">Number of floors</p>
+                    <p className="text-xl font-semibold text-gray-900">
+                      {getFloorsText(constructionData.no_of_floors)}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Number of floors</p>
-                <p className="text-xl font-semibold text-gray-900">
-                  {getFloorsText(constructionData.no_of_floors)}
-                </p>
-              </div>
-            </div>
-
-            {/* House Illustration */}
-            <div className="flex justify-center mt-8">
-              <div className="w-32 h-32 bg-gradient-to-b from-amber-200 to-amber-300 rounded-lg flex items-center justify-center relative">
+              {/* House Illustration */}
+              <div className=" w-full flex justify-center items-center">
                 {/* Simple house illustration */}
-                <div className="text-6xl">🏠</div>
+                {/* <div className="text-6xl">🏠</div> */}
+                <img src={"/steps-images/home.svg"} />
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

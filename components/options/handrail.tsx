@@ -69,97 +69,89 @@ export const HandRails = () => {
     }
   };
   return (
-    <div>
-      <Card className="w-full">
-        <CardHeader className="bg-yellow-50">
-          <CardTitle className="text-xl font-semibold text-gray-800">
-            Handrails
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
-          <div>
-            <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
-            <RadioGroup
-              value={selectedStair}
-              onValueChange={handleStairHandRail}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedStair === item.NAME
-                        ? "border-black"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handleStairHandRail(item.NAME)}
-                  >
-                    <RadioGroupItem
-                      value={item.NAME}
-                      id={`stair-${index}`}
-                      className="absolute top-1 right-1"
-                    />
-                    <Label
-                      htmlFor={`stair-${index}`}
-                      className="cursor-pointer"
-                    >
-                      <img src={item.IMAGE} />
-                      {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </div>
+    <Card className="w-full bg-main">
+      <CardHeader className="">
+        <CardTitle className="text-xl font-semibold text-gray-800">
+          Handrails
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <div>
+          <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
+          <RadioGroup value={selectedStair} onValueChange={handleStairHandRail}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedStair === item.NAME
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleStairHandRail(item.NAME)}
+                >
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`stair-${index}`}
+                    className="absolute top-1 right-1"
+                  />
+                  <Label htmlFor={`stair-${index}`} className="cursor-pointer">
+                    <img src={item.IMAGE} />
+                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
+        </div>
 
-          <div>
-            <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
-            <RadioGroup
-              value={selectedBalcony}
-              onValueChange={handleBalconyHandRail}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedBalcony === item.NAME
-                        ? "border-black"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handleBalconyHandRail(item.NAME)}
+        <div>
+          <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
+          <RadioGroup
+            value={selectedBalcony}
+            onValueChange={handleBalconyHandRail}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedBalcony === item.NAME
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleBalconyHandRail(item.NAME)}
+                >
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`balcony-${index}`}
+                    className="absolute top-1 right-1"
+                  />
+                  <Label
+                    htmlFor={`balcony-${index}`}
+                    className="cursor-pointer"
                   >
-                    <RadioGroupItem
-                      value={item.NAME}
-                      id={`balcony-${index}`}
-                      className="absolute top-1 right-1"
-                    />
-                    <Label
-                      htmlFor={`balcony-${index}`}
-                      className="cursor-pointer"
-                    >
-                      <img src={item.IMAGE} />
-                      {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </div>
-          <button
-            className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-            onClick={nextStep}
-          >
-            nextStep
-          </button>
-          <button
-            className="w-44 mt-6  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-            onClick={prevStep}
-          >
-            prevStep
-          </button>
-        </CardContent>
-      </Card>
-    </div>
+                    <img src={item.IMAGE} />
+                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
+        </div>
+        <button
+          className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+          onClick={nextStep}
+        >
+          nextStep
+        </button>
+        <button
+          className="w-44 mt-6  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+          onClick={prevStep}
+        >
+          prevStep
+        </button>
+      </CardContent>
+    </Card>
   );
 };

@@ -79,120 +79,118 @@ export const Door = () => {
     }
   };
   return (
-    <div>
-      <Card className="w-full">
-        <CardHeader className="bg-yellow-50">
-          <CardTitle className="text-xl font-semibold text-gray-800">
-            Doors
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
-          <div>
-            <h3 className="text-lg font-medium mb-4">Door Shutter</h3>
-            <RadioGroup
-              value={selectedShutter?.toString()}
-              onValueChange={handleShutter}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {DOOR_CATEGORY.DOOR_SHUTTER.map((item, index) => (
+    <Card className="w-full bg-main">
+      <CardHeader className="">
+        <CardTitle className="text-xl font-semibold text-gray-800">
+          Doors
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <div>
+          <h3 className="text-lg font-medium mb-4">Door Shutter</h3>
+          <RadioGroup
+            value={selectedShutter?.toString()}
+            onValueChange={handleShutter}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {DOOR_CATEGORY.DOOR_SHUTTER.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedShutter === item.PER_SQFT_RATE
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleShutter(item.PER_SQFT_RATE)}
+                >
+                  <RadioGroupItem
+                    value={`option-${index}`}
+                    id={`shutter-${index}`}
+                  />
+                  <Label
+                    htmlFor={`shutter-${index}`}
+                    className="cursor-pointer"
+                  >
+                    ₹{item.PER_SQFT_RATE}/sqft
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-4">
+            Door Frame (Single Rebate)
+          </h3>
+          <RadioGroup
+            value={selectedFrame}
+            onValueChange={handleFrameSingleRebate}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {DOOR_CATEGORY.DOOR_FRAME_SINGLE_REBATE_ELS0100.map(
+                (item, index) => (
                   <div
                     key={index}
                     className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedShutter === item.PER_SQFT_RATE
+                      selectedFrame === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
-                    onClick={() => handleShutter(item.PER_SQFT_RATE)}
+                    onClick={() => handleFrameSingleRebate(item.NAME)}
                   >
-                    <RadioGroupItem
-                      value={`option-${index}`}
-                      id={`shutter-${index}`}
-                    />
+                    <RadioGroupItem value={item.NAME} id={`frame-${index}`} />
+                    <img src={item?.IMAGE} />
                     <Label
-                      htmlFor={`shutter-${index}`}
+                      htmlFor={`frame-${index}`}
                       className="cursor-pointer"
                     >
-                      ₹{item.PER_SQFT_RATE}/sqft
+                      {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                     </Label>
                   </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </div>
+                )
+              )}
+            </div>
+          </RadioGroup>
+        </div>
 
-          <div>
-            <h3 className="text-lg font-medium mb-4">
-              Door Frame (Single Rebate)
-            </h3>
-            <RadioGroup
-              value={selectedFrame}
-              onValueChange={handleFrameSingleRebate}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {DOOR_CATEGORY.DOOR_FRAME_SINGLE_REBATE_ELS0100.map(
-                  (item, index) => (
-                    <div
-                      key={index}
-                      className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                        selectedFrame === item.NAME
-                          ? "border-black"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                      onClick={() => handleFrameSingleRebate(item.NAME)}
-                    >
-                      <RadioGroupItem value={item.NAME} id={`frame-${index}`} />
-                      <img src={item?.IMAGE} />
-                      <Label
-                        htmlFor={`frame-${index}`}
-                        className="cursor-pointer"
-                      >
-                        {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
-                      </Label>
-                    </div>
-                  )
-                )}
-              </div>
-            </RadioGroup>
-          </div>
+        <div>
+          <h3 className="text-lg font-medium mb-4">Main Door</h3>
+          <RadioGroup value={selectedMainDoor} onValueChange={handleMainDoor}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {DOOR_CATEGORY.MAIN_DOOR.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedMainDoor === item.NAME
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleMainDoor(item.NAME)}
+                >
+                  <RadioGroupItem value={item.NAME} id={`main-${index}`} />
 
-          <div>
-            <h3 className="text-lg font-medium mb-4">Main Door</h3>
-            <RadioGroup value={selectedMainDoor} onValueChange={handleMainDoor}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {DOOR_CATEGORY.MAIN_DOOR.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedMainDoor === item.NAME
-                        ? "border-black"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handleMainDoor(item.NAME)}
-                  >
-                    <RadioGroupItem value={item.NAME} id={`main-${index}`} />
-
-                    <Label htmlFor={`main-${index}`} className="cursor-pointer">
-                      {item.NAME}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </div>
-          <button
-            className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-            onClick={nextStep}
-          >
-            nextStep
-          </button>
-          <button
-            className="w-44 mt-6  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-            onClick={prevStep}
-          >
-            prevStep
-          </button>
-        </CardContent>
-      </Card>
-    </div>
+                  <Label htmlFor={`main-${index}`} className="cursor-pointer">
+                    {item.NAME}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
+        </div>
+        <button
+          className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+          onClick={nextStep}
+        >
+          nextStep
+        </button>
+        <button
+          className="w-44 mt-6  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
+          onClick={prevStep}
+        >
+          prevStep
+        </button>
+      </CardContent>
+    </Card>
   );
 };
