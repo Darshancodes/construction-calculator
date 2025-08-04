@@ -24,6 +24,7 @@ interface DataStoreState {
   constructionData: ConstructionData;
   readonly total_prices: number;
   inclusion_settings: InclusionSettings;
+
   // Constants
   MISCELLANEOUS_COST_PERCENT: number;
   LABOUR_COST_PER_SQFT: number;
@@ -46,6 +47,7 @@ interface DataStoreActions {
   addPrice: (newItem: PriceItem) => void;
   calculateTotal: () => void;
   addAndCalculate: (newItem: PriceItem) => void;
+  removePriceByName: (categoryName: string) => void;
 }
 
 // Combined data store type
@@ -113,7 +115,32 @@ export const useDataStore = create<DataStore>((set, get) => ({
         total_final_cost: final,
       };
     }),
+  removePriceByName: (categoryName: string) =>
+    set((state) => {
+      const updatedPrices = state.all_prices.filter(
+        (item) => item.NAME !== categoryName
+      );
 
+      const total = updatedPrices.reduce((sum, item) => sum + item.AMOUNT, 0);
+      const buildUpArea = get().constructionData.total_build_up_area;
+      const miscPercent = get().MISCELLANEOUS_COST_PERCENT;
+      const labourRate = get().LABOUR_COST_PER_SQFT;
+      const managementRate = get().MANAGEMENT_COST_PER_SQFT;
+
+      const miscellaneous = (miscPercent / 100) * total;
+      const labour = buildUpArea * labourRate;
+      const management = buildUpArea * managementRate;
+      const final = total + miscellaneous + labour + management;
+
+      return {
+        all_prices: updatedPrices,
+        total_prices: total,
+        miscellaneous_cost: miscellaneous,
+        labour_cost: labour,
+        management_cost: management,
+        total_final_cost: final,
+      };
+    }),
   // Derive total_prices from all_prices
   get total_prices(): number {
     return this.all_prices.reduce((sum, item) => sum + item.AMOUNT, 0);

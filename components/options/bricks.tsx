@@ -15,6 +15,7 @@ export const Bricks = () => {
   const {
     constructionData: { ground_floor_area, total_build_up_area },
     addAndCalculate,
+    removePriceByName,
   } = useDataStore();
   const { nextStep, prevStep } = useStepStore();
   const brands = [
@@ -85,6 +86,9 @@ export const Bricks = () => {
         selectedOption.PER_SQFT_RATE,
         selectedOption.STANDARD_QUANTITY
       );
+    } else {
+      // User selected "No" or empty option → remove it
+      removePriceByName(CATEGORY_NAMES["WATER-PROOFING"]);
     }
   };
 
@@ -100,6 +104,8 @@ export const Bricks = () => {
         selectedOption.PER_SQFT_RATE,
         selectedOption.STANDARD_QUANTITY
       );
+    } else {
+      removePriceByName(CATEGORY_NAMES["TERMITE-SOLUTION"]);
     }
   };
 
@@ -180,7 +186,15 @@ export const Bricks = () => {
                     key={index}
                     className="flex items-center space-x-2 bg-white py-4 px-2"
                   >
-                    <RadioGroupItem value={option.NAME} id={`water-${index}`} />
+                    <RadioGroupItem
+                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center ${
+                        selectedBrand === option.NAME
+                          ? "border-blue-500 bg-blue-500"
+                          : "border-gray-300"
+                      }`}
+                      value={option.NAME}
+                      id={`water-${index}`}
+                    />
                     <Label
                       htmlFor={`water-${index}`}
                       className="cursor-pointer "
