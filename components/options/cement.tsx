@@ -56,7 +56,15 @@ export const Cement = () => {
           <RadioGroup value={selectedBrand} onValueChange={handleCementPrice}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
-                <div key={index} className="relative">
+                <div
+                  key={index}
+                  className={`relative border-2 rounded-lg ${
+                    selectedBrand === brand.NAME
+                      ? "border-blue-500 shadow-md"
+                      : "border-gray-200"
+                  }`}
+                  onClick={() => handleCementPrice(brand?.NAME)}
+                >
                   <div className="absolute top-3 right-3">
                     <div
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${

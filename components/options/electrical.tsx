@@ -101,7 +101,12 @@ export const Electrical = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-2 bg-white py-2 flex-col relative"
+                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                      selectedWallMaterial === item.NAME
+                        ? "border-blue-500 shadow-md"
+                        : "border-gray-200"
+                    }`}
+                    onClick={() => handleSlabWall(item?.NAME)}
                   >
                     <img src={item?.IMAGE} />
                     <RadioGroupItem
@@ -130,7 +135,12 @@ export const Electrical = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-2 bg-white flex-col relative"
+                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                      selectedWiresCables === item.NAME
+                        ? "border-blue-500 shadow-md"
+                        : "border-gray-200"
+                    }`}
+                    onClick={() => handleWireCables(item?.NAME)}
                   >
                     <img src={item?.IMAGE} />
                     <RadioGroupItem
@@ -162,7 +172,12 @@ export const Electrical = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-2 bg-white flex-col relative"
+                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                      selectedSwitches === item.NAME
+                        ? "border-blue-500 shadow-md"
+                        : "border-gray-200"
+                    }`}
+                    onClick={() => handleSheetsSwitches(item?.NAME)}
                   >
                     <img src={item?.IMAGE} />
                     <RadioGroupItem

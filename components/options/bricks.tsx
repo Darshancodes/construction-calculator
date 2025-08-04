@@ -112,14 +112,24 @@ export const Bricks = () => {
       </CardHeader>
       <CardContent className="p-6">
         <div className="mb-6">
-          <h3 className="text-lg font-medium mb-4">Select Brand</h3>
+          <h3 className="text-lg font-medium mb-4">
+            Select Brand - {selectedBrand}
+          </h3>
           <RadioGroup value={selectedBrand} onValueChange={handleBrandChange}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
-                <div key={index} className="relative">
+                <div
+                  key={index}
+                  className={`relative border-2 rounded-lg ${
+                    selectedBrand === brand.NAME
+                      ? "border-blue-500 shadow-md"
+                      : "border-gray-200"
+                  }`}
+                  onClick={() => handleBrandChange(brand?.NAME)}
+                >
                   <div className="absolute top-3 right-3">
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center ${
                         selectedBrand === brand.NAME
                           ? "border-blue-500 bg-blue-500"
                           : "border-gray-300"
