@@ -17,7 +17,7 @@ export const Door = () => {
     addAndCalculate,
   } = useDataStore();
   const calculateDoorShutter = (per_sqft_rate) => {
-    let name = `${per_sqft_rate}/ft`;
+    const name = `${per_sqft_rate}/ft`;
     const amount = total_build_up_area * per_sqft_rate;
     addAndCalculate({
       NAME: CATEGORY_NAMES["DOOR-SHUTTER"],
