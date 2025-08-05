@@ -42,7 +42,7 @@ export const Steel = () => {
     });
   };
 
-  const handleBrandSelect = (product: any) => {
+  const handleBrandSelect = (product) => {
     setSelectedBrand(product.NAME);
     calculateSteelPrice(
       product.NAME,
