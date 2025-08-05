@@ -21,7 +21,7 @@ import { useDataStore } from "@/store/useDataStore";
 import StepNavigation from "./step-navigation";
 import { Stone } from "../options/stone";
 import { TotalCost } from "../options/total-cost";
-import { ConstructionEstimator } from "./construction-estimator";
+import { ConstructionEstimator } from "./construction-estimator-1";
 import { StepIndicator } from "./step-indicator";
 
 export const MultiStep = () => {

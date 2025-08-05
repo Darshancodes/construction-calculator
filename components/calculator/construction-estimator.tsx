@@ -43,7 +43,7 @@ export const ConstructionEstimator = () => {
     <div className=" bg-gray-100 py-4 px-2">
       <div className="">
         {/* Header */}
-        <div className="flex flex-col gay-2 my-4">
+        <div className="flex flex-col gap-2 my-4">
           <h1 className="text-2xl font-bold text-gray-900 ">
             Home construction estimator
           </h1>
@@ -98,7 +98,7 @@ export const ConstructionEstimator = () => {
               </div>
 
               {/* Number of Floors */}
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col w-full gap-3 mt-2">
                 <label className="block text-sm font-medium text-gray-700 ">
                   Number of floors
                 </label>

@@ -67,25 +67,6 @@ export const Steel = () => {
             />
           ))}
         </div>
-
-        <div className="text-sm text-gray-600 mb-6">
-          Total: ₹{total_prices} | Build-up Area: {total_build_up_area} sqft
-        </div>
-
-        <div className="flex gap-4">
-          <button
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
-            onClick={prevStep}
-          >
-            Previous Step
-          </button>
-          <button
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
-            onClick={nextStep}
-          >
-            Next Step
-          </button>
-        </div>
       </div>
     </div>
   );
@@ -158,7 +139,7 @@ const Card = ({
         </div> */}
 
         {/* Price info - shown on hover or when selected */}
-        {isSelected && (
+        {/* {isSelected && (
           <div className="mt-3 pt-3 border-t border-gray-100">
             <div className="text-xs text-gray-600 space-y-1">
               <div className="flex justify-between">
@@ -175,7 +156,7 @@ const Card = ({
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
