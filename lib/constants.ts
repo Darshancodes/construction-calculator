@@ -94,6 +94,7 @@ export const BRICKS_CATEGORY = {
       STANDARD_QUANTITY: 12,
       STANDARD_QUANTITY_UNIT: "SQFT",
       IMAGE: "/brand-images/renwal.svg",
+      IMAGE2: "/brand-images/other-red-clay-brick.svg",
     },
     {
       NAME: "KANOTA OR HANUMANGARH",
@@ -102,6 +103,7 @@ export const BRICKS_CATEGORY = {
       STANDARD_QUANTITY: 12,
       STANDARD_QUANTITY_UNIT: "SQFT",
       IMAGE: "/brand-images/kanota.svg",
+      IMAGE2: "/brand-images/hanumangarh.svg",
     },
   ],
   WATER_PROOFING: [
@@ -461,6 +463,7 @@ export const STONE_QUANTITY = {
       PER_UNIT_RATE: 750,
       PER_UNIT: "TON",
       STANDARD_QUANTITY: 0.05,
+      IMAGE: "/brand-images/rough-stone.svg",
     },
   ],
 };

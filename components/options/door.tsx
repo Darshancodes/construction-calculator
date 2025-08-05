@@ -87,7 +87,7 @@ export const Door = () => {
               {DOOR_CATEGORY.DOOR_SHUTTER.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white min-h-44 flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedShutter === item.PER_SQFT_RATE
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -97,6 +97,7 @@ export const Door = () => {
                   <RadioGroupItem
                     value={`option-${index}`}
                     id={`shutter-${index}`}
+                    className="absolute top-1 right-1"
                   />
                   <Label
                     htmlFor={`shutter-${index}`}
@@ -123,14 +124,18 @@ export const Door = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                       selectedFrame === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                     onClick={() => handleFrameSingleRebate(item.NAME)}
                   >
-                    <RadioGroupItem value={item.NAME} id={`frame-${index}`} />
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`frame-${index}`}
+                      className="absolute top-1 right-1"
+                    />
                     <img src={item?.IMAGE} />
                     <Label
                       htmlFor={`frame-${index}`}
@@ -152,14 +157,18 @@ export const Door = () => {
               {DOOR_CATEGORY.MAIN_DOOR.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white relative min-h-44 flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedMainDoor === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                   onClick={() => handleMainDoor(item.NAME)}
                 >
-                  <RadioGroupItem value={item.NAME} id={`main-${index}`} />
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`main-${index}`}
+                    className="absolute top-1 right-1"
+                  />
 
                   <Label htmlFor={`main-${index}`} className="cursor-pointer">
                     {item.NAME}
@@ -169,7 +178,7 @@ export const Door = () => {
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -180,7 +189,7 @@ export const Door = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

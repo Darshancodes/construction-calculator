@@ -16,9 +16,6 @@ export const HandRails = () => {
     addAndCalculate,
   } = useDataStore();
   const calculateStairHandRail = (name, per_unit_rate, standard_quantity) => {
-    // const per_unit_rate = 400; //rft
-    // const standard_quantity = 30;
-    // const total_no_of_floors = no_of_floors;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
     addAndCalculate({
@@ -26,12 +23,8 @@ export const HandRails = () => {
       AMOUNT: amount,
       BRAND: name,
     });
-    // return amount;
   };
   const calculateBalconyHandRail = (name, per_unit_rate, standard_quantity) => {
-    // const per_unit_rate = 1200; //rft
-    // const standard_quantity = 35;
-    // const total_no_of_floors = no_of_floors;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
     addAndCalculate({
@@ -83,7 +76,7 @@ export const HandRails = () => {
               {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedStair === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -95,10 +88,8 @@ export const HandRails = () => {
                     id={`stair-${index}`}
                     className="absolute top-1 right-1"
                   />
-                  <Label htmlFor={`stair-${index}`} className="cursor-pointer">
-                    <img src={item.IMAGE} />
-                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                  </Label>
+                  <img src={item.IMAGE} />
+                  {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                 </div>
               ))}
             </div>
@@ -115,7 +106,7 @@ export const HandRails = () => {
               {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedBalcony === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -127,19 +118,14 @@ export const HandRails = () => {
                     id={`balcony-${index}`}
                     className="absolute top-1 right-1"
                   />
-                  <Label
-                    htmlFor={`balcony-${index}`}
-                    className="cursor-pointer"
-                  >
-                    <img src={item.IMAGE} />
-                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                  </Label>
+                  <img src={item.IMAGE} />
+                  {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                 </div>
               ))}
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -150,7 +136,7 @@ export const HandRails = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

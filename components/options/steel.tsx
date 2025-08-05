@@ -123,7 +123,7 @@ const Card = ({
 
         {/* Brand logo placeholder */}
         <div className="flex justify-center mb-4 mt-2">
-          <div className="w-20 h-16 bg-gray-100 rounded flex items-center justify-center">
+          <div className=" rounded flex items-center justify-center">
             <img
               src={product.IMAGE || "/placeholder.svg"}
               alt={product.NAME}
@@ -140,7 +140,7 @@ const Card = ({
         </div>
 
         {/* Brand name */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <h3 className="text-sm font-medium text-gray-800">
             {product.NAME === "JSW OR RATHI" ? (
               <div className="flex items-center justify-center gap-2">
@@ -155,7 +155,7 @@ const Card = ({
               )
             )}
           </h3>
-        </div>
+        </div> */}
 
         {/* Price info - shown on hover or when selected */}
         {isSelected && (

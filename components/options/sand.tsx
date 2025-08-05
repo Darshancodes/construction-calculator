@@ -15,17 +15,9 @@ export const Sand = () => {
     addAndCalculate,
   } = useDataStore();
   const calculateSand = (name, per_unit_rate, standard_quantity) => {
-    // const per_unit_rate = 1250;
-    // const standard_quantity = 0.05;
-
-    // const ground_floor_area = 2000;
-    // const no_of_floors = 5;
-    // const total_build_up_area = ground_floor_area * no_of_floors;
-
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;
     addAndCalculate({ NAME: CATEGORY_NAMES.SAND, AMOUNT: amount, BRAND: name });
-    // return amount;
   };
   // const calculateMESand = (name, per_unit_rate, standard_quantity) => {
   //   // const per_unit_rate = 900;
@@ -53,6 +45,7 @@ export const Sand = () => {
   // };
 
   const handleSand = (name) => {
+    setSelectedSand(name);
     const selected = SAND_QUANTITY.BRANDS.find((sand) => sand.NAME === name);
     if (selected) {
       calculateSand(
@@ -78,7 +71,7 @@ export const Sand = () => {
                 {SAND_QUANTITY.BRANDS.map((item, index) => (
                   <div
                     key={index}
-                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                       selectedSand === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
@@ -88,25 +81,21 @@ export const Sand = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`sand-${index}`}
-                      className="peer sr-only"
+                      className="absolute top-1 right-1"
                     />
-                    <Label
-                      htmlFor={`sand-${index}`}
-                      className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
-                    >
-                      <img src={item?.IMAGE} />
 
-                      <span className="text-sm font-medium">{item.NAME}</span>
-                      <span className="text-xs text-gray-500 mt-1">
-                        ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                      </span>
-                    </Label>
+                    <img src={item?.IMAGE} />
+
+                    <span className="text-sm font-medium">{item.NAME}</span>
+                    <span className="text-xs text-gray-500 mt-1">
+                      ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
+                    </span>
                   </div>
                 ))}
               </div>
             </RadioGroup>
           </div>
-          <button
+          {/* <button
             className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
             onClick={nextStep}
           >
@@ -117,7 +106,7 @@ export const Sand = () => {
             onClick={prevStep}
           >
             prevStep
-          </button>
+          </button> */}
         </CardContent>
       </Card>
     </div>

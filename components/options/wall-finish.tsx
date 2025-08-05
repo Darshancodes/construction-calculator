@@ -109,7 +109,7 @@ export const WallFinishes = () => {
               {WALL_FINISHES.POP_FALSE_CEILING.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedCeiling === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -121,13 +121,8 @@ export const WallFinishes = () => {
                     id={`ceiling-${index}`}
                     className="absolute top-1 right-1"
                   />
-                  <Label
-                    htmlFor={`ceiling-${index}`}
-                    className="cursor-pointer"
-                  >
-                    <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
-                  </Label>
+                  <img src={item?.IMAGE} />
+                  {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                 </div>
               ))}
             </div>
@@ -141,7 +136,7 @@ export const WallFinishes = () => {
               {WALL_FINISHES.POP_IN_WALLS.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedWalls === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -153,10 +148,8 @@ export const WallFinishes = () => {
                     id={`walls-${index}`}
                     className="absolute top-1 right-1"
                   />
-                  <Label htmlFor={`walls-${index}`} className="cursor-pointer">
-                    <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
-                  </Label>
+                  <img src={item?.IMAGE} />
+                  {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
                 </div>
               ))}
             </div>
@@ -170,7 +163,7 @@ export const WallFinishes = () => {
               {WALL_FINISHES.INTERMNAL_WALL_PAINT.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedPaint === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
@@ -182,16 +175,14 @@ export const WallFinishes = () => {
                     id={`paint-${index}`}
                     className="absolute top-1 right-1"
                   />
-                  <Label htmlFor={`paint-${index}`} className="cursor-pointer">
-                    <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
-                  </Label>
+                  <img src={item?.IMAGE} />
+                  {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                 </div>
               ))}
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -202,7 +193,7 @@ export const WallFinishes = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

@@ -17,35 +17,22 @@ export const Plumbing = () => {
     addAndCalculate,
   } = useDataStore();
   const calculatePVC = (name, per_sqft_rate) => {
-    // const per_sqft_rate = 35;
-    // const ground_floor_area = 2000;
-    // const no_of_floors = 5;
-    // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["PLUMBING-PVC-INTERNAL-AND-EXTERNAL"],
       AMOUNT: amount,
       BRAND: name,
     });
-    // return amount;
   };
   const calculateCPVC = (name, per_sqft_rate) => {
-    // const per_sqft_rate = 30;
-    // const ground_floor_area = 2000;
-    // const no_of_floors = 5;
-    // const total_build_up_area = ground_floor_area * no_of_floors;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
       AMOUNT: amount,
       BRAND: name,
     });
-    // return amount;
   };
   const calculateCPVitreous = (name, per_unit_rate, standard_quantity) => {
-    // const per_unit_rate = 35000;
-    // const standard_quantity = 2;
-    // const no_of_floors = 5;
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
     addAndCalculate({
@@ -53,7 +40,6 @@ export const Plumbing = () => {
       AMOUNT: amount,
       BRAND: name,
     });
-    // return amount;
   };
 
   const handlePVC = (name) => {
@@ -108,18 +94,20 @@ export const Plumbing = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                       selectedPVC === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                     onClick={() => handlePVC(item.NAME)}
                   >
-                    <RadioGroupItem value={item.NAME} id={`pvc-${index}`} />
-                    <Label htmlFor={`pvc-${index}`} className="cursor-pointer">
-                      <img src={item?.IMAGE} />
-                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
-                    </Label>
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`pvc-${index}`}
+                      className="absolute top-1 right-1"
+                    />
+                    <img src={item?.IMAGE} />
+                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                   </div>
                 )
               )}
@@ -137,18 +125,20 @@ export const Plumbing = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                       selectedCPVC === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                     onClick={() => handleCPVC(item.NAME)}
                   >
-                    <RadioGroupItem value={item.NAME} id={`cpvc-${index}`} />
-                    <Label htmlFor={`cpvc-${index}`} className="cursor-pointer">
-                      <img src={item?.IMAGE} />
-                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
-                    </Label>
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`cpvc-${index}`}
+                      className="absolute top-1 right-1"
+                    />
+                    <img src={item?.IMAGE} />
+                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
                   </div>
                 )
               )}
@@ -159,32 +149,31 @@ export const Plumbing = () => {
         <div>
           <h3 className="text-lg font-medium mb-4">CP-Vitreous</h3>
           <RadioGroup value={selectedVitreous} onValueChange={handleCPVitreous}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedVitreous === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                   onClick={() => handleCPVitreous(item.NAME)}
                 >
-                  <RadioGroupItem value={item.NAME} id={`vitreous-${index}`} />
-                  <Label
-                    htmlFor={`vitreous-${index}`}
-                    className="cursor-pointer"
-                  >
-                    <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
-                    {item.PER_UNIT}
-                  </Label>
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`vitreous-${index}`}
+                    className="absolute top-1 right-1"
+                  />
+                  <img src={item?.IMAGE} />
+                  {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
+                  {item.PER_UNIT}
                 </div>
               ))}
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -195,7 +184,7 @@ export const Plumbing = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

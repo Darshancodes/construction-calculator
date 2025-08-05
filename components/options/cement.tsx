@@ -48,7 +48,6 @@ export const Cement = () => {
       </CardHeader>
       <CardContent className="p-6">
         <div className="mb-4">
-          <h3 className="text-lg font-medium mb-4">Select Brand</h3>
           <RadioGroup value={selectedBrand} onValueChange={handleCementPrice}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
@@ -78,7 +77,7 @@ export const Cement = () => {
                     htmlFor={`cement-${index}`}
                     className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                   >
-                    <div className=" bg-gray-300 rounded-lg mb-3 flex items-center justify-center">
+                    <div className=" rounded-lg mb-3 flex items-center justify-center">
                       <img src={brand?.IMAGE} />
                     </div>
                     <span className="text-sm font-medium text-center">

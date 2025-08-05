@@ -87,12 +87,12 @@ export const Electrical = () => {
             value={selectedWallMaterial}
             onValueChange={handleSlabWall}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ELECTRICAL_CATEGORY.ELECTRICAL_OR_WALL_MATERIAL.map(
                 (item, index) => (
                   <div
                     key={index}
-                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                    className={`flex flex-col justify-center items-center min-h-44 space-x-2 bg-white border-2  relative ${
                       selectedWallMaterial === item.NAME
                         ? "border-blue-500 shadow-md"
                         : "border-gray-200"
@@ -121,12 +121,12 @@ export const Electrical = () => {
             value={selectedWiresCables}
             onValueChange={handleWireCables}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ELECTRICAL_CATEGORY["WIRES_AND_CABLES_EWC0100-FLAT"].map(
                 (item, index) => (
                   <div
                     key={index}
-                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                    className={`flex items-center justify-center min-h-44 space-x-2 bg-white border-2 flex-col relative ${
                       selectedWiresCables === item.NAME
                         ? "border-blue-500 shadow-md"
                         : "border-gray-200"
@@ -163,7 +163,7 @@ export const Electrical = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className={`flex items-center space-x-2 bg-white border-2 flex-col relative ${
+                    className={`flex items-center justify-center min-h-44 space-x-2 bg-white border-2 flex-col relative ${
                       selectedSwitches === item.NAME
                         ? "border-blue-500 shadow-md"
                         : "border-gray-200"

@@ -70,18 +70,22 @@ export const MixConcrete = () => {
         <div>
           <h3 className="text-lg font-medium mb-4">RMC (Ready Mix Concrete)</h3>
           <RadioGroup value={selectedRMC} onValueChange={handleRMC}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {MIX_CONCRETE_CATEGORY.RMC.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedRMC === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                   onClick={() => handleRMC(item.NAME)}
                 >
-                  <RadioGroupItem value={item.NAME} id={`rmc-${index}`} />
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`rmc-${index}`}
+                    className="absolute top-1 right-1"
+                  />
                   <img src={item?.IMAGE} />
                   <Label htmlFor={`rmc-${index}`} className="cursor-pointer">
                     {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
@@ -97,18 +101,22 @@ export const MixConcrete = () => {
             PCC (Plain Cement Concrete)
           </h3>
           <RadioGroup value={selectedPCC} onValueChange={handlePCC}>
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {MIX_CONCRETE_CATEGORY.PCC.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                  className={`bg-white flex flex-col justify-center items-center w-full relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     selectedPCC === item.NAME
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                   onClick={() => handlePCC(item.NAME)}
                 >
-                  <RadioGroupItem value={item.NAME} id={`pcc-${index}`} />
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`pcc-${index}`}
+                    className="absolute top-1 right-1"
+                  />
                   <img src={item.IMAGE} />
                   <Label htmlFor={`pcc-${index}`} className="cursor-pointer">
                     {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
@@ -118,7 +126,7 @@ export const MixConcrete = () => {
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -129,7 +137,7 @@ export const MixConcrete = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

@@ -22,6 +22,7 @@ import StepNavigation from "./step-navigation";
 import { Stone } from "../options/stone";
 import { TotalCost } from "../options/total-cost";
 import { ConstructionEstimator } from "./construction-estimator";
+import { StepIndicator } from "./step-indicator";
 
 export const MultiStep = () => {
   const { currentStep } = useStepStore();
@@ -69,7 +70,7 @@ export const MultiStep = () => {
       <StepNavigation />
       <div>{JSON.stringify(all_prices)}</div>
       {render()}
-      <div className="text-xl font-bold">{total_prices}</div>
+      <StepIndicator />
     </div>
   );
 };

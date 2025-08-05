@@ -118,9 +118,6 @@ export const Bricks = () => {
       </CardHeader>
       <CardContent className="p-6">
         <div className="mb-6">
-          <h3 className="text-lg font-medium mb-4">
-            Select Brand - {selectedBrand}
-          </h3>
           <RadioGroup value={selectedBrand} onValueChange={handleBrandChange}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
@@ -151,12 +148,31 @@ export const Bricks = () => {
                     htmlFor={`brick-${index}`}
                     className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                   >
-                    <div className="w-16 h-12 bg-red-200 rounded mb-3 flex items-center justify-center">
-                      {/* <div className="w-12 h-8 bg-red-400 rounded-sm"></div>
-                       
-                       */}
-                      <img src={brand?.IMAGE} className="w-full h-full" />
+                    {/* Images Section */}
+                    <div className="flex items-center justify-center mb-3 w-full h-20">
+                      <div className="flex items-center space-x-2">
+                        <img
+                          src={brand.IMAGE}
+                          alt={brand.NAME}
+                          className="h-16 w-auto object-contain"
+                        />
+                        {brand.IMAGE2 && (
+                          <>
+                            <span className="text-gray-400 text-sm">Or</span>
+                            <img
+                              src={brand.IMAGE2}
+                              alt={`${brand.NAME} alternative`}
+                              className="h-16 w-auto object-contain"
+                            />
+                          </>
+                        )}
+                      </div>
                     </div>
+                    {/* <img src={brand?.IMAGE} className="w-full h-full" />
+                    or
+                    {brand?.IMAGE2 && (
+                      <img src={brand?.IMAGE} className="w-full h-full" />
+                    )} */}
                     <span className="text-sm font-medium text-center">
                       {brand.NAME}
                     </span>
@@ -245,7 +261,7 @@ export const Bricks = () => {
             </RadioGroup>
           </div>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -256,7 +272,7 @@ export const Bricks = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

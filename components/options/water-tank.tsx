@@ -42,9 +42,53 @@ export const WaterTank = () => {
         <div>
           <h3 className="text-lg font-medium mb-4">Tank Capacity</h3>
           <RadioGroup value={selectedTank} onValueChange={handleTank}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <img src={WATER_TANK_CATEGORY.IMAGE} />
               {WATER_TANK_CATEGORY.BRANDS.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white flex justify-center items-center py-10 relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedTank === item.NAME
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleTank(item.NAME)}
+                >
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`tank-${index}`}
+                    className="absolute top-3 right-3"
+                  />
+
+                  <div className="text-center">
+                    <div className="text-lg font-medium text-gray-900 mb-1">
+                      {item.NAME.includes("Upto") ? (
+                        <>
+                          <span className="text-sm text-gray-600">Upto</span>
+                          <br />
+                          <span className="text-xl">
+                            {item.NAME.replace("Upto ", "")}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl">{item.NAME}</span>
+                          {item.QUANTITY && (
+                            <div className="text-sm text-gray-600 mt-1">
+                              {item.QUANTITY}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+
+                    <div className="text-xs text-gray-500 mt-2">
+                      ₹{item.PER_UNIT_RATE.toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {/* {WATER_TANK_CATEGORY.BRANDS.map((item, index) => (
                 <div
                   key={index}
                   className={`bg-white relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
@@ -57,7 +101,7 @@ export const WaterTank = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`tank-${index}`}
-                    className="peer sr-only"
+                    className="absolute top-1 right-1"
                   />
 
                   <div className="w-16 h-16 bg-blue-200 rounded-full mb-3 flex items-center justify-center">
@@ -68,11 +112,11 @@ export const WaterTank = () => {
                     ₹{item.PER_UNIT_RATE.toLocaleString()}
                   </span>
                 </div>
-              ))}
+              ))} */}
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -83,7 +127,7 @@ export const WaterTank = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );
