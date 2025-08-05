@@ -24,7 +24,11 @@ export const Bricks = () => {
     "kanota or hanumargarah",
   ];
 
-  const calculateBricks = (name, per_unit_rate, standard_quantity) => {
+  const calculateBricks = (
+    name: string,
+    per_unit_rate: number,
+    standard_quantity: number
+  ) => {
     const total_quantity = standard_quantity * total_build_up_area;
     const amount = per_unit_rate * total_quantity;
     addAndCalculate({
@@ -33,12 +37,16 @@ export const Bricks = () => {
       BRAND: name,
     });
   };
-  const calculateWaterProofing = (name, per_sqft_rate, standard_quantity) => {
+  const calculateWaterProofing = (
+    name: string,
+    per_unit_rate: number,
+    standard_quantity: number
+  ) => {
     // const per_sqft_rate = 40;
     // const standard_quantity = 0.3;
 
     const total_quantity = standard_quantity * ground_floor_area;
-    const amount = per_sqft_rate * total_quantity;
+    const amount = per_unit_rate * total_quantity;
     addAndCalculate({
       NAME: CATEGORY_NAMES["WATER-PROOFING"],
       AMOUNT: amount,
@@ -46,7 +54,11 @@ export const Bricks = () => {
     });
     return amount;
   };
-  const calculateTermiteSolution = (name, per_sqft_rate, standard_quantity) => {
+  const calculateTermiteSolution = (
+    name: string,
+    per_sqft_rate: number,
+    standard_quantity: number
+  ) => {
     // const per_sqft_rate = 15;
     // const standard_quantity = 0.9;
     const total_quantity = standard_quantity * ground_floor_area;
@@ -60,7 +72,7 @@ export const Bricks = () => {
   };
 
   // Handle brand selection and calculation
-  const handleBrandChange = (brandName) => {
+  const handleBrandChange = (brandName: string) => {
     setSelectedBrand(brandName);
     const selectedBrandData = BRICKS_CATEGORY.BRANDS.find(
       (brand) => brand.NAME === brandName
@@ -75,7 +87,7 @@ export const Bricks = () => {
   };
 
   // Handle water proofing selection and calculation
-  const handleWaterProofingChange = (optionName) => {
+  const handleWaterProofingChange = (optionName: string) => {
     setWaterProofing(optionName);
     const selectedOption = BRICKS_CATEGORY.WATER_PROOFING.find(
       (option) => option.NAME === optionName
