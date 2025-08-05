@@ -19,7 +19,7 @@ type StepStore = StepStoreState & StepStoreActions;
 // Step store implementation
 export const useStepStore = create<StepStore>((set) => ({
   currentStep: 1,
-  maxStep: 16,
+  maxStep: 15,
   stepChange: (id) => set((state) => ({ currentStep: id })),
   // Navigate to next step
   nextStep: () =>

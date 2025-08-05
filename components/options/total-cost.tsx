@@ -1,3 +1,4 @@
+"use client";
 import { useDataStore } from "@/store/useDataStore";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -78,7 +79,7 @@ export const TotalCost = () => {
                 <div className="flex justify-center mt-8">
                   <div className="w-32 h-32 bg-gradient-to-br from-amber-200 to-amber-400 rounded-lg flex items-center justify-center">
                     <img
-                      src="/placeholder.svg?height=120&width=120"
+                      src="/steps-images/home.svg"
                       alt="House illustration"
                       className="w-24 h-24 object-contain"
                     />

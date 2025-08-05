@@ -59,8 +59,8 @@ export const MultiStep = () => {
         return <Plumbing />;
       case 15:
         return <Stone />;
-      case 16:
-        return <TotalCost />;
+      // case 16:
+      //   return <TotalCost />;
     }
   };
 
@@ -68,7 +68,6 @@ export const MultiStep = () => {
     <div>
       <ConstructionEstimator />
       <StepNavigation />
-      <div>{JSON.stringify(all_prices)}</div>
       {render()}
       <StepIndicator />
     </div>

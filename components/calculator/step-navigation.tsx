@@ -27,13 +27,6 @@ const CONSTRUCTION_STEPS = [
     name: "Stone",
     image: STEPS_IMAGES.BRICKS,
   },
-  { id: 16, name: "Total Cost", image: "/placeholder.svg?height=60&width=60" },
-  //   {
-  //     id: 18,
-  //     name: "Miscellaneous",
-  //     image: "/placeholder.svg?height=60&width=60",
-  //   },
-  //   { id: 17, name: "Management", image: "/placeholder.svg?height=60&width=60" },
 ];
 
 interface StepNavigationProps {
