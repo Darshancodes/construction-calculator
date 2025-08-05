@@ -20,8 +20,6 @@ export const Flooring = () => {
   } = useDataStore();
 
   const calculateVetrifiedTile = (name: string, per_sqft_rate: number) => {
-    // const per_sqft_rate = 50;
-    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["VETRIFIED-TILES"],
@@ -35,9 +33,6 @@ export const Flooring = () => {
     per_sqft_rate: number,
     standard_quantity: number
   ) => {
-    // const per_sqft_rate = 50;
-    // const total_build_up_area = 10000;
-    // const standard_quantity = 0.4;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
     addAndCalculate({
@@ -52,9 +47,6 @@ export const Flooring = () => {
     per_sqft_rate: number,
     standard_quantity: number
   ) => {
-    // const per_sqft_rate = 75;
-    // const total_build_up_area = 10000;
-    // const standard_quantity = 0.2;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
     addAndCalculate({
@@ -71,9 +63,6 @@ export const Flooring = () => {
     per_sqft_rate: number,
     standard_quantity: number
   ) => {
-    // const per_sqft_rate = 40;
-    // const total_build_up_area = 10000;
-    // const standard_quantity = 1.25;
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_sqft_rate * total_quantity;
     addAndCalculate({

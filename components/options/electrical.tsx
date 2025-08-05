@@ -19,9 +19,6 @@ export const Electrical = () => {
   } = useDataStore();
 
   const calculateSlabWallMaterial = (name, per_sqft_rate) => {
-    // const per_sqft_rate = 20;
-    // const ground_floor_area = 2000;
-    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["ELECTRICAL-SLAB-AND-WALL-MATERIAL"],
@@ -31,9 +28,6 @@ export const Electrical = () => {
     return amount;
   };
   const calculateWiresCables = (name, per_sqft_rate) => {
-    // const per_sqft_rate = 70;
-    // const ground_floor_area = 2000;
-    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["WIRES-AND-CABLES-EWC0100-FLAT"],
@@ -43,9 +37,6 @@ export const Electrical = () => {
     return amount;
   };
   const calculateSheetsSwitches = (name, per_sqft_rate) => {
-    // const per_sqft_rate = 12;
-    // const ground_floor_area = 2000;
-    // const total_build_up_area = 10000;
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({
       NAME: CATEGORY_NAMES["SHEET-AND-SWITCHES-EWC0100-FLAT"],

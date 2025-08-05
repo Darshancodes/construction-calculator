@@ -40,10 +40,10 @@ export const ConstructionEstimator = () => {
   };
 
   return (
-    <div className=" bg-gray-100 py-2 px-2">
+    <div className=" bg-gray-100 py-4 px-2">
       <div className="">
         {/* Header */}
-        <div className="">
+        <div className="flex flex-col gay-2 my-4">
           <h1 className="text-2xl font-bold text-gray-900 ">
             Home construction estimator
           </h1>
@@ -98,13 +98,13 @@ export const ConstructionEstimator = () => {
               </div>
 
               {/* Number of Floors */}
-              <div className="flex flex-col ">
+              <div className="flex flex-col w-full">
                 <label className="block text-sm font-medium text-gray-700 ">
                   Number of floors
                 </label>
-                <div className="flex gap-4 ">
+                <div className="flex gap-4 flex-col md:flex-row w-full">
                   {/* Floor Counter */}
-                  <div className="flex w-1/2 items-center justify-between bg-gray-100 rounded-lg p-4">
+                  <div className="flex w-full md:w-1/2 items-center justify-between bg-gray-100 rounded-lg p-4">
                     <Button
                       variant="outline"
                       size="icon"
@@ -129,7 +129,7 @@ export const ConstructionEstimator = () => {
                   {/* Refresh Button */}
                   <Button
                     onClick={handleRefresh}
-                    className="w-1/2 h-16 flex items-center justify-cente rounded-lg"
+                    className="w-full md:w-1/2 h-16 flex items-center justify-cente rounded-lg"
                   >
                     <RefreshCw className="w-4 h-4 mr-2" />
                     Refresh
@@ -142,7 +142,7 @@ export const ConstructionEstimator = () => {
           {/* Right Side - Summary */}
           <Card>
             {/* Total Built-up Area */}
-            <CardContent className=" flex bg-white h-full ">
+            <CardContent className=" flex flex-col md:flex-row bg-white h-full ">
               <div className="flex flex-col gap-3 w-full py-2 px-2 justify-center ">
                 <div className="flex items-start  ">
                   <div className="bg-gray-100 p-2 rounded">
