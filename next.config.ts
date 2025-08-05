@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  ignoreDuringBuilds: true,
+  rules: {
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@next/next/no-img-element": "warn",
+  },
 };
 
 export default nextConfig;
