@@ -51,69 +51,115 @@ export default function StepNavigation() {
   };
 
   return (
-    <div className="w-full bg-white">
-      <div className="px-4 py-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Select materials
-        </h2>
+    <>
+      <div className="hidden md:block w-full bg-white">
+        <div className="px-4 py-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Select materials
+          </h2>
 
-        <div className="relative">
-          {/* Left scroll button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
-            onClick={scrollLeft}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
+          <div className="relative">
+            {/* Left scroll button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              onClick={scrollLeft}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
 
-          {/* Scrollable container */}
+            {/* Scrollable container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-3 overflow-x-auto scrollbar-hide px-10 py-2"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {CONSTRUCTION_STEPS.map((step) => (
+                <div
+                  key={step.id}
+                  onClick={() => stepChange(step.id)}
+                  className={`flex-shrink-0 w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                    currentStep === step.id
+                      ? "bg-main"
+                      : // ? "border-green-500 bg-green-50"
+                        "border-gray-200 bg-white hover:border-gray-300"
+                  }`}
+                >
+                  <div className="flex flex-col items-center justify-center h-full p-2">
+                    <div className="w-10 h-10 mb-1 flex items-center justify-center">
+                      <Image
+                        src={step.image || "/placeholder.svg"}
+                        alt={step.name}
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </div>
+                    <span className="text-xs text-gray-600 text-center leading-tight">
+                      {step.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right scroll button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              onClick={scrollRight}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+      {/* Mobile Version */}
+      <div className="md:hidden  bg-white border-t border-gray-200 z-50">
+        <div className="px-4 py-3">
           <div
             ref={scrollContainerRef}
-            className="flex gap-3 overflow-x-auto scrollbar-hide px-10 py-2"
+            className="flex gap-4 overflow-x-auto scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {CONSTRUCTION_STEPS.map((step) => (
               <div
                 key={step.id}
                 onClick={() => stepChange(step.id)}
-                className={`flex-shrink-0 w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                className={`flex-shrink-0 flex flex-col items-center cursor-pointer transition-all duration-200 px-3 py-2 rounded-lg ${
                   currentStep === step.id
-                    ? "bg-main"
-                    : // ? "border-green-500 bg-green-50"
-                      "border-gray-200 bg-white hover:border-gray-300"
+                    ? "bg-yellow-100"
+                    : "bg-transparent hover:bg-gray-50"
                 }`}
               >
-                <div className="flex flex-col items-center justify-center h-full p-2">
-                  <div className="w-10 h-10 mb-1 flex items-center justify-center">
-                    <Image
-                      src={step.image || "/placeholder.svg"}
-                      alt={step.name}
-                      width={40}
-                      height={40}
-                      className="object-contain"
-                    />
-                  </div>
-                  <span className="text-xs text-gray-600 text-center leading-tight">
-                    {step.name}
-                  </span>
+                <div className="w-12 h-12 mb-2 flex items-center justify-center">
+                  <Image
+                    src={step.image || "/placeholder.svg"}
+                    alt={step.name}
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
                 </div>
+                <span
+                  className={`text-xs text-center leading-tight min-w-0 ${
+                    currentStep === step.id
+                      ? "text-gray-900 font-medium"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {step.name}
+                </span>
+                {currentStep === step.id && (
+                  <div className="w-8 h-0.5 bg-yellow-500 mt-1 rounded-full" />
+                )}
               </div>
             ))}
           </div>
-
-          {/* Right scroll button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
-            onClick={scrollRight}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
