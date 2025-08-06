@@ -58,12 +58,19 @@ export const StepIndicator = () => {
             <div className="w-full">
               <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-3">
-                  <ShoppingCart className="w-3 h-3" />
-                  <div className="flex flex-col">
+                  <ShoppingCart className="w-5 h-5" />
+                  {all_prices?.length > 0 ? (
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">
+                        {all_prices.length} items added to cart
+                      </span>
+                    </div>
+                  ) : (
                     <span className="text-sm font-medium">
-                      {all_prices.length} items added to cart
+                      add items to cart
                     </span>
-                  </div>
+                  )}
+                  <img src={"/icons/arrow-drop-up.svg"} />
                 </div>
 
                 <div
