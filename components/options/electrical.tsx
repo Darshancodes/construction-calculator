@@ -188,7 +188,7 @@ export const Electrical = () => {
             </div>
           </RadioGroup>
         </div>
-        <button
+        {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -199,7 +199,7 @@ export const Electrical = () => {
           onClick={prevStep}
         >
           prevStep
-        </button>
+        </button> */}
       </CardContent>
     </Card>
   );

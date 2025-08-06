@@ -15,6 +15,7 @@ interface PriceItem {
 interface ConstructionData {
   ground_floor_area: number;
   no_of_floors: number;
+  location: string;
   readonly total_build_up_area: number;
 }
 
@@ -61,6 +62,7 @@ export const useDataStore = create<DataStore>((set, get) => ({
   constructionData: {
     ground_floor_area: 2000,
     no_of_floors: 5,
+    location: "gorenpur",
     // This will be calculated automatically
     get total_build_up_area(): number {
       return this.ground_floor_area * this.no_of_floors;

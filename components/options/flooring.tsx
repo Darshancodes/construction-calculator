@@ -331,7 +331,7 @@ export const Flooring = () => {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex gap-4 pt-6">
+      {/* <div className="flex gap-4 pt-6">
         <button
           className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
           onClick={prevStep}
@@ -344,7 +344,7 @@ export const Flooring = () => {
         >
           Next Step
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

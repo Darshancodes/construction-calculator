@@ -134,7 +134,7 @@ export default function StepNavigation() {
                     : "bg-transparent hover:bg-gray-50"
                 }`}
               >
-                <div className="w-12 h-12 mb-2 flex items-center justify-center">
+                <div className=" mb-2 flex items-center justify-center">
                   <Image
                     src={step.image || "/placeholder.svg"}
                     alt={step.name}

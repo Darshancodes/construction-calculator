@@ -95,7 +95,7 @@ export const Door = () => {
                   onClick={() => handleShutter(item.PER_SQFT_RATE)}
                 >
                   <RadioGroupItem
-                    value={`option-${index}`}
+                    value={item.PER_SQFT_RATE.toString()}
                     id={`shutter-${index}`}
                     className="absolute top-1 right-1"
                   />
