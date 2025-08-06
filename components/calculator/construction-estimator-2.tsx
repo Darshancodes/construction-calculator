@@ -17,7 +17,7 @@ export const ConstructionEstimator = () => {
     useDataStore();
   const [location, setLocation] = useState("Bikaner");
   const [showMobileModal, setShowMobileModal] = useState(false);
-  const [showDesktopModal, setShowDesktopModal] = useState(true);
+  const [showDesktopModal, setShowDesktopModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // Local form state
@@ -26,10 +26,20 @@ export const ConstructionEstimator = () => {
     no_of_floors: constructionData.no_of_floors,
   });
 
-  // Check if screen is mobile
+  // Check if screen is mobile and set appropriate modal
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      // Set the appropriate modal based on screen size
+      if (mobile) {
+        setShowMobileModal(true);
+        setShowDesktopModal(false);
+      } else {
+        setShowDesktopModal(true);
+        setShowMobileModal(false);
+      }
     };
 
     checkScreenSize();
@@ -232,7 +242,7 @@ export const ConstructionEstimator = () => {
 
   // Mobile Modal Component
   const MobileModal = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg w-full max-w-md mx-4 relative">
         {/* Close button */}
         <button
@@ -543,12 +553,7 @@ export const ConstructionEstimator = () => {
 
   // Render based on screen size
   if (isMobile) {
-    return (
-      <>
-        <MobileView />
-        {showMobileModal && <MobileModal />}
-      </>
-    );
+    return <>{showMobileModal && <MobileModal />}</>;
   }
 
   return (

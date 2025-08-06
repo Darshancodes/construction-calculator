@@ -1,6 +1,14 @@
 import { useDataStore } from "@/store/useDataStore";
 import { Button } from "../ui/button";
-import { ArrowRight, ChevronUp, Edit2, ShoppingCart, X } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  Edit2,
+  ShoppingCart,
+  X,
+} from "lucide-react";
 import { useStepStore } from "@/store/useStepStore";
 import Link from "next/link";
 import {
@@ -11,12 +19,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const StepIndicator = () => {
+  const scrollRef = useRef(null);
   const { all_prices, total_prices, constructionData, removePriceByName } =
     useDataStore();
   const { stepChange, currentStep, nextStep } = useStepStore();
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const handleRemoveItem = (brand: string) => {
     // Implement your remove logic here
@@ -39,6 +50,40 @@ export const StepIndicator = () => {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  const checkScrollButtons = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const scrollElement = scrollRef.current;
+    if (scrollElement) {
+      scrollElement.addEventListener("scroll", checkScrollButtons);
+      window.addEventListener("resize", checkScrollButtons);
+
+      return () => {
+        scrollElement.removeEventListener("scroll", checkScrollButtons);
+        window.removeEventListener("resize", checkScrollButtons);
+      };
+    }
+  }, [all_prices]);
 
   // Group items by category
   const groupedItems = all_prices.reduce((acc, price) => {
@@ -208,35 +253,66 @@ export const StepIndicator = () => {
     return (
       <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6">
         {/* Left side - Cart icon and items */}
-        <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden">
+        <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden min-w-0">
           <div className="flex gap-3 items-start text-sm">
             <ShoppingCart className="w-4 h-4" />
             <span>Added to cart</span>
           </div>
 
-          {/* Scrollable items container */}
-          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-1">
-            {all_prices.map((price, index) => (
-              <div
-                key={`${price?.BRAND}-${index}`}
-                className="flex items-center gap-2 bg-gray-800 rounded-full px-3 py-1.5 text-sm whitespace-nowrap flex-shrink-0"
-              >
-                <span className="text-white">{price.BRAND}</span>
-                <button
-                  onClick={() => handleRemoveItem(price?.NAME)}
-                  className="text-gray-400 hover:text-white transition-colors"
-                  aria-label={`Remove ${price.NAME}`}
+          {/* Items container with scroll arrows */}
+          <div className="flex items-center gap-2 w-full min-w-0">
+            {/* Left scroll arrow */}
+
+            <button
+              onClick={scrollLeft}
+              className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            {/* Scrollable items container */}
+            <div
+              ref={scrollRef}
+              className="flex items-center gap-2 overflow-x-auto flex-1 min-w-0 py-1"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              {all_prices.map((price, index) => (
+                <div
+                  key={`${price?.BRAND}-${index}`}
+                  className="flex items-center gap-2 bg-gray-800 rounded-full px-3 py-1.5 text-sm whitespace-nowrap flex-shrink-0"
                 >
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-            ))}
+                  <span className="text-white">{price.BRAND}</span>
+                  <button
+                    onClick={() => handleRemoveItem(price?.NAME)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                    aria-label={`Remove ${price.NAME}`}
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Right scroll arrow */}
+
+            <button
+              onClick={scrollRight}
+              className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
+        {/* Action buttons */}
         {currentStep < 15 && (
           <button
-            className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+            className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ml-4 flex-shrink-0"
             onClick={nextStep}
           >
             Next
@@ -244,19 +320,25 @@ export const StepIndicator = () => {
           </button>
         )}
 
-        {/* Right side - Proceed button */}
-        {currentStep == 15 && (
+        {currentStep === 15 && (
           <div className="flex-shrink-0 ml-4">
-            <Link
-              href={"/total-cost"}
+            <button
+              onClick={() => console.log("Proceeding to total cost")}
               className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
             >
               Proceed
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         )}
       </div>
+
+      // {/* CSS to hide scrollbar */}
+      // <style jsx>{`
+      //   div::-webkit-scrollbar {
+      //     display: none;
+      //   }
+      // `}</style>
     );
   };
   return isMobile ? <MobileSheet /> : <DesktopView />;
@@ -293,6 +375,110 @@ function PropertyInfoCard({ location, build_up_area, no_of_floors }) {
     </div>
   );
 }
+
+// <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6">
+//         {/* Left side - Cart icon and items */}
+//         <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden">
+//           <div className="flex gap-3 items-start text-sm">
+//             <ShoppingCart className="w-4 h-4" />
+//             <span>Added to cart</span>
+//           </div>
+
+//           {/* Left scroll arrow */}
+//           {canScrollLeft && (
+//             <button
+//               onClick={scrollLeft}
+//               className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors"
+//               aria-label="Scroll left"
+//             >
+//               <ChevronLeft className="w-4 h-4" />
+//             </button>
+//           )}
+
+//           {/* Scrollable items container */}
+//           {/* <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-1">
+//             {all_prices.map((price, index) => (
+//               <div
+//                 key={`${price?.BRAND}-${index}`}
+//                 className="flex items-center gap-2 bg-gray-800 rounded-full px-3 py-1.5 text-sm whitespace-nowrap flex-shrink-0"
+//               >
+//                 <span className="text-white">{price.BRAND}</span>
+//                 <button
+//                   onClick={() => handleRemoveItem(price?.NAME)}
+//                   className="text-gray-400 hover:text-white transition-colors"
+//                   aria-label={`Remove ${price.NAME}`}
+//                 >
+//                   <X className="w-3 h-3" />
+//                 </button>
+//               </div>
+//             ))}
+//           </div> */}
+//           {/* Scrollable items container */}
+//           <div
+//             ref={scrollRef}
+//             className="flex items-center gap-2 overflow-x-auto flex-1 min-w-0"
+//             style={{
+//               scrollbarWidth: "none",
+//               msOverflowStyle: "none",
+//               // WebkitScrollbar: { display: "none" },
+//             }}
+//           >
+//             <style jsx>{`
+//               div::-webkit-scrollbar {
+//                 display: none;
+//               }
+//             `}</style>
+//             {all_prices.map((price, index) => (
+//               <div
+//                 key={`${price?.BRAND}-${index}`}
+//                 className="flex items-center gap-2 bg-gray-800 rounded-full px-3 py-1.5 text-sm whitespace-nowrap flex-shrink-0"
+//               >
+//                 <span className="text-white">{price.BRAND}</span>
+//                 <button
+//                   onClick={() => handleRemoveItem(price?.NAME)}
+//                   className="text-gray-400 hover:text-white transition-colors"
+//                   aria-label={`Remove ${price.NAME}`}
+//                 >
+//                   <X className="w-3 h-3" />
+//                 </button>
+//               </div>
+//             ))}
+//             {/* Right scroll arrow */}
+//             {canScrollRight && (
+//               <button
+//                 onClick={scrollRight}
+//                 className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors"
+//                 aria-label="Scroll right"
+//               >
+//                 <ChevronRight className="w-4 h-4" />
+//               </button>
+//             )}
+//           </div>
+//         </div>
+
+//         {currentStep < 15 && (
+//           <button
+//             className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+//             onClick={nextStep}
+//           >
+//             Next
+//             <ArrowRight className="w-4 h-4" />
+//           </button>
+//         )}
+
+//         {/* Right side - Proceed button */}
+//         {currentStep == 15 && (
+//           <div className="flex-shrink-0 ml-4">
+//             <Link
+//               href={"/total-cost"}
+//               className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+//             >
+//               Proceed
+//               <ArrowRight className="w-4 h-4" />
+//             </Link>
+//           </div>
+//         )}
+//       </div>
 
 // <div className="w-full">
 //           <SheetTrigger className="w-full rounded-t-lg">

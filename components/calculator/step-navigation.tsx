@@ -128,9 +128,9 @@ export default function StepNavigation() {
               <div
                 key={step.id}
                 onClick={() => stepChange(step.id)}
-                className={`flex-shrink-0 flex flex-col items-center cursor-pointer transition-all duration-200 px-3 py-2 rounded-lg ${
+                className={`flex-shrink-0 flex flex-col items-center cursor-pointer transition-all duration-200 px-3  ${
                   currentStep === step.id
-                    ? "bg-yellow-100"
+                    ? "bg-yellow-100 border-b-4 border-black"
                     : "bg-transparent hover:bg-gray-50"
                 }`}
               >
@@ -140,10 +140,10 @@ export default function StepNavigation() {
                     alt={step.name}
                     width={32}
                     height={32}
-                    className="object-contain"
+                    className="object-contain w-20"
                   />
                 </div>
-                <span
+                {/* <span
                   className={`text-xs text-center leading-tight min-w-0 ${
                     currentStep === step.id
                       ? "text-gray-900 font-medium"
@@ -151,10 +151,10 @@ export default function StepNavigation() {
                   }`}
                 >
                   {step.name}
-                </span>
-                {currentStep === step.id && (
+                </span> */}
+                {/* {currentStep === step.id && (
                   <div className="w-8 h-0.5 bg-yellow-500 mt-1 rounded-full" />
-                )}
+                )} */}
               </div>
             ))}
           </div>
