@@ -14,12 +14,14 @@ import {
 import { useEffect, useState } from "react";
 
 export const StepIndicator = () => {
-  const { all_prices, total_prices, constructionData } = useDataStore();
+  const { all_prices, total_prices, constructionData, removePriceByName } =
+    useDataStore();
   const { stepChange, currentStep, nextStep } = useStepStore();
   const [isMobile, setIsMobile] = useState(false);
   const handleRemoveItem = (brand: string) => {
     // Implement your remove logic here
     console.log("Remove item:", brand);
+    removePriceByName(brand);
   };
 
   const handleProceed = () => {
@@ -51,12 +53,12 @@ export const StepIndicator = () => {
   const MobileSheet = () => {
     return (
       <Sheet>
-        <div className="w-full">
-          <SheetTrigger className="w-full rounded-t-lg">
-            <div className="bg-black w-full flex flex-col text-white px-2 py-4 rounded-t-lg  cursor-pointer">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center justify-between gap-3">
-                  <ShoppingCart className="w-5 h-5" />
+        <div className="w-full rounded-t-lg bg-black text-white px-2 py-4 cursor-pointer">
+          <SheetTrigger asChild>
+            <div className="w-full">
+              <div className="flex items-center justify-between px-1">
+                <div className="flex items-center gap-3">
+                  <ShoppingCart className="w-3 h-3" />
                   <div className="flex flex-col">
                     <span className="text-sm font-medium">
                       {all_prices.length} items added to cart
@@ -64,11 +66,31 @@ export const StepIndicator = () => {
                   </div>
                 </div>
 
-                {/* <div className="flex items-center gap-2">
-                <span className="text-sm">View Cart</span>
-                <ChevronUp className="w-4 h-4" />
-              </div> */}
+                <div
+                  className="flex items-center gap-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {currentStep < 15 ? (
+                    <div
+                      className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 cursor-pointer"
+                      onClick={nextStep}
+                    >
+                      Next
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  ) : (
+                    <Link
+                      href="/total-cost"
+                      className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Proceed
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
+                </div>
               </div>
+
               <PropertyInfoCard
                 build_up_area={constructionData?.total_build_up_area}
                 location={constructionData?.location}
@@ -76,58 +98,55 @@ export const StepIndicator = () => {
               />
             </div>
           </SheetTrigger>
-          <div className="">
-            {currentStep < 15 && (
-              <button
-                className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                onClick={nextStep}
-              >
-                Next
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
-
-            {/* Right side - Proceed button */}
-            {currentStep == 15 && (
-              <div className="flex-shrink-0 ml-4">
-                <Link
-                  href={"/total-cost"}
-                  className="bg-white absolute right-0 bottom-0 text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                >
-                  Proceed
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            )}
-          </div>
         </div>
         <SheetContent
           side="bottom"
           className="w-[400px] h-[400px] bg-black text-white"
         >
           <SheetHeader>
-            <SheetTitle className="flex justify-end items-center mt-10">
-              <ShoppingCart className="w-3 h-3 text-white" />
-              <div className="flex text-white flex-col">
-                <span className="text-sm font-medium">
-                  {all_prices.length} items added to cart
-                </span>
+            <div className="flex justify-between items-center">
+              <SheetTitle className="flex flex-col justify-center items-start ">
+                <ShoppingCart className="w-3 h-3 text-white" />
+                <div className="flex text-white flex-col">
+                  <span className="text-sm font-medium">
+                    {all_prices.length} items added to cart
+                  </span>
+                </div>
+              </SheetTitle>
+              <div className="">
+                {currentStep < 15 && (
+                  <button
+                    className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+                    onClick={nextStep}
+                  >
+                    Next
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+
+                {/* Right side - Proceed button */}
+                {currentStep == 15 && (
+                  <div className="flex-shrink-0 ml-4">
+                    <Link
+                      href={"/total-cost"}
+                      className="bg-white absolute right-0 bottom-0 text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+                    >
+                      Proceed
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                )}
               </div>
-            </SheetTitle>
+            </div>
             <div className="space-y-6">
               {Object.entries(groupedItems).map(([category, items]) => (
-                <div key={category} className="space-y-3">
+                <div key={category} className="space-y-3 my-3">
                   {/* Category Header */}
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-amber-600 rounded flex items-center justify-center">
-                      <span className="text-white text-xs font-semibold">
-                        {category === "Wall finishes"
-                          ? "🧱"
-                          : category === "Plumbing"
-                          ? "🔧"
-                          : "📦"}
-                      </span>
-                    </div>
+                    <span className="text-white w-10 h-5 text-lg font-semibold">
+                      <img src={"/steps-images/cement.svg"} />
+                    </span>
+
                     <h3 className="text-white text-lg font-semibold">
                       {category}
                     </h3>
@@ -138,13 +157,13 @@ export const StepIndicator = () => {
                     {items?.map((price, index) => (
                       <div
                         key={`${price?.BRAND}-${index}`}
-                        className="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3 group hover:bg-gray-700 transition-colors"
+                        className="flex items-center justify-between rounded-lg px-4 py-3 group bg-[#1B1B1B] transition-colors"
                       >
                         <div className="flex items-center gap-3">
                           {/* Item Icon */}
-                          <div className="w-10 h-8 bg-amber-600 rounded flex items-center justify-center flex-shrink-0">
+                          <div className="w-10 h-8 bg-gray-600/90 rounded flex items-center justify-center flex-shrink-0">
                             <span className="text-white text-xs font-bold">
-                              {price?.BRAND?.slice(0, 1)}
+                              <img src={"/steps-images/cement.svg"} />
                             </span>
                           </div>
 
@@ -154,49 +173,24 @@ export const StepIndicator = () => {
                               {price.NAME}
                             </span>
                             <span className="text-white font-semibold">
-                              {price.BRAND || "up to ₹50/sqft."}
+                              {price.BRAND}
                             </span>
                           </div>
                         </div>
 
                         {/* Remove Button */}
-                        <button
-                          onClick={() => handleRemoveItem(price?.BRAND)}
-                          className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-white transition-all p-1 rounded"
+                        <Button
+                          onClick={() => handleRemoveItem(price?.NAME)}
+                          className="text-white transition-all p-1 rounded-lg"
                           aria-label={`Remove ${price.NAME}`}
                         >
-                          <X className="w-4 h-4" />
-                        </button>
+                          <X className="w-4 h-4 text-white" />
+                        </Button>
                       </div>
                     ))}
                   </div>
                 </div>
               ))}
-            </div>
-
-            <div className="">
-              {currentStep < 15 && (
-                <button
-                  className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                  onClick={nextStep}
-                >
-                  Next
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
-
-              {/* Right side - Proceed button */}
-              {currentStep == 15 && (
-                <div className="flex-shrink-0 ml-4">
-                  <Link
-                    href={"/total-cost"}
-                    className="bg-white absolute right-0 bottom-0 text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                  >
-                    Proceed
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              )}
             </div>
           </SheetHeader>
         </SheetContent>
@@ -207,8 +201,8 @@ export const StepIndicator = () => {
     return (
       <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6">
         {/* Left side - Cart icon and items */}
-        <div className="flex items-center gap-3 flex-1 overflow-hidden">
-          <div className="flex items-center gap-2 text-sm">
+        <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden">
+          <div className="flex gap-3 items-start text-sm">
             <ShoppingCart className="w-4 h-4" />
             <span>Added to cart</span>
           </div>
@@ -222,7 +216,7 @@ export const StepIndicator = () => {
               >
                 <span className="text-white">{price.BRAND}</span>
                 <button
-                  onClick={() => handleRemoveItem(price?.BRAND)}
+                  onClick={() => handleRemoveItem(price?.NAME)}
                   className="text-gray-400 hover:text-white transition-colors"
                   aria-label={`Remove ${price.NAME}`}
                 >
@@ -263,9 +257,9 @@ export const StepIndicator = () => {
 
 function PropertyInfoCard({ location, build_up_area, no_of_floors }) {
   return (
-    <div className="  text-white mt-4 mx-3">
+    <div className="  text-white mt-4 mx-3 bg-[#1B1B1B] rounded-lg py-3">
       <div className="flex justify-between items-start">
-        <div className="space-y-1 space-x-3">
+        <div className="space-y-1 space-x-8 px-3">
           {/* Header labels */}
           <div className="flex space-x-4 text-gray-400 text-sm">
             <span>Location</span>
@@ -292,3 +286,54 @@ function PropertyInfoCard({ location, build_up_area, no_of_floors }) {
     </div>
   );
 }
+
+// <div className="w-full">
+//           <SheetTrigger className="w-full rounded-t-lg">
+//             <div className="bg-black w-full flex flex-col text-white px-2 py-4 rounded-t-lg  cursor-pointer">
+//               <div className="flex items-center justify-between">
+//                 <div className="flex items-center justify-between gap-3">
+//                   <ShoppingCart className="w-5 h-5" />
+//                   <div className="flex flex-col">
+//                     <span className="text-sm font-medium">
+//                       {all_prices.length} items added to cart
+//                     </span>
+//                   </div>
+//                 </div>
+
+//                 {/* <div className="flex items-center gap-2">
+//                 <span className="text-sm">View Cart</span>
+//                 <ChevronUp className="w-4 h-4" />
+//               </div> */}
+//               </div>
+//               <PropertyInfoCard
+//                 build_up_area={constructionData?.total_build_up_area}
+//                 location={constructionData?.location}
+//                 no_of_floors={constructionData?.no_of_floors}
+//               />
+//             </div>
+//           </SheetTrigger>
+//           <div className="">
+//             {currentStep < 15 && (
+//               <button
+//                 className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+//                 onClick={nextStep}
+//               >
+//                 Next
+//                 <ArrowRight className="w-4 h-4" />
+//               </button>
+//             )}
+
+//             {/* Right side - Proceed button */}
+//             {currentStep == 15 && (
+//               <div className="flex-shrink-0 ml-4">
+//                 <Link
+//                   href={"/total-cost"}
+//                   className="bg-white absolute right-0 bottom-0 text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+//                 >
+//                   Proceed
+//                   <ArrowRight className="w-4 h-4" />
+//                 </Link>
+//               </div>
+//             )}
+//           </div>
+//         </div>
