@@ -26,18 +26,16 @@ export const ConstructionEstimator = () => {
     no_of_floors: constructionData.no_of_floors,
   });
 
-  // Check if screen is mobile and set appropriate modal
+  // Check if screen is mobile and set appropriate modal on first load only
   useEffect(() => {
     const checkScreenSize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
 
-      // Set the appropriate modal based on screen size
-      if (mobile) {
-        setShowMobileModal(true);
+      // Only close modals that shouldn't be open on the current screen size
+      if (mobile && showDesktopModal) {
         setShowDesktopModal(false);
-      } else {
-        setShowDesktopModal(true);
+      } else if (!mobile && showMobileModal) {
         setShowMobileModal(false);
       }
     };
@@ -46,7 +44,63 @@ export const ConstructionEstimator = () => {
     window.addEventListener("resize", checkScreenSize);
 
     return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+  }, [showDesktopModal, showMobileModal]);
+
+  // Separate effect to open modal on first load only
+  useEffect(() => {
+    const mobile = window.innerWidth < 768;
+
+    if (mobile) {
+      setShowMobileModal(true);
+      setShowDesktopModal(false);
+    } else {
+      setShowDesktopModal(true);
+      setShowMobileModal(false);
+    }
+  }, []); // Empty dependency array - runs only once on mount
+
+  // Check if screen is mobile - FIXED: Only set isMobile, don't auto-open modals
+  // useEffect(() => {
+  //   const checkScreenSize = () => {
+  //     const mobile = window.innerWidth < 768;
+  //     setIsMobile(mobile);
+
+  //     // REMOVED: Auto-opening of modals
+  //     // Only close modals that shouldn't be open on the current screen size
+  //     if (mobile && showDesktopModal) {
+  //       setShowDesktopModal(false);
+  //     } else if (!mobile && showMobileModal) {
+  //       setShowMobileModal(false);
+  //     }
+  //   };
+
+  //   checkScreenSize();
+  //   window.addEventListener("resize", checkScreenSize);
+
+  //   return () => window.removeEventListener("resize", checkScreenSize);
+  // }, [showDesktopModal, showMobileModal]); // Added dependencies
+
+  // Check if screen is mobile and set appropriate modal
+  // useEffect(() => {
+  //   const checkScreenSize = () => {
+  //     const mobile = window.innerWidth < 768;
+  //     setIsMobile(mobile);
+
+  //     // Set the appropriate modal based on screen size
+  //     if (mobile) {
+  //       setShowMobileModal(true);
+  //       setShowDesktopModal(false);
+  //     } else {
+  //       setShowDesktopModal(true);
+  //       setShowMobileModal(false);
+  //     }
+  //   };
+
+  //   checkScreenSize();
+  //   window.addEventListener("resize", checkScreenSize);
+
+  //   return () => window.removeEventListener("resize", checkScreenSize);
+  // }, []);
 
   // Update the handleAreaChange function
   const handleAreaChange = (value: string) => {
