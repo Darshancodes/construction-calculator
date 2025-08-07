@@ -98,8 +98,8 @@ export const StepIndicator = () => {
   const MobileSheet = () => {
     return (
       <Sheet>
-        <div className="w-full rounded-t-lg bg-black text-white px-2 py-4 cursor-pointer">
-          <SheetTrigger asChild>
+        <div className="w-full fixed mt-20 left-0 right-0 z-50 rounded-t-lg bg-black text-white px-2 py-4 cursor-pointer bottom-0">
+          <SheetTrigger className="w-full">
             <div className="w-full">
               <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-3">
@@ -248,7 +248,7 @@ export const StepIndicator = () => {
   };
   const DesktopView = () => {
     return (
-      <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6">
+      <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6 rounded-t-lg">
         {/* Left side - Cart icon and items */}
         <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden min-w-0">
           <div className="flex gap-3 items-start text-sm">
@@ -259,14 +259,15 @@ export const StepIndicator = () => {
           {/* Items container with scroll arrows */}
           <div className="flex items-center gap-2 w-full min-w-0">
             {/* Left scroll arrow */}
-
-            <button
-              onClick={scrollLeft}
-              className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+            {canScrollLeft && (
+              <button
+                onClick={scrollLeft}
+                className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+            )}
 
             {/* Scrollable items container */}
             <div
@@ -295,14 +296,15 @@ export const StepIndicator = () => {
             </div>
 
             {/* Right scroll arrow */}
-
-            <button
-              onClick={scrollRight}
-              className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            {canScrollRight && (
+              <button
+                onClick={scrollRight}
+                className="flex-shrink-0 p-1 hover:bg-gray-700 rounded transition-colors z-10"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
 

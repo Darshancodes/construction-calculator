@@ -122,216 +122,317 @@ export const Flooring = () => {
     }
   };
   return (
-    <div className=" p-6 space-y-4 bg-main rounded-lg">
-      {/* Vitrified Tiles */}
-      <div className=" rounded-lg p-4">
-        <div className="flex items-center md:gap-6">
-          <div className="flex-shrink-0">
-            <div className="text-sm font-medium text-gray-700 mb-2">
-              Verified tiles
-            </div>
-            <img
-              src={FLOORING_CATEGORY.VETRIFIED_IMAGE || "/placeholder.svg"}
-              alt="Vitrified tiles"
-              className="w-14 md:w-20 md:h-20 object-cover rounded"
-            />
-          </div>
-          <div className="flex-1">
-            <RadioGroup
-              value={selectedVitrified}
-              onValueChange={handleVetrifiedTile}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {FLOORING_CATEGORY.VETRIFIED_TILES.map((item, index) => (
-                  <div key={index} className="relative ">
-                    <div
-                      className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                        selectedVitrified === item.NAME
-                          ? "border-black"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                      onClick={() => handleVetrifiedTile(item.NAME)}
-                    >
-                      <RadioGroupItem
-                        value={item.NAME}
-                        id={`vitrified-${index}`}
-                        className="absolute top-2 right-2"
-                      />
-                      <div className="text-center">
-                        <div className="text-xs text-gray-500 mb-1">Upto</div>
-                        <div className="text-lg font-bold">
-                          ₹{item.PER_SQFT_RATE}
-                        </div>
-                        <div className="text-xs text-gray-500">per sqft.</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </div>
-        </div>
-      </div>
+    <>
+      {/* Main Content */}
+      <div className="space-y-6 bg-main">
+        {/* Vitrified Tiles */}
+        <FlooringSection
+          title="Vitrified tiles"
+          image={FLOORING_CATEGORY.VETRIFIED_IMAGE}
+          items={FLOORING_CATEGORY.VETRIFIED_TILES}
+          selectedValue={selectedVitrified}
+          onSelect={handleVetrifiedTile}
+        />
 
-      {/* Ceramic Wall Tile */}
-      <div className="bg-yellow-50 rounded-lg md:p-4">
-        <div className="flex items-center md:gap-6">
-          <div className="flex-shrink-0">
-            <div className="text-xs sm:text-sm font-medium text-gray-700 mb-2">
-              Ceramic wall tile
-            </div>
-            <img
-              src={
-                FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE || "/placeholder.svg"
-              }
-              alt="Ceramic wall tile"
-              className="w-14 md:w-20 md:h-20 object-cover rounded"
-            />
-          </div>
-          <div className="flex-1">
-            <RadioGroup
-              value={selectedCeramic}
-              onValueChange={handleCeremicWall}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN.map(
-                  (item, index) => (
-                    <div key={index} className="relative min-w-72">
-                      <div
-                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                          selectedCeramic === item.NAME
-                            ? "border-black"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => handleCeremicWall(item.NAME)}
-                      >
-                        <RadioGroupItem
-                          value={item.NAME}
-                          id={`ceramic-${index}`}
-                          className="absolute top-2 right-2"
-                        />
-                        <div className="text-center">
-                          <div className="text-xs text-gray-500 mb-1">Upto</div>
-                          <div className="text-lg font-bold">
-                            ₹{item.PER_SQFT_RATE}
-                          </div>
-                          <div className="text-xs text-gray-500">per sqft.</div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </RadioGroup>
-          </div>
-        </div>
-      </div>
+        {/* Ceramic Wall Tile */}
+        <FlooringSection
+          title="Ceramic wall tile"
+          image={FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE}
+          items={FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN}
+          selectedValue={selectedCeramic}
+          onSelect={handleCeremicWall}
+        />
 
-      {/* Granite */}
-      <div className="bg-yellow-50 rounded-lg p-4">
-        <div className="flex items-center md:gap-6">
-          <div className="flex-shrink-0">
-            <div className="text-sm font-medium text-gray-700 mb-2">
-              Granite
-            </div>
-            <img
-              src={
-                FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE || "/placeholder.svg"
-              }
-              alt="Granite"
-              className="w-16 md:w-20 md:h-20 object-cover rounded"
-            />
-          </div>
-          <div className="flex-1">
-            <RadioGroup value={selectedGranite} onValueChange={handleGranite}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.map(
-                  (item, index) => (
-                    <div key={index} className="relative min-w-72">
-                      <div
-                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                          selectedGranite === item.NAME
-                            ? "border-black"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => handleGranite(item.NAME)}
-                      >
-                        <RadioGroupItem
-                          value={item.NAME}
-                          id={`granite-${index}`}
-                          className="absolute top-2 right-2"
-                        />
-                        <div className="text-center">
-                          <div className="text-xs text-gray-500 mb-1">Upto</div>
-                          <div className="text-lg font-bold">
-                            ₹{item.PER_SQFT_RATE}
-                          </div>
-                          <div className="text-xs text-gray-500">per sqft.</div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </RadioGroup>
-          </div>
-        </div>
-      </div>
+        {/* Granite */}
+        <FlooringSection
+          title="Granite"
+          image={FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE}
+          items={
+            FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE
+          }
+          selectedValue={selectedGranite}
+          onSelect={handleGranite}
+        />
 
-      {/* Rough Stone */}
-      <div className="bg-yellow-50 rounded-lg p-4">
-        <div className="flex items-center md:gap-6">
-          <div className="flex-shrink-0">
-            <div className="text-sm font-medium text-gray-700 mb-2">
-              Rough stone
-            </div>
-            <img
-              src={FLOORING_CATEGORY.ROUGH_STONE_IMAGE || "/placeholder.svg"}
-              alt="Rough stone"
-              className="w-14 md:w-20 md:h-20 object-cover rounded"
-            />
-          </div>
-          <div className="flex-1">
-            <RadioGroup
-              value={selectedRoughStone}
-              onValueChange={handleRoughStone}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA.map(
-                  (item, index) => (
-                    <div key={index} className="relative min-w-72">
-                      <div
-                        className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                          selectedRoughStone === item.NAME
-                            ? "border-black"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => handleRoughStone(item.NAME)}
-                      >
-                        <RadioGroupItem
-                          value={item.NAME}
-                          id={`stone-${index}`}
-                          className="absolute top-2 right-2"
-                        />
-                        <div className="text-center">
-                          <div className="text-xs text-gray-500 mb-1">Upto</div>
-                          <div className="text-lg font-bold">
-                            ₹{item.PER_SQFT_RATE}
-                          </div>
-                          <div className="text-xs text-gray-500">per sqft.</div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </RadioGroup>
-          </div>
-        </div>
+        {/* Rough Stone */}
+        <FlooringSection
+          title="Rough stone"
+          image={FLOORING_CATEGORY.ROUGH_STONE_IMAGE}
+          items={FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA}
+          selectedValue={selectedRoughStone}
+          onSelect={handleRoughStone}
+        />
       </div>
-    </div>
+    </>
   );
 };
+
+const FlooringSection = ({
+  title,
+  image,
+  items,
+  selectedValue,
+  onSelect,
+  bgColor = "bg-yellow-50",
+}) => (
+  <div className={`${bgColor} rounded-lg p-3 md:p-6`}>
+    <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
+      {/* Image and Title Section */}
+      <div className="flex items-center gap-3 lg:flex-col md:w-56 lg:items-center lg:flex-shrink-0">
+        <div className="text-sm font-medium text-gray-700 lg:mb-2 lg:text-center">
+          {title}
+        </div>
+        <img
+          src={image}
+          alt={title}
+          className="w-16 h-16 hidden md:block md:w-20 md:h-20 object-cover rounded flex-shrink-0"
+        />
+      </div>
+
+      {/* Options Section */}
+      <div className="flex-1 w-full">
+        <RadioGroup value={selectedValue} onValueChange={onSelect}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
+            {items.map((item, index) => (
+              <div key={index} className="relative">
+                <div
+                  className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all hover:shadow-md ${
+                    selectedValue === item.NAME
+                      ? "border-blue-500 shadow-lg"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => onSelect(item.NAME)}
+                >
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`${title.toLowerCase()}-${index}`}
+                    className="absolute top-3 right-3"
+                  />
+                  <div className="text-center pr-6">
+                    <div className="text-xs text-gray-500 mb-1">Upto</div>
+                    <div className="text-lg md:text-xl font-bold text-gray-900">
+                      ₹{item.PER_SQFT_RATE}
+                    </div>
+                    <div className="text-xs text-gray-500">per sqft.</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </RadioGroup>
+      </div>
+    </div>
+  </div>
+);
+
+// <div className=" p-6 space-y-4 bg-main rounded-lg">
+//       {/* Vitrified Tiles */}
+//       <div className=" rounded-lg p-4">
+//         <div className="flex items-center md:gap-6">
+//           <div className="flex-shrink-0">
+//             <div className="text-sm font-medium text-gray-700 mb-2">
+//               Verified tiles
+//             </div>
+//             <img
+//               src={FLOORING_CATEGORY.VETRIFIED_IMAGE || "/placeholder.svg"}
+//               alt="Vitrified tiles"
+//               className="w-14 md:w-20 md:h-20 object-cover rounded"
+//             />
+//           </div>
+//           <div className="flex-1">
+//             <RadioGroup
+//               value={selectedVitrified}
+//               onValueChange={handleVetrifiedTile}
+//             >
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+//                 {FLOORING_CATEGORY.VETRIFIED_TILES.map((item, index) => (
+//                   <div key={index} className="relative ">
+//                     <div
+//                       className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+//                         selectedVitrified === item.NAME
+//                           ? "border-black"
+//                           : "border-gray-200 hover:border-gray-300"
+//                       }`}
+//                       onClick={() => handleVetrifiedTile(item.NAME)}
+//                     >
+//                       <RadioGroupItem
+//                         value={item.NAME}
+//                         id={`vitrified-${index}`}
+//                         className="absolute top-2 right-2"
+//                       />
+//                       <div className="text-center">
+//                         <div className="text-xs text-gray-500 mb-1">Upto</div>
+//                         <div className="text-lg font-bold">
+//                           ₹{item.PER_SQFT_RATE}
+//                         </div>
+//                         <div className="text-xs text-gray-500">per sqft.</div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+//             </RadioGroup>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Ceramic Wall Tile */}
+//       <div className="bg-yellow-50 rounded-lg md:p-4">
+//         <div className="flex  items-center gap-2 md:gap-6">
+//           <div className="flex-shrink-0">
+//             <div className="text-xs sm:text-sm font-medium text-gray-700 mb-2">
+//               Ceramic wall tile
+//             </div>
+//             <img
+//               src={
+//                 FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE || "/placeholder.svg"
+//               }
+//               alt="Ceramic wall tile"
+//               className="w-14 md:w-20 md:h-20 object-cover rounded"
+//             />
+//           </div>
+//           <div className="flex-1">
+//             <RadioGroup
+//               value={selectedCeramic}
+//               onValueChange={handleCeremicWall}
+//             >
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+//                 {FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN.map(
+//                   (item, index) => (
+//                     <div key={index} className="relative min-w-32">
+//                       <div
+//                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+//                           selectedCeramic === item.NAME
+//                             ? "border-black"
+//                             : "border-gray-200 hover:border-gray-300"
+//                         }`}
+//                         onClick={() => handleCeremicWall(item.NAME)}
+//                       >
+//                         <RadioGroupItem
+//                           value={item.NAME}
+//                           id={`ceramic-${index}`}
+//                           className="absolute top-2 right-2"
+//                         />
+//                         <div className="text-center">
+//                           <div className="text-xs text-gray-500 mb-1">Upto</div>
+//                           <div className="text-lg font-bold">
+//                             ₹{item.PER_SQFT_RATE}
+//                           </div>
+//                           <div className="text-xs text-gray-500">per sqft.</div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   )
+//                 )}
+//               </div>
+//             </RadioGroup>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Granite */}
+//       <div className="bg-yellow-50 rounded-lg p-4">
+//         <div className="flex items-center md:gap-6">
+//           <div className="flex-shrink-0">
+//             <div className="text-sm font-medium text-gray-700 mb-2">
+//               Granite
+//             </div>
+//             <img
+//               src={
+//                 FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE || "/placeholder.svg"
+//               }
+//               alt="Granite"
+//               className="w-16 md:w-20 md:h-20 object-cover rounded"
+//             />
+//           </div>
+//           <div className="flex-1">
+//             <RadioGroup value={selectedGranite} onValueChange={handleGranite}>
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+//                 {FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.map(
+//                   (item, index) => (
+//                     <div key={index} className="relative min-w-72">
+//                       <div
+//                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+//                           selectedGranite === item.NAME
+//                             ? "border-black"
+//                             : "border-gray-200 hover:border-gray-300"
+//                         }`}
+//                         onClick={() => handleGranite(item.NAME)}
+//                       >
+//                         <RadioGroupItem
+//                           value={item.NAME}
+//                           id={`granite-${index}`}
+//                           className="absolute top-2 right-2"
+//                         />
+//                         <div className="text-center">
+//                           <div className="text-xs text-gray-500 mb-1">Upto</div>
+//                           <div className="text-lg font-bold">
+//                             ₹{item.PER_SQFT_RATE}
+//                           </div>
+//                           <div className="text-xs text-gray-500">per sqft.</div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   )
+//                 )}
+//               </div>
+//             </RadioGroup>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Rough Stone */}
+//       <div className="bg-yellow-50 rounded-lg p-4">
+//         <div className="flex items-center md:gap-6">
+//           <div className="flex-shrink-0">
+//             <div className="text-sm font-medium text-gray-700 mb-2">
+//               Rough stone
+//             </div>
+//             <img
+//               src={FLOORING_CATEGORY.ROUGH_STONE_IMAGE || "/placeholder.svg"}
+//               alt="Rough stone"
+//               className="w-14 md:w-20 md:h-20 object-cover rounded"
+//             />
+//           </div>
+//           <div className="flex-1">
+//             <RadioGroup
+//               value={selectedRoughStone}
+//               onValueChange={handleRoughStone}
+//             >
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+//                 {FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA.map(
+//                   (item, index) => (
+//                     <div key={index} className="relative min-w-72">
+//                       <div
+//                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
+//                           selectedRoughStone === item.NAME
+//                             ? "border-black"
+//                             : "border-gray-200 hover:border-gray-300"
+//                         }`}
+//                         onClick={() => handleRoughStone(item.NAME)}
+//                       >
+//                         <RadioGroupItem
+//                           value={item.NAME}
+//                           id={`stone-${index}`}
+//                           className="absolute top-2 right-2"
+//                         />
+//                         <div className="text-center">
+//                           <div className="text-xs text-gray-500 mb-1">Upto</div>
+//                           <div className="text-lg font-bold">
+//                             ₹{item.PER_SQFT_RATE}
+//                           </div>
+//                           <div className="text-xs text-gray-500">per sqft.</div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   )
+//                 )}
+//               </div>
+//             </RadioGroup>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
 
 {
   /* <div>

@@ -68,7 +68,7 @@ export const MultiStep = () => {
     <div>
       <ConstructionEstimator />
       <StepNavigation />
-      {render()}
+      <div className="pb-32">{render()}</div>
       <StepIndicator />
     </div>
   );
