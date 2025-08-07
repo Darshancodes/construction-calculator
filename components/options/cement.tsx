@@ -80,15 +80,6 @@ export const Cement = () => {
                     <div className=" rounded-lg mb-3 flex items-center justify-center">
                       <img src={brand?.IMAGE} />
                     </div>
-                    <span className="text-sm font-medium text-center">
-                      {brand.NAME}
-                    </span>
-                    <span className="text-xs text-gray-500 mt-1">
-                      ₹{brand.PER_UNIT_RATE}/{brand.PER_UNIT}
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      {brand.STANDARD_QUANTITY} {brand.STANDARD_QUANTITY_UNIT}
-                    </span>
                   </Label>
                 </div>
               ))}

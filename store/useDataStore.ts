@@ -1,14 +1,11 @@
 import { create } from "zustand";
 
 // Price item interface
+// Add other properties as needed based on your price items
 interface PriceItem {
   NAME: string;
   AMOUNT: number;
   BRAND: string;
-  // Add other properties as needed based on your price items
-  // id?: string;
-  // name?: string;
-  // category?: string;
 }
 
 // Construction data interface

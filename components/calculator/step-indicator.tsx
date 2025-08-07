@@ -151,13 +151,10 @@ export const StepIndicator = () => {
             </div>
           </SheetTrigger>
         </div>
-        <SheetContent
-          side="bottom"
-          className="w-[400px] h-[400px] bg-black text-white"
-        >
+        <SheetContent side="bottom" className="w-full bg-black  text-white">
           <SheetHeader>
             <div className="flex justify-between items-center">
-              <SheetTitle className="flex flex-col justify-center items-start ">
+              <SheetTitle className="flex items-center gap-3">
                 <ShoppingCart className="w-3 h-3 text-white" />
                 <div className="flex text-white flex-col">
                   <span className="text-sm font-medium">
@@ -190,7 +187,7 @@ export const StepIndicator = () => {
                 )}
               </div>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-6 overflow-y-auto max-h-[40vh]">
               {Object.entries(groupedItems).map(([category, items]) => (
                 <div key={category} className="space-y-3 my-3">
                   {/* Category Header */}

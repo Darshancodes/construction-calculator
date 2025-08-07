@@ -125,7 +125,7 @@ export const Flooring = () => {
     <div className=" p-6 space-y-4 bg-main rounded-lg">
       {/* Vitrified Tiles */}
       <div className=" rounded-lg p-4">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center md:gap-6">
           <div className="flex-shrink-0">
             <div className="text-sm font-medium text-gray-700 mb-2">
               Verified tiles
@@ -133,7 +133,7 @@ export const Flooring = () => {
             <img
               src={FLOORING_CATEGORY.VETRIFIED_IMAGE || "/placeholder.svg"}
               alt="Vitrified tiles"
-              className="w-20 h-20 object-cover rounded"
+              className="w-14 md:w-20 md:h-20 object-cover rounded"
             />
           </div>
           <div className="flex-1">
@@ -141,9 +141,9 @@ export const Flooring = () => {
               value={selectedVitrified}
               onValueChange={handleVetrifiedTile}
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {FLOORING_CATEGORY.VETRIFIED_TILES.map((item, index) => (
-                  <div key={index} className="relative">
+                  <div key={index} className="relative ">
                     <div
                       className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
                         selectedVitrified === item.NAME
@@ -174,10 +174,10 @@ export const Flooring = () => {
       </div>
 
       {/* Ceramic Wall Tile */}
-      <div className="bg-yellow-50 rounded-lg p-4">
-        <div className="flex items-center gap-6">
+      <div className="bg-yellow-50 rounded-lg md:p-4">
+        <div className="flex items-center md:gap-6">
           <div className="flex-shrink-0">
-            <div className="text-sm font-medium text-gray-700 mb-2">
+            <div className="text-xs sm:text-sm font-medium text-gray-700 mb-2">
               Ceramic wall tile
             </div>
             <img
@@ -185,7 +185,7 @@ export const Flooring = () => {
                 FLOORING_CATEGORY.CERAMIC_WALL_TILE_IMAGE || "/placeholder.svg"
               }
               alt="Ceramic wall tile"
-              className="w-20 h-20 object-cover rounded"
+              className="w-14 md:w-20 md:h-20 object-cover rounded"
             />
           </div>
           <div className="flex-1">
@@ -193,10 +193,10 @@ export const Flooring = () => {
               value={selectedCeramic}
               onValueChange={handleCeremicWall}
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {FLOORING_CATEGORY.CERAMIC_WALL_TILE_TOILET_KITCHEN.map(
                   (item, index) => (
-                    <div key={index} className="relative">
+                    <div key={index} className="relative min-w-72">
                       <div
                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
                           selectedCeramic === item.NAME
@@ -229,7 +229,7 @@ export const Flooring = () => {
 
       {/* Granite */}
       <div className="bg-yellow-50 rounded-lg p-4">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center md:gap-6">
           <div className="flex-shrink-0">
             <div className="text-sm font-medium text-gray-700 mb-2">
               Granite
@@ -239,15 +239,15 @@ export const Flooring = () => {
                 FLOORING_CATEGORY.GRANITE_DOORFRAME_IMAGE || "/placeholder.svg"
               }
               alt="Granite"
-              className="w-20 h-20 object-cover rounded"
+              className="w-16 md:w-20 md:h-20 object-cover rounded"
             />
           </div>
           <div className="flex-1">
             <RadioGroup value={selectedGranite} onValueChange={handleGranite}>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {FLOORING_CATEGORY.GRANITE_DOORFRAME_WINDOWFRAME_KITCHENTOP_STAIRCASE.map(
                   (item, index) => (
-                    <div key={index} className="relative">
+                    <div key={index} className="relative min-w-72">
                       <div
                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
                           selectedGranite === item.NAME
@@ -280,7 +280,7 @@ export const Flooring = () => {
 
       {/* Rough Stone */}
       <div className="bg-yellow-50 rounded-lg p-4">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center md:gap-6">
           <div className="flex-shrink-0">
             <div className="text-sm font-medium text-gray-700 mb-2">
               Rough stone
@@ -288,7 +288,7 @@ export const Flooring = () => {
             <img
               src={FLOORING_CATEGORY.ROUGH_STONE_IMAGE || "/placeholder.svg"}
               alt="Rough stone"
-              className="w-20 h-20 object-cover rounded"
+              className="w-14 md:w-20 md:h-20 object-cover rounded"
             />
           </div>
           <div className="flex-1">
@@ -296,10 +296,10 @@ export const Flooring = () => {
               value={selectedRoughStone}
               onValueChange={handleRoughStone}
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {FLOORING_CATEGORY.ROUGH_STONE_TERRACE_PARKINGAREA.map(
                   (item, index) => (
-                    <div key={index} className="relative">
+                    <div key={index} className="relative min-w-72">
                       <div
                         className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all ${
                           selectedRoughStone === item.NAME
@@ -329,22 +329,6 @@ export const Flooring = () => {
           </div>
         </div>
       </div>
-
-      {/* Navigation Buttons */}
-      {/* <div className="flex gap-4 pt-6">
-        <button
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
-          onClick={prevStep}
-        >
-          Previous Step
-        </button>
-        <button
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
-          onClick={nextStep}
-        >
-          Next Step
-        </button>
-      </div> */}
     </div>
   );
 };
