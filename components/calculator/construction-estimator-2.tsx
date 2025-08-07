@@ -1,5 +1,5 @@
 import { useDataStore } from "@/store/useDataStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
 import {
   Select,
@@ -19,7 +19,7 @@ export const ConstructionEstimator = () => {
   const [showMobileModal, setShowMobileModal] = useState(false);
   const [showDesktopModal, setShowDesktopModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const inputRef = useRef(null);
   // Local form state
   const [formData, setFormData] = useState({
     ground_floor_area: constructionData.ground_floor_area.toString(), // Store as string
@@ -104,9 +104,18 @@ export const ConstructionEstimator = () => {
 
   // Update the handleAreaChange function
   const handleAreaChange = (value: string) => {
-    // Only allow numbers and empty string
-    if (value === "" || /^[0-9\b]+$/.test(value)) {
-      setFormData((prev) => ({ ...prev, ground_floor_area: value }));
+    if (value === "" || /^\d+$/.test(value)) {
+      setFormData((prev) => ({
+        ...prev,
+        ground_floor_area: value,
+      }));
+
+      // Maintain focus after state update
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, 0);
     }
   };
 
@@ -191,10 +200,11 @@ export const ConstructionEstimator = () => {
               </label>
               <div className="flex items-center gap-2">
                 <Input
+                  ref={inputRef}
                   type="text" // Use text type to have better control
-                  //   inputMode="numeric" // Shows numeric keyboard on mobile
+                  inputMode="numeric" // Shows numeric keyboard on mobile
                   pattern="[0-9]*" // Helps with mobile numeric input
-                  value={formData.ground_floor_area.toString()}
+                  value={formData.ground_floor_area}
                   onChange={(e) => handleAreaChange(e.target.value)}
                   className="flex-1"
                   placeholder="2000"
@@ -336,7 +346,9 @@ export const ConstructionEstimator = () => {
             </label>
             <div className="flex items-center gap-2">
               <Input
-                type="number"
+                ref={inputRef}
+                type="text" // Use text type to have better control
+                inputMode="numeric"
                 value={formData.ground_floor_area}
                 onChange={(e) => handleAreaChange(e.target.value)}
                 className="flex-1"
