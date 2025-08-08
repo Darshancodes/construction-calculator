@@ -6,6 +6,7 @@ import {
   ChevronRight,
   ChevronUp,
   Edit2,
+  ShoppingBag,
   ShoppingCart,
   X,
 } from "lucide-react";
@@ -103,7 +104,7 @@ export const StepIndicator = () => {
             <div className="w-full">
               <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-3">
-                  <ShoppingCart className="w-5 h-5" />
+                  <ShoppingBag className="w-5 h-5" />
                   {all_prices?.length > 0 ? (
                     <div className="flex flex-col">
                       <span className="text-sm font-medium">
@@ -252,7 +253,7 @@ export const StepIndicator = () => {
         {/* Left side - Cart icon and items */}
         <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden min-w-0">
           <div className="flex gap-3 items-start text-sm">
-            <ShoppingCart className="w-4 h-4" />
+            <ShoppingBag className="w-4 h-4" />
             <span>Added to cart</span>
           </div>
 
