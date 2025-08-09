@@ -12,8 +12,8 @@ export const Steel = () => {
     all_prices,
     constructionData: { total_build_up_area },
   } = useDataStore();
-  const [selectedBrand, setSelectedBrand] = useState(
-    () => () => getStoredBrand(CATEGORY_NAMES?.["STEEL"], all_prices)
+  const [selectedBrand, setSelectedBrand] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["STEEL"], all_prices)
   );
   // const calculateSteelPrice = (name, unit_rate, standard_quantity) => {
   //   // const ground_floor_area = 2000;
