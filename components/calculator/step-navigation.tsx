@@ -294,8 +294,9 @@ export default function StepNavigation() {
                   <div className="flex flex-col items-center justify-center h-full p-2">
                     {/* Green check circle for selected items */}
                     {hasSelectedItems(step.category) && (
-                      <div className="absolute -top-1 -right-1 z-10">
-                        <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" />
+                      <div className="absolute top-1 right-1 z-10">
+                        <img src={"/icons/green-check.svg"} />
+                        {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
                       </div>
                     )}
                     <div className="w-10 h-10 mb-1 flex items-center justify-center">

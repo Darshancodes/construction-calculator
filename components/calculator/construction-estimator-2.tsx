@@ -468,154 +468,150 @@ export const ConstructionEstimator = () => {
     </div>
   );
 
-  // Desktop View - Read-only display with Edit button
-  const DesktopView = () => (
-    <div className="bg-gray-100 py-4 px-2">
-      <div className="">
-        {/* Header */}
-        <div className="flex flex-col gap-2 my-4">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Home construction estimator
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Get an accurate estimate for your dream home in minutes
-          </p>
-        </div>
+  const DesktopView = () => {
+    return (
+      <div className=" bg-white">
+        <div className="max-w-6xl mx-auto py-8 px-6">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Home construction estimator
+            </h1>
+            <p className="text-gray-600 text-lg">
+              Get an accurate estimate for your dream home in minutes
+            </p>
+          </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {/* Left Side - Construction Detail */}
-          <Card className="">
-            <CardContent className="">
-              <h2 className="text-xl font-semibold text-gray-900">
-                Construction detail
-              </h2>
+          {/* Main Content */}
+          <div className="bg-gray-100 rounded-lg p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Side - Construction Detail */}
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  Construction detail
+                </h2>
 
-              {/* Location */}
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Location in Rajasthan
-                </label>
-                <Select value={location} disabled onValueChange={setLocation}>
-                  <SelectTrigger className="w-full bg-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Bikaner">Bikaner</SelectItem>
-                    <SelectItem value="Jaipur">Jaipur</SelectItem>
-                    <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-                    <SelectItem value="Udaipur">Udaipur</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Built-up Area */}
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                  built-up area
-                </label>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="number"
-                    disabled
-                    value={constructionData.ground_floor_area}
-                    onChange={(e) => handleAreaChange(e.target.value)}
-                    className="flex-1 bg-white"
-                  />
-                  <span className="text-sm text-gray-600 bg-gray-200 px-3 py-2 rounded">
-                    Sq.ft.
-                  </span>
-                </div>
-              </div>
-
-              {/* Number of Floors */}
-              <div className="flex flex-col w-full gap-3 mt-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Number of floors
-                </label>
-                <div className="flex gap-4 flex-col md:flex-row w-full">
-                  {/* Floor Counter */}
-                  <div className="flex w-full md:w-1/2 items-center justify-between bg-gray-100 rounded-lg p-4">
-                    <Button
-                      disabled
-                      variant="outline"
-                      size="icon"
-                      onClick={() => handleFloorsChange(false)}
-                      //   disabled={constructionData.no_of_floors <= 1}
-                    >
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                    <span className="text-sm text-gray-600 text-center">
-                      {constructionData.no_of_floors} (
-                      {getFloorsText(constructionData.no_of_floors)})
-                    </span>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => handleFloorsChange(true)}
-                      disabled
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </div>
-
-                  {/* Refresh Button */}
-                  <Button
-                    disabled
-                    onClick={handleRefresh}
-                    className="w-full md:w-1/2 h-16 flex items-center justify-center rounded-lg"
-                  >
-                    <RefreshCw className="w-4 h-4 mr-2" />
-                    Refresh
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Right Side - Summary */}
-          <Card>
-            {/* Total Built-up Area */}
-            <CardContent className="flex flex-col md:flex-row bg-white h-full">
-              <div className="flex flex-col gap-3 w-full py-2 px-2 justify-center">
-                <div className="flex items-start">
-                  <div className="bg-gray-100 p-2 rounded">
-                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                  </div>
+                <div className="space-y-6">
+                  {/* Location */}
                   <div>
-                    <p className="text-lg text-gray-600">Total built-up area</p>
-                    <p className="text-2xl font-bold text-gray-900">
-                      {constructionData.total_build_up_area.toLocaleString()}{" "}
-                      sq.ft.
-                    </p>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Location in Rajasthan
+                    </label>
+                    <Select value={location} onValueChange={setLocation}>
+                      <SelectTrigger className="w-full bg-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Bikaner">Bikaner</SelectItem>
+                        <SelectItem value="Jaipur">Jaipur</SelectItem>
+                        <SelectItem value="Jodhpur">Jodhpur</SelectItem>
+                        <SelectItem value="Udaipur">Udaipur</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </div>
 
-                {/* Number of Floors */}
-                <div className="flex items-start">
-                  <div className="bg-gray-100 p-2 rounded">
-                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                  </div>
+                  {/* Built-up Area */}
                   <div>
-                    <p className="text-lg text-gray-600">Number of floors</p>
-                    <p className="text-xl font-semibold text-gray-900">
-                      {getFloorsText(constructionData.no_of_floors)}
-                    </p>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      built-up area
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <Input
+                        type="number"
+                        disabled
+                        value={constructionData.ground_floor_area}
+                        onChange={(e) => handleAreaChange(e.target.value)}
+                        className="flex-1 bg-white"
+                      />
+                      <span className="text-sm text-gray-600 bg-gray-200 px-3 py-2 rounded border">
+                        Sq.ft.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Number of Floors */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Number of floors
+                    </label>
+                    <div className="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        // onClick={() => handleFloorsChange(false)}
+                        // disabled={floors <= 1}
+                        className="h-8 w-8"
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <span className="text-sm text-gray-600 text-center px-4">
+                        {constructionData.no_of_floors} (
+                        {getFloorsText(constructionData.no_of_floors)})
+                      </span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => handleFloorsChange(true)}
+                        className="h-8 w-8"
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+
+                    {/* Refresh Button */}
+                    <Button className="w-full bg-black hover:bg-gray-800 text-white h-12">
+                      <RefreshCw className="w-4 h-4 mr-2" />
+                      Refresh
+                    </Button>
                   </div>
                 </div>
               </div>
-              {/* House Illustration */}
-              <div className="w-full flex justify-center items-center">
-                <img src="/steps-images/home.svg" alt="Home" />
+
+              {/* Right Side - Summary */}
+              <div className="bg-white rounded-lg p-6 flex flex-col justify-between">
+                <div className="space-y-6">
+                  {/* Total Built-up Area */}
+                  <div className="flex items-start gap-3">
+                    <div className="bg-gray-100 p-2 rounded">
+                      <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 text-sm mb-1">
+                        Total built-up area
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {constructionData.total_build_up_area.toLocaleString()}{" "}
+                        sq.ft.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Number of Floors */}
+                  <div className="flex items-start gap-3">
+                    <div className="bg-gray-100 p-2 rounded">
+                      <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 text-sm mb-1">
+                        Number of floors
+                      </p>
+                      <p className="text-xl font-semibold text-gray-900">
+                        {getFloorsText(constructionData.no_of_floors)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {/* House Illustration */}{" "}
+                <div className="w-full flex justify-center items-center">
+                  <img src="/steps-images/home.svg" alt="Home" />
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
-        {/* Desktop Modal */}
-        {showDesktopModal && <DesktopModal />}
       </div>
-    </div>
-  );
+    );
+  };
 
   // Render based on screen size
   if (isMobile) {
