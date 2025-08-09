@@ -96,7 +96,7 @@ export const Door = () => {
                 <div
                   key={index}
                   className={`bg-white min-h-44 flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedShutter === item.PER_SQFT_RATE
+                    selectedShutter === `${item.PER_SQFT_RATE}/ft`
                       ? "border-black"
                       : "border-gray-200 hover:border-gray-300"
                   }`}

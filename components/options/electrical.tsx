@@ -111,7 +111,7 @@ export const Electrical = () => {
                     key={index}
                     className={`flex flex-col justify-center items-center min-h-44 space-x-2 bg-white border-2  relative ${
                       selectedWallMaterial === item.NAME
-                        ? "border-blue-500 shadow-md"
+                        ? "border-black shadow-md"
                         : "border-gray-200"
                     }`}
                     onClick={() => handleSlabWall(item?.NAME)}
@@ -145,7 +145,7 @@ export const Electrical = () => {
                     key={index}
                     className={`flex items-center justify-center min-h-44 space-x-2 bg-white border-2 flex-col relative ${
                       selectedWiresCables === item.NAME
-                        ? "border-blue-500 shadow-md"
+                        ? "border-black shadow-md"
                         : "border-gray-200"
                     }`}
                     onClick={() => handleWireCables(item?.NAME)}
@@ -182,7 +182,7 @@ export const Electrical = () => {
                     key={index}
                     className={`flex items-center justify-center min-h-44 space-x-2 bg-white border-2 flex-col relative ${
                       selectedSwitches === item.NAME
-                        ? "border-blue-500 shadow-md"
+                        ? "border-black shadow-md"
                         : "border-gray-200"
                     }`}
                     onClick={() => handleSheetsSwitches(item?.NAME)}

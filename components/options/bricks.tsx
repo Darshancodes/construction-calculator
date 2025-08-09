@@ -145,13 +145,18 @@ export const Bricks = () => {
                   key={index}
                   className={`relative border-2 rounded-lg ${
                     selectedBrand === brand.NAME
-                      ? "border-blue-500 shadow-md"
+                      ? "border-black shadow-md"
                       : "border-gray-200"
                   }`}
                   onClick={() => handleBrandChange(brand?.NAME)}
                 >
                   <div className="absolute top-3 right-3">
-                    <div
+                    <RadioGroupItem
+                      value={brand.NAME}
+                      id={`bricks-${index}`}
+                      className="absolute top-0 right-0"
+                    />
+                    {/* <div
                       className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center ${
                         selectedBrand === brand.NAME
                           ? "border-blue-500 bg-blue-500"
@@ -161,7 +166,7 @@ export const Bricks = () => {
                       {selectedBrand === brand.NAME && (
                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       )}
-                    </div>
+                    </div> */}
                   </div>
 
                   <Label

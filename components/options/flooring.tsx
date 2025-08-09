@@ -217,7 +217,7 @@ const FlooringSection = ({
                 <div
                   className={`bg-white rounded-lg border-2 p-4 cursor-pointer transition-all hover:shadow-md ${
                     selectedValue === item.NAME
-                      ? "border-blue-500 shadow-lg"
+                      ? "border-black shadow-lg"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                   onClick={() => onSelect(item.NAME)}

@@ -88,7 +88,7 @@ const Card = ({
   return (
     <div
       className={`bg-white rounded-lg border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
-        isSelected ? "border-blue-500 shadow-md" : "border-gray-200"
+        isSelected ? "border-black shadow-md" : "border-gray-200"
       }`}
       onClick={onSelect}
     >
@@ -97,11 +97,11 @@ const Card = ({
         <div className="absolute top-3 right-3">
           <div
             className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-              isSelected ? "border-blue-500 bg-blue-500" : "border-gray-300"
+              isSelected ? "bgwhite" : "border-gray-300"
             }`}
           >
             {isSelected && (
-              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <div className="w-2 h-2 bg-black rounded-full"></div>
             )}
           </div>
         </div>

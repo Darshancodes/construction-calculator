@@ -59,12 +59,17 @@ export const Cement = () => {
                   key={index}
                   className={`relative border-2 rounded-lg ${
                     selectedBrand === brand.NAME
-                      ? "border-blue-500 shadow-md"
+                      ? "border-black shadow-md"
                       : "border-gray-200"
                   }`}
                   onClick={() => handleCementPrice(brand?.NAME)}
                 >
-                  <div className="absolute top-3 right-3">
+                  <RadioGroupItem
+                    value={brand.NAME}
+                    id={`cement-${index}`}
+                    className="absolute top-0 right-0"
+                  />
+                  {/* <div className="absolute top-3 right-3">
                     <div
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                         selectedBrand === brand.NAME
@@ -76,7 +81,7 @@ export const Cement = () => {
                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       )}
                     </div>
-                  </div>
+                  </div> */}
                   <Label
                     htmlFor={`cement-${index}`}
                     className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
