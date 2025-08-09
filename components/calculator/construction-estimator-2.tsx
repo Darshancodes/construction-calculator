@@ -59,49 +59,6 @@ export const ConstructionEstimator = () => {
     }
   }, []); // Empty dependency array - runs only once on mount
 
-  // Check if screen is mobile - FIXED: Only set isMobile, don't auto-open modals
-  // useEffect(() => {
-  //   const checkScreenSize = () => {
-  //     const mobile = window.innerWidth < 768;
-  //     setIsMobile(mobile);
-
-  //     // REMOVED: Auto-opening of modals
-  //     // Only close modals that shouldn't be open on the current screen size
-  //     if (mobile && showDesktopModal) {
-  //       setShowDesktopModal(false);
-  //     } else if (!mobile && showMobileModal) {
-  //       setShowMobileModal(false);
-  //     }
-  //   };
-
-  //   checkScreenSize();
-  //   window.addEventListener("resize", checkScreenSize);
-
-  //   return () => window.removeEventListener("resize", checkScreenSize);
-  // }, [showDesktopModal, showMobileModal]); // Added dependencies
-
-  // Check if screen is mobile and set appropriate modal
-  // useEffect(() => {
-  //   const checkScreenSize = () => {
-  //     const mobile = window.innerWidth < 768;
-  //     setIsMobile(mobile);
-
-  //     // Set the appropriate modal based on screen size
-  //     if (mobile) {
-  //       setShowMobileModal(true);
-  //       setShowDesktopModal(false);
-  //     } else {
-  //       setShowDesktopModal(true);
-  //       setShowMobileModal(false);
-  //     }
-  //   };
-
-  //   checkScreenSize();
-  //   window.addEventListener("resize", checkScreenSize);
-
-  //   return () => window.removeEventListener("resize", checkScreenSize);
-  // }, []);
-
   // Update the handleAreaChange function
   const handleAreaChange = (value: string) => {
     if (value === "" || /^\d+$/.test(value)) {
@@ -347,7 +304,7 @@ export const ConstructionEstimator = () => {
             <div className="flex items-center gap-2">
               <Input
                 ref={inputRef}
-                type="text" // Use text type to have better control
+                type="tel" // Use text type to have better control
                 inputMode="numeric"
                 value={formData.ground_floor_area}
                 onChange={(e) => handleAreaChange(e.target.value)}
