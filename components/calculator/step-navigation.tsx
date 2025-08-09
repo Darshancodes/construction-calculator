@@ -268,7 +268,7 @@ export default function StepNavigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              className="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
               onClick={scrollLeft}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -320,7 +320,7 @@ export default function StepNavigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              className="absolute cursor-pointer right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
               onClick={scrollRight}
             >
               <ChevronRight className="h-4 w-4" />
