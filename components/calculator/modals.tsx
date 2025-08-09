@@ -9,6 +9,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { getFloorsText } from "./construction-estimator-2";
+import { createPortal } from "react-dom";
 
 // Desktop Modal Component
 export const DesktopModal = ({
@@ -184,60 +185,69 @@ export const MobileModal = ({
   handleFloorsChange,
   handleAreaBlur,
   handleSubmit,
-}) => (
-  <div className="fixed inset-0 bg-black/90 bg-opacity-50 z-[300] flex items-center justify-center p-4">
-    <div className="bg-white rounded-lg w-full max-w-md mx-4 relative">
-      {/* Close button */}
-      <button
-        onClick={() => setShowMobileModal(false)}
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-      >
-        <X className="h-6 w-6" />
-      </button>
+}) => {
+  return createPortal(
+    <div
+      style={{ WebkitOverflowScrolling: "touch" }}
+      className="fixed inset-0 bg-black/90 bg-opacity-50 z-[300] flex items-center justify-center p-4"
+    >
+      <div className="bg-white rounded-lg w-full max-w-md mx-4 relative">
+        {/* Close button */}
+        <button
+          onClick={() => setShowMobileModal(false)}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <X className="h-6 w-6" />
+        </button>
 
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">
-          Add details of your dream home
-        </h2>
+        <div className="p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">
+            Add details of your dream home
+          </h2>
 
-        {/* Location */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Location in Rajasthan
-          </label>
-          <Select value={location} onValueChange={setLocation}>
-            <SelectTrigger className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Bikaner">Bikaner</SelectItem>
-              <SelectItem value="Jaipur">Jaipur</SelectItem>
-              <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-              <SelectItem value="Udaipur">Udaipur</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Location */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Location in Rajasthan
+            </label>
+            <Select value={location} onValueChange={setLocation}>
+              <SelectTrigger className="w-full relative z-10">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent
+                className="z-[500]"
+                position="popper"
+                // Ensure it renders above the modal
+                sideOffset={4}
+              >
+                <SelectItem value="Bikaner">Bikaner</SelectItem>
+                <SelectItem value="Jaipur">Jaipur</SelectItem>
+                <SelectItem value="Jodhpur">Jodhpur</SelectItem>
+                <SelectItem value="Udaipur">Udaipur</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Built-up Area */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            built-up area
-          </label>
-          <div className="flex items-center gap-2">
-            <Input
-              ref={MobileInputRef}
-              type="text"
-              // inputMode="numeric"
-              // pattern="[0-9]*"
-              value={formData.ground_floor_area}
-              autoComplete="off"
-              onChange={(e) => handleAreaChange(e.target.value)}
-              onBlur={handleAreaBlur}
-              className="flex-1"
-              placeholder="2000"
-              style={{ fontSize: "16px" }}
-            />
-            {/* <Input
+          {/* Built-up Area */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              built-up area
+            </label>
+            <div className="flex items-center gap-2">
+              <Input
+                ref={MobileInputRef}
+                type="text"
+                // inputMode="numeric"
+                // pattern="[0-9]*"
+                value={formData.ground_floor_area}
+                autoComplete="off"
+                onChange={(e) => handleAreaChange(e.target.value)}
+                onBlur={handleAreaBlur}
+                className="flex-1"
+                placeholder="2000"
+                style={{ fontSize: "16px" }}
+              />
+              {/* <Input
                 ref={MobileInputRef}
                 type="tel" // Use text type to have better control
                 inputMode="numeric"
@@ -249,49 +259,51 @@ export const MobileModal = ({
                 placeholder="2000"
                 style={{ fontSize: "16px" }}
               /> */}
-            <span className="text-sm text-gray-600 bg-gray-100 px-3 py-2 rounded">
-              Sq.ft.
-            </span>
+              <span className="text-sm text-gray-600 bg-gray-100 px-3 py-2 rounded">
+                Sq.ft.
+              </span>
+            </div>
           </div>
-        </div>
 
-        {/* Number of Floors */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Number of floors
-          </label>
-          <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => handleFloorsChange(false)}
-              disabled={formData.no_of_floors <= 1}
-              className="h-8 w-8"
-            >
-              <Minus className="h-4 w-4" />
-            </Button>
-            <span className="text-sm text-gray-600 text-center px-4">
-              {formData.no_of_floors} ({getFloorsText(formData.no_of_floors)})
-            </span>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => handleFloorsChange(true)}
-              className="h-8 w-8"
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
+          {/* Number of Floors */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Number of floors
+            </label>
+            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => handleFloorsChange(false)}
+                disabled={formData.no_of_floors <= 1}
+                className="h-8 w-8"
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="text-sm text-gray-600 text-center px-4">
+                {formData.no_of_floors} ({getFloorsText(formData.no_of_floors)})
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => handleFloorsChange(true)}
+                className="h-8 w-8"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-        </div>
 
-        {/* Submit Button */}
-        <Button
-          onClick={handleSubmit}
-          className="w-full bg-black text-white hover:bg-gray-800 py-3"
-        >
-          Submit →
-        </Button>
+          {/* Submit Button */}
+          <Button
+            onClick={handleSubmit}
+            className="w-full bg-black text-white hover:bg-gray-800 py-3"
+          >
+            Submit →
+          </Button>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </div>,
+    document.body
+  );
+};
