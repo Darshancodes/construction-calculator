@@ -11,6 +11,13 @@ import {
 import { Button } from "../ui/button";
 import { Minus, Plus, RefreshCw, X } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
+import { DesktopModal, MobileModal } from "./modals";
+
+export const getFloorsText = (floors: number) => {
+  if (floors === 1) return "Ground floor";
+  if (floors === 2) return "Ground + 1st floor";
+  return `Ground + ${floors - 1} floors`;
+};
 
 export const ConstructionEstimator = () => {
   const { constructionData, updateConstructionData, calculateTotal } =
@@ -19,7 +26,8 @@ export const ConstructionEstimator = () => {
   const [showMobileModal, setShowMobileModal] = useState(false);
   const [showDesktopModal, setShowDesktopModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const inputRef = useRef(null);
+  const desktopInputRef = useRef(null);
+  const MobileInputRef = useRef(null);
   // Local form state
   const [formData, setFormData] = useState({
     ground_floor_area: constructionData.ground_floor_area.toString(), // Store as string
@@ -60,20 +68,32 @@ export const ConstructionEstimator = () => {
   }, []); // Empty dependency array - runs only once on mount
 
   // Update the handleAreaChange function
+  // const handleAreaChange = (value: string) => {
+  //   const numericValue = value.replace(/\D/g, "");
+  //   // if (value === "" || /^\d+$/.test(value)) {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     ground_floor_area: numericValue,
+  //   }));
+  //   // }
+  // };
   const handleAreaChange = (value: string) => {
-    if (value === "" || /^\d+$/.test(value)) {
-      setFormData((prev) => ({
-        ...prev,
-        ground_floor_area: value,
-      }));
+    setFormData((prev) => ({ ...prev, ground_floor_area: value }));
+    // if (value === "" || /^\d+$/.test(value)) {
+    //   setFormData((prev) => ({
+    //     ...prev,
+    //     ground_floor_area: value,
+    //   }));
+    //   // REMOVE the forced focus here
+    // }
+  };
 
-      // Maintain focus after state update
-      setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
-      }, 0);
-    }
+  const handleAreaBlur = () => {
+    // Clean up non-digit characters on blur
+    setFormData((prev) => ({
+      ...prev,
+      ground_floor_area: prev.ground_floor_area.replace(/\D/g, ""),
+    }));
   };
 
   const handleFloorsChange = (increment: boolean) => {
@@ -81,12 +101,6 @@ export const ConstructionEstimator = () => {
       ? formData.no_of_floors + 1
       : Math.max(1, formData.no_of_floors - 1);
     setFormData((prev) => ({ ...prev, no_of_floors: newFloors }));
-  };
-
-  const getFloorsText = (floors: number) => {
-    if (floors === 1) return "Ground floor";
-    if (floors === 2) return "Ground + 1st floor";
-    return `Ground + ${floors - 1} floors`;
   };
 
   const handleRefresh = () => {
@@ -113,144 +127,199 @@ export const ConstructionEstimator = () => {
     }
   };
 
-  // Desktop Modal Component
-  const DesktopModal = () => (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg w-full max-w-4xl mx-4 relative">
-        {/* Close button */}
-        <button
-          onClick={() => setShowDesktopModal(false)}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
-        >
-          <X className="h-6 w-6" />
-        </button>
+  // Rest of the component remains the same...
+  // (MobileView and DesktopView components should use constructionData from the store)
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
-          {/* Left side - Form */}
-          <div className="p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-8">
-              Add your dream home details
-            </h2>
+  // Render based on screen size
+  if (isMobile) {
+    return (
+      <>
+        {showMobileModal && (
+          <MobileModal
+            MobileInputRef={MobileInputRef}
+            formData={formData}
+            handleAreaBlur={handleAreaBlur}
+            handleAreaChange={handleAreaChange}
+            handleFloorsChange={handleFloorsChange}
+            handleSubmit={handleSubmit}
+            location={location}
+            setLocation={setLocation}
+            setShowMobileModal={setShowMobileModal}
+          />
+        )}
+      </>
+    );
+  }
 
-            {/* Location */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Location in Rajasthan
-              </label>
-              <Select value={location} onValueChange={setLocation}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Bikaner">Bikaner</SelectItem>
-                  <SelectItem value="Jaipur">Jaipur</SelectItem>
-                  <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-                  <SelectItem value="Udaipur">Udaipur</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+  return (
+    <>
+      <DesktopView
+        constructionData={constructionData}
+        handleAreaChange={handleAreaChange}
+        location={location}
+        setLocation={setLocation}
+      />
+      {showDesktopModal && (
+        <DesktopModal
+          formData={formData}
+          handleAreaBlur={handleAreaBlur}
+          handleAreaChange={handleAreaChange}
+          handleFloorsChange={handleFloorsChange}
+          handleSubmit={handleSubmit}
+          location={location}
+          setLocation={setLocation}
+          setShowDesktopModal={setShowDesktopModal}
+        />
+      )}
+    </>
+  );
+};
 
-            {/* Built-up Area */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Built-up area
-              </label>
-              <div className="flex items-center gap-2">
-                <Input
-                  ref={inputRef}
-                  type="text" // Use text type to have better control
-                  inputMode="numeric" // Shows numeric keyboard on mobile
-                  pattern="[0-9]*" // Helps with mobile numeric input
-                  value={formData.ground_floor_area}
-                  onChange={(e) => handleAreaChange(e.target.value)}
-                  className="flex-1"
-                  placeholder="2000"
-                />
-                {/* <Input
-                  type="number"
-                  value={formData.ground_floor_area}
-                  onChange={(e) => handleAreaChange(e.target.value)}
-                  className="flex-1"
-                  placeholder="2000"
-                /> */}
-                <span className="text-sm text-gray-600 bg-gray-100 px-3 py-2 rounded">
-                  Sq.ft.
-                </span>
-              </div>
-            </div>
+const DesktopView = ({
+  location,
+  setLocation,
+  constructionData,
+  handleAreaChange,
+}) => {
+  return (
+    <div className=" bg-white">
+      <div className=" py-8 px-6">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Home construction estimator
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Get an accurate estimate for your dream home in minutes
+          </p>
+        </div>
 
-            {/* Number of Floors */}
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Number of floors
-              </label>
-              <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handleFloorsChange(false)}
-                  disabled={formData.no_of_floors <= 1}
-                  className="h-8 w-8"
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="text-sm text-gray-600 text-center px-4">
-                  {formData.no_of_floors} (
-                  {getFloorsText(formData.no_of_floors)})
-                </span>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handleFloorsChange(true)}
-                  className="h-8 w-8"
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+        {/* Main Content */}
+        <div className="bg-gray-100 rounded-lg p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Side - Construction Detail */}
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                Construction detail
+              </h2>
 
-            {/* Submit Button */}
-            <Button
-              onClick={handleSubmit}
-              className="w-full bg-black text-white hover:bg-gray-800 py-3 text-base"
-            >
-              Submit →
-            </Button>
-          </div>
+              <div className="space-y-6">
+                {/* Location */}
+                <div className="flex gap-2">
+                  <div className="w-full">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Location in Rajasthan
+                    </label>
+                    <Select value={location} onValueChange={setLocation}>
+                      <SelectTrigger className="w-full bg-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Bikaner">Bikaner</SelectItem>
+                        <SelectItem value="Jaipur">Jaipur</SelectItem>
+                        <SelectItem value="Jodhpur">Jodhpur</SelectItem>
+                        <SelectItem value="Udaipur">Udaipur</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-          {/* Right side - Summary and House Illustration */}
-          <div className="bg-gray-50 p-8 rounded-r-lg flex flex-col justify-center">
-            <div className="space-y-6">
-              {/* Total built-up area */}
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-4 h-4 bg-gray-400 rounded-sm"></div>
-                  <span className="text-sm text-gray-600">
-                    Total built-up area
-                  </span>
+                  {/* Built-up Area */}
+                  <div className="w-full">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      built-up area
+                    </label>
+                    <div className="flex items-center relative gap-2">
+                      <Input
+                        type="number"
+                        disabled
+                        value={constructionData.ground_floor_area}
+                        onChange={(e) => handleAreaChange(e.target.value)}
+                        className="flex-1 bg-white"
+                      />
+                      <span className="text-sm absolute right-0 text-gray-600 bg-gray-200 px-3 py-2 rounded border">
+                        Sq.ft.
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-lg font-semibold text-gray-900">
-                  {(
-                    formData.ground_floor_area * formData.no_of_floors
-                  ).toLocaleString()}{" "}
-                  sq.ft.
-                </div>
-              </div>
 
-              {/* Number of floors */}
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-4 h-4 bg-gray-400 rounded-sm"></div>
-                  <span className="text-sm text-gray-600">
+                {/* Number of Floors */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Number of floors
-                  </span>
-                </div>
-                <div className="text-lg font-semibold text-gray-900 capitalize">
-                  {getFloorsText(formData.no_of_floors)}
+                  </label>
+                  <div className="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      // onClick={() => handleFloorsChange(false)}
+                      disabled
+                      className="h-8 w-8"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="text-sm text-gray-600 text-center px-4">
+                      {constructionData.no_of_floors} (
+                      {getFloorsText(constructionData.no_of_floors)})
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      // onClick={() => handleFloorsChange(true)}
+                      className="h-8 w-8"
+                      disabled
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  {/* Refresh Button */}
+                  <Button
+                    disabled
+                    className="w-full bg-black hover:bg-gray-800 text-white h-12"
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Refresh
+                  </Button>
                 </div>
               </div>
+            </div>
 
-              {/* House Illustration */}
+            {/* Right Side - Summary */}
+            <div className="bg-white rounded-lg p-6 flex  justify-between items-center">
+              <div className="space-y-6 w-full">
+                {/* Total Built-up Area */}
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 p-2 rounded">
+                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 text-sm mb-1">
+                      Total built-up area
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {constructionData.total_build_up_area.toLocaleString()}{" "}
+                      sq.ft.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Number of Floors */}
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 p-2 rounded">
+                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 text-sm mb-1">
+                      Number of floors
+                    </p>
+                    <p className="text-xl font-semibold text-gray-900">
+                      {getFloorsText(constructionData.no_of_floors)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* House Illustration */}{" "}
               <div className="w-full flex justify-center items-center">
                 <img src="/steps-images/home.svg" alt="Home" />
               </div>
@@ -260,344 +329,71 @@ export const ConstructionEstimator = () => {
       </div>
     </div>
   );
-
-  // Mobile Modal Component
-  const MobileModal = () => (
-    <div className="fixed inset-0 bg-black/90 bg-opacity-50 z-[300] flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg w-full max-w-md mx-4 relative">
-        {/* Close button */}
-        <button
-          onClick={() => setShowMobileModal(false)}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-        >
-          <X className="h-6 w-6" />
-        </button>
-
-        <div className="p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
-            Add details of your dream home
-          </h2>
-
-          {/* Location */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Location in Rajasthan
-            </label>
-            <Select value={location} onValueChange={setLocation}>
-              <SelectTrigger className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Bikaner">Bikaner</SelectItem>
-                <SelectItem value="Jaipur">Jaipur</SelectItem>
-                <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-                <SelectItem value="Udaipur">Udaipur</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Built-up Area */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              built-up area
-            </label>
-            <div className="flex items-center gap-2">
-              <Input
-                ref={inputRef}
-                type="tel" // Use text type to have better control
-                inputMode="numeric"
-                value={formData.ground_floor_area}
-                onChange={(e) => {
-                  e.preventDefault();
-                  handleAreaChange(e.target.value);
-                }}
-                onFocus={(e) => {
-                  // Prevent zoom on iOS
-                  e.target.setAttribute("readonly", true);
-                  setTimeout(() => {
-                    e.target.removeAttribute("readonly");
-                  }, 100);
-                }}
-                className="flex-1"
-                placeholder="2000"
-              />
-              <span className="text-sm text-gray-600 bg-gray-100 px-3 py-2 rounded">
-                Sq.ft.
-              </span>
-            </div>
-          </div>
-
-          {/* Number of Floors */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Number of floors
-            </label>
-            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => handleFloorsChange(false)}
-                disabled={formData.no_of_floors <= 1}
-                className="h-8 w-8"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="text-sm text-gray-600 text-center px-4">
-                {formData.no_of_floors} ({getFloorsText(formData.no_of_floors)})
-              </span>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => handleFloorsChange(true)}
-                className="h-8 w-8"
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <Button
-            onClick={handleSubmit}
-            className="w-full bg-black text-white hover:bg-gray-800 py-3"
-          >
-            Submit →
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Rest of the component remains the same...
-  // (MobileView and DesktopView components should use constructionData from the store)
-
-  // Mobile View - Summary Card with Add Details Button
-  const MobileView = () => (
-    <div className="bg-gray-100 py-4 px-4">
-      <div className="flex flex-col gap-4 my-4">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Home construction estimator
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Get an accurate estimate for your dream home in minutes
-        </p>
-      </div>
-
-      {/* Summary Card */}
-      <Card className="mb-4">
-        <CardContent className="p-6">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-start gap-3">
-              <div className="bg-gray-100 p-2 rounded">
-                <div className="w-4 h-4 bg-gray-400 rounded"></div>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Total built-up area</p>
-                <p className="text-xl font-bold text-gray-900">
-                  {constructionData.total_build_up_area.toLocaleString()} sq.ft.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="bg-gray-100 p-2 rounded">
-                <div className="w-4 h-4 bg-gray-400 rounded"></div>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Number of floors</p>
-                <p className="text-lg font-semibold text-gray-900">
-                  {getFloorsText(constructionData.no_of_floors)}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-center mt-4">
-              <img
-                src="/steps-images/home.svg"
-                alt="Home"
-                className="w-20 h-20"
-              />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Add Details Button */}
-      <Button
-        onClick={() => setShowMobileModal(true)}
-        className="w-full py-3 text-lg"
-      >
-        Add Details of Your Dream Home
-      </Button>
-
-      {/* Mobile Modal */}
-      {showMobileModal && <MobileModal />}
-    </div>
-  );
-
-  const DesktopView = () => {
-    return (
-      <div className=" bg-white">
-        <div className=" py-8 px-6">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Home construction estimator
-            </h1>
-            <p className="text-gray-600 text-lg">
-              Get an accurate estimate for your dream home in minutes
-            </p>
-          </div>
-
-          {/* Main Content */}
-          <div className="bg-gray-100 rounded-lg p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left Side - Construction Detail */}
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  Construction detail
-                </h2>
-
-                <div className="space-y-6">
-                  {/* Location */}
-                  <div className="flex gap-2">
-                    <div className="w-full">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Location in Rajasthan
-                      </label>
-                      <Select value={location} onValueChange={setLocation}>
-                        <SelectTrigger className="w-full bg-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Bikaner">Bikaner</SelectItem>
-                          <SelectItem value="Jaipur">Jaipur</SelectItem>
-                          <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-                          <SelectItem value="Udaipur">Udaipur</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Built-up Area */}
-                    <div className="w-full">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        built-up area
-                      </label>
-                      <div className="flex items-center relative gap-2">
-                        <Input
-                          type="number"
-                          disabled
-                          value={constructionData.ground_floor_area}
-                          onChange={(e) => handleAreaChange(e.target.value)}
-                          className="flex-1 bg-white"
-                        />
-                        <span className="text-sm absolute right-0 text-gray-600 bg-gray-200 px-3 py-2 rounded border">
-                          Sq.ft.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Number of Floors */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Number of floors
-                    </label>
-                    <div className="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        // onClick={() => handleFloorsChange(false)}
-                        disabled
-                        className="h-8 w-8"
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <span className="text-sm text-gray-600 text-center px-4">
-                        {constructionData.no_of_floors} (
-                        {getFloorsText(constructionData.no_of_floors)})
-                      </span>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handleFloorsChange(true)}
-                        className="h-8 w-8"
-                        disabled
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-
-                    {/* Refresh Button */}
-                    <Button
-                      disabled
-                      className="w-full bg-black hover:bg-gray-800 text-white h-12"
-                    >
-                      <RefreshCw className="w-4 h-4 mr-2" />
-                      Refresh
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side - Summary */}
-              <div className="bg-white rounded-lg p-6 flex  justify-between items-center">
-                <div className="space-y-6 w-full">
-                  {/* Total Built-up Area */}
-                  <div className="flex items-start gap-3">
-                    <div className="bg-gray-100 p-2 rounded">
-                      <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                    </div>
-                    <div>
-                      <p className="text-gray-600 text-sm mb-1">
-                        Total built-up area
-                      </p>
-                      <p className="text-2xl font-bold text-gray-900">
-                        {constructionData.total_build_up_area.toLocaleString()}{" "}
-                        sq.ft.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Number of Floors */}
-                  <div className="flex items-start gap-3">
-                    <div className="bg-gray-100 p-2 rounded">
-                      <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                    </div>
-                    <div>
-                      <p className="text-gray-600 text-sm mb-1">
-                        Number of floors
-                      </p>
-                      <p className="text-xl font-semibold text-gray-900">
-                        {getFloorsText(constructionData.no_of_floors)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                {/* House Illustration */}{" "}
-                <div className="w-full flex justify-center items-center">
-                  <img src="/steps-images/home.svg" alt="Home" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // Render based on screen size
-  if (isMobile) {
-    return <>{showMobileModal && <MobileModal />}</>;
-  }
-
-  return (
-    <>
-      <DesktopView />
-      {showDesktopModal && <DesktopModal />}
-    </>
-  );
 };
+
+// // Mobile View - Summary Card with Add Details Button
+// const MobileView = () => (
+//   <div className="bg-gray-100 py-4 px-4">
+//     <div className="flex flex-col gap-4 my-4">
+//       <h1 className="text-2xl font-bold text-gray-900">
+//         Home construction estimator
+//       </h1>
+//       <p className="text-gray-600 text-lg">
+//         Get an accurate estimate for your dream home in minutes
+//       </p>
+//     </div>
+
+//     {/* Summary Card */}
+//     <Card className="mb-4">
+//       <CardContent className="p-6">
+//         <div className="flex flex-col gap-4">
+//           <div className="flex items-start gap-3">
+//             <div className="bg-gray-100 p-2 rounded">
+//               <div className="w-4 h-4 bg-gray-400 rounded"></div>
+//             </div>
+//             <div>
+//               <p className="text-sm text-gray-600">Total built-up area</p>
+//               <p className="text-xl font-bold text-gray-900">
+//                 {constructionData.total_build_up_area.toLocaleString()} sq.ft.
+//               </p>
+//             </div>
+//           </div>
+
+//           <div className="flex items-start gap-3">
+//             <div className="bg-gray-100 p-2 rounded">
+//               <div className="w-4 h-4 bg-gray-400 rounded"></div>
+//             </div>
+//             <div>
+//               <p className="text-sm text-gray-600">Number of floors</p>
+//               <p className="text-lg font-semibold text-gray-900">
+//                 {getFloorsText(constructionData.no_of_floors)}
+//               </p>
+//             </div>
+//           </div>
+
+//           <div className="flex justify-center mt-4">
+//             <img
+//               src="/steps-images/home.svg"
+//               alt="Home"
+//               className="w-20 h-20"
+//             />
+//           </div>
+//         </div>
+//       </CardContent>
+//     </Card>
+
+//     {/* Add Details Button */}
+//     <Button
+//       onClick={() => setShowMobileModal(true)}
+//       className="w-full py-3 text-lg"
+//     >
+//       Add Details of Your Dream Home
+//     </Button>
+
+//     {/* Mobile Modal */}
+//     {showMobileModal && <MobileModal />}
+//   </div>
+// );
 
 // export const ConstructionEstimator = () => {
 //   const { constructionData, updateConstructionData, calculateTotal } =
