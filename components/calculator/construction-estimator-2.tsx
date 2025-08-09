@@ -471,7 +471,7 @@ export const ConstructionEstimator = () => {
   const DesktopView = () => {
     return (
       <div className=" bg-white">
-        <div className="max-w-6xl mx-auto py-8 px-6">
+        <div className=" py-8 px-6">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -493,39 +493,41 @@ export const ConstructionEstimator = () => {
 
                 <div className="space-y-6">
                   {/* Location */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Location in Rajasthan
-                    </label>
-                    <Select value={location} onValueChange={setLocation}>
-                      <SelectTrigger className="w-full bg-white">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Bikaner">Bikaner</SelectItem>
-                        <SelectItem value="Jaipur">Jaipur</SelectItem>
-                        <SelectItem value="Jodhpur">Jodhpur</SelectItem>
-                        <SelectItem value="Udaipur">Udaipur</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <div className="flex gap-2">
+                    <div className="w-full">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Location in Rajasthan
+                      </label>
+                      <Select value={location} onValueChange={setLocation}>
+                        <SelectTrigger className="w-full bg-white">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Bikaner">Bikaner</SelectItem>
+                          <SelectItem value="Jaipur">Jaipur</SelectItem>
+                          <SelectItem value="Jodhpur">Jodhpur</SelectItem>
+                          <SelectItem value="Udaipur">Udaipur</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  {/* Built-up Area */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      built-up area
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <Input
-                        type="number"
-                        disabled
-                        value={constructionData.ground_floor_area}
-                        onChange={(e) => handleAreaChange(e.target.value)}
-                        className="flex-1 bg-white"
-                      />
-                      <span className="text-sm text-gray-600 bg-gray-200 px-3 py-2 rounded border">
-                        Sq.ft.
-                      </span>
+                    {/* Built-up Area */}
+                    <div className="w-full">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        built-up area
+                      </label>
+                      <div className="flex items-center relative gap-2">
+                        <Input
+                          type="number"
+                          disabled
+                          value={constructionData.ground_floor_area}
+                          onChange={(e) => handleAreaChange(e.target.value)}
+                          className="flex-1 bg-white"
+                        />
+                        <span className="text-sm absolute right-0 text-gray-600 bg-gray-200 px-3 py-2 rounded border">
+                          Sq.ft.
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -539,7 +541,7 @@ export const ConstructionEstimator = () => {
                         variant="outline"
                         size="icon"
                         // onClick={() => handleFloorsChange(false)}
-                        // disabled={floors <= 1}
+                        disabled
                         className="h-8 w-8"
                       >
                         <Minus className="h-4 w-4" />
@@ -553,13 +555,17 @@ export const ConstructionEstimator = () => {
                         size="icon"
                         onClick={() => handleFloorsChange(true)}
                         className="h-8 w-8"
+                        disabled
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
 
                     {/* Refresh Button */}
-                    <Button className="w-full bg-black hover:bg-gray-800 text-white h-12">
+                    <Button
+                      disabled
+                      className="w-full bg-black hover:bg-gray-800 text-white h-12"
+                    >
                       <RefreshCw className="w-4 h-4 mr-2" />
                       Refresh
                     </Button>
@@ -568,8 +574,8 @@ export const ConstructionEstimator = () => {
               </div>
 
               {/* Right Side - Summary */}
-              <div className="bg-white rounded-lg p-6 flex flex-col justify-between">
-                <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 flex  justify-between items-center">
+                <div className="space-y-6 w-full">
                   {/* Total Built-up Area */}
                   <div className="flex items-start gap-3">
                     <div className="bg-gray-100 p-2 rounded">
