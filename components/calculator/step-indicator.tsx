@@ -322,13 +322,13 @@ export const StepIndicator = () => {
 
         {currentStep === 15 && (
           <div className="flex-shrink-0 ml-4">
-            <button
-              onClick={() => console.log("Proceeding to total cost")}
+            <Link
+              href={"/total-cost"}
               className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
             >
               Proceed
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         )}
       </div>
