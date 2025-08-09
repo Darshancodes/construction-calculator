@@ -1,4 +1,5 @@
 import { CATEGORY_NAMES, TMT_STEEL_CATEGORY } from "@/lib/constants";
+import { getStoredBrand } from "@/lib/store-utils";
 import { useDataStore } from "@/store/useDataStore";
 import { useStepStore } from "@/store/useStepStore";
 import { useState } from "react";
@@ -8,9 +9,12 @@ export const Steel = () => {
   const {
     addAndCalculate,
     total_prices,
+    all_prices,
     constructionData: { total_build_up_area },
   } = useDataStore();
-  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState(
+    () => () => getStoredBrand(CATEGORY_NAMES?.["STEEL"], all_prices)
+  );
   // const calculateSteelPrice = (name, unit_rate, standard_quantity) => {
   //   // const ground_floor_area = 2000;
   //   // const no_of_floors = 5;

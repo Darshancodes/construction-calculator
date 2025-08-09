@@ -7,14 +7,20 @@ import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { CATEGORY_NAMES, MIX_CONCRETE_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const MixConcrete = () => {
-  const [selectedRMC, setSelectedRMC] = useState("");
-  const [selectedPCC, setSelectedPCC] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedRMC, setSelectedRMC] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["MIX-CONCRETE-RMC"], all_prices)
+  );
+  const [selectedPCC, setSelectedPCC] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["MIX-CONCRETE-PCC"], all_prices)
+  );
   const calculateRMC = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = standard_quantity * total_build_up_area;
     const amount = total_quantity * per_unit_rate;

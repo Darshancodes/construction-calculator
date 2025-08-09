@@ -7,10 +7,13 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, KITCHEN_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const Kitchen = () => {
-  const [selectedKitchen, setSelectedKitchen] = useState("");
   const { nextStep, prevStep } = useStepStore();
-  const { addAndCalculate } = useDataStore();
+  const { addAndCalculate, all_prices } = useDataStore();
+  const [selectedKitchen, setSelectedKitchen] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["KITCHEN"], all_prices)
+  );
   const kitchenList = [
     { name: "basic", price: "100000" },
     { name: "premium", price: "150000" },

@@ -7,17 +7,36 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, FLOORING_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 
 export const Flooring = () => {
-  const [selectedVitrified, setSelectedVitrified] = useState("");
-  const [selectedCeramic, setSelectedCeramic] = useState("");
-  const [selectedGranite, setSelectedGranite] = useState("");
-  const [selectedRoughStone, setSelectedRoughStone] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedVitrified, setSelectedVitrified] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["VETRIFIED-TILES"], all_prices)
+  );
+  const [selectedCeramic, setSelectedCeramic] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["CERAMIC-WALL-TILE-TOILED-AND-KITCHEN"],
+      all_prices
+    )
+  );
+  const [selectedGranite, setSelectedGranite] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["GRANITE-DOOR_FRAME-WINDOW_FRAME-KITCHEN_TOP-STAIRCASE"],
+      all_prices
+    )
+  );
+  const [selectedRoughStone, setSelectedRoughStone] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["ROUGH-STONE-TERRACE-AND-PARKING-AREA"],
+      all_prices
+    )
+  );
 
   const calculateVetrifiedTile = (name: string, per_sqft_rate: number) => {
     const amount = per_sqft_rate * total_build_up_area;

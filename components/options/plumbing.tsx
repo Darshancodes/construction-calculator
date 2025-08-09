@@ -7,15 +7,29 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, PLUMBING_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const Plumbing = () => {
-  const [selectedPVC, setSelectedPVC] = useState("");
-  const [selectedCPVC, setSelectedCPVC] = useState("");
-  const [selectedVitreous, setSelectedVitreous] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedPVC, setSelectedPVC] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["PLUMBING-PVC-INTERNAL-AND-EXTERNAL"],
+      all_prices
+    )
+  );
+  const [selectedCPVC, setSelectedCPVC] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
+      all_prices
+    )
+  );
+  const [selectedVitreous, setSelectedVitreous] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["PLUMBING-CP-AND-VITREOUS"], all_prices)
+  );
   const calculatePVC = (name, per_sqft_rate) => {
     const amount = per_sqft_rate * total_build_up_area;
     addAndCalculate({

@@ -7,17 +7,25 @@ import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { BRICKS_CATEGORY, CATEGORY_NAMES } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 
 export const Bricks = () => {
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [waterProofing, setWaterProofing] = useState("");
-  const [termiteSolution, setTermiteSolution] = useState("");
   const {
     constructionData: { ground_floor_area, total_build_up_area },
     addAndCalculate,
     removePriceByName,
+    all_prices,
   } = useDataStore();
   const { nextStep, prevStep } = useStepStore();
+  const [selectedBrand, setSelectedBrand] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES.BRICKS, all_prices)
+  );
+  const [waterProofing, setWaterProofing] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["WATER-PROOFING"], all_prices)
+  );
+  const [termiteSolution, setTermiteSolution] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["TERMITE-SOLUTION"], all_prices)
+  );
   const brands = [
     "fly ash bricks",
     "renwal or other red clay brick",

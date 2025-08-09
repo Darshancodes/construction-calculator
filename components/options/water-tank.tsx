@@ -7,13 +7,17 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, WATER_TANK_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const WaterTank = () => {
-  const [selectedTank, setSelectedTank] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     addAndCalculate,
+    all_prices,
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
   } = useDataStore();
+  const [selectedTank, setSelectedTank] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["WATER-TANK"], all_prices)
+  );
   const calculateTankPrice = (name: string, price: number) => {
     addAndCalculate({
       NAME: CATEGORY_NAMES["WATER-TANK"],

@@ -7,16 +7,33 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, ELECTRICAL_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const Electrical = () => {
   const brands = ["shiva/jindal", "other brands"];
-  const [selectedWallMaterial, setSelectedWallMaterial] = useState("");
-  const [selectedWiresCables, setSelectedWiresCables] = useState("");
-  const [selectedSwitches, setSelectedSwitches] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedWallMaterial, setSelectedWallMaterial] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["ELECTRICAL-SLAB-AND-WALL-MATERIAL"],
+      all_prices
+    )
+  );
+  const [selectedWiresCables, setSelectedWiresCables] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["WIRES-AND-CABLES-EWC0100-FLAT"],
+      all_prices
+    )
+  );
+  const [selectedSwitches, setSelectedSwitches] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["SHEET-AND-SWITCHES-EWC0100-FLAT"],
+      all_prices
+    )
+  );
 
   const calculateSlabWallMaterial = (name, per_sqft_rate) => {
     const amount = per_sqft_rate * total_build_up_area;

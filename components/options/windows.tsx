@@ -7,14 +7,18 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, WINDOWS_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 
 export const Windows = () => {
-  const [selectedMaterial, setSelectedMaterial] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     addAndCalculate,
+    all_prices,
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
   } = useDataStore();
+  const [selectedMaterial, setSelectedMaterial] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["WINDOW-MATERIAL"], all_prices)
+  );
   const calculateMaterial = (name: string, per_sqft_rate: number) => {
     const amount = total_build_up_area * per_sqft_rate;
     addAndCalculate({

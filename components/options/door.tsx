@@ -7,15 +7,26 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, DOOR_CATEGORY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const Door = () => {
-  const [selectedShutter, setSelectedShutter] = useState<number>();
-  const [selectedFrame, setSelectedFrame] = useState("");
-  const [selectedMainDoor, setSelectedMainDoor] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedShutter, setSelectedShutter] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["DOOR-SHUTTER"], all_prices)
+  );
+  const [selectedFrame, setSelectedFrame] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["DOOR-FRAME-SINGLE-REBATE-ELS0100"],
+      all_prices
+    )
+  );
+  const [selectedMainDoor, setSelectedMainDoor] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["MAIN-DOOR"], all_prices)
+  );
   const calculateDoorShutter = (per_sqft_rate) => {
     const name = `${per_sqft_rate}/ft`;
     const amount = total_build_up_area * per_sqft_rate;
@@ -45,7 +56,7 @@ export const Door = () => {
     });
   };
   const handleShutter = (sqft_rate) => {
-    setSelectedShutter(sqft_rate);
+    setSelectedShutter(`${sqft_rate}/ft`);
     const selected = DOOR_CATEGORY.DOOR_SHUTTER.find(
       (shutter) => shutter.PER_SQFT_RATE === sqft_rate
     );
@@ -79,10 +90,7 @@ export const Door = () => {
       <CardContent className="p-6 space-y-6">
         <div>
           <h3 className="text-lg font-medium mb-4">Door Shutter</h3>
-          <RadioGroup
-            value={selectedShutter?.toString()}
-            onValueChange={handleShutter}
-          >
+          <RadioGroup value={selectedShutter} onValueChange={handleShutter}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {DOOR_CATEGORY.DOOR_SHUTTER.map((item, index) => (
                 <div
@@ -95,7 +103,7 @@ export const Door = () => {
                   onClick={() => handleShutter(item.PER_SQFT_RATE)}
                 >
                   <RadioGroupItem
-                    value={item.PER_SQFT_RATE.toString()}
+                    value={`${item.PER_SQFT_RATE}/ft`}
                     id={`shutter-${index}`}
                     className="absolute top-1 right-1"
                   />

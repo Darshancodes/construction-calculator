@@ -7,13 +7,17 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, SAND_QUANTITY } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const Sand = () => {
-  const [selectedSand, setSelectedSand] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedSand, setSelectedSand] = useState(
+    () => () => getStoredBrand(CATEGORY_NAMES?.["SAND"], all_prices)
+  );
   const calculateSand = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = total_build_up_area * standard_quantity;
     const amount = per_unit_rate * total_quantity;

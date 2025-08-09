@@ -12,113 +12,118 @@ import { Micro_5 } from "next/font/google";
 const CONSTRUCTION_STEPS = [
   {
     id: 1,
-    category: CATEGORY_NAMES?.STEEL,
+    category: [CATEGORY_NAMES?.STEEL],
     name: "TMT Steel",
     image: STEPS_IMAGES.TMT_STEEL,
   },
   {
     id: 2,
-    category: CATEGORY_NAMES?.BRICKS,
+    category: [CATEGORY_NAMES?.BRICKS],
     name: "Bricks",
     image: STEPS_IMAGES.BRICKS,
   },
   {
     id: 3,
-    category: CATEGORY_NAMES?.CEMENT,
+    category: [CATEGORY_NAMES?.CEMENT],
     name: "Cement",
     image: STEPS_IMAGES.CEMENT,
   },
   {
     id: 4,
-    category:
-      CATEGORY_NAMES?.["ELECTRICAL-SLAB-AND-WALL-MATERIAL"] &&
-      CATEGORY_NAMES?.["WIRES-AND-CABLES-EWC0100-FLAT"] &&
+    category: [
+      CATEGORY_NAMES?.["ELECTRICAL-SLAB-AND-WALL-MATERIAL"],
+      CATEGORY_NAMES?.["WIRES-AND-CABLES-EWC0100-FLAT"],
       CATEGORY_NAMES?.["SHEET-AND-SWITCHES-EWC0100-FLAT"],
+    ],
     name: "Electrical",
     image: STEPS_IMAGES.ELECTRICAL,
   },
   {
     id: 5,
-    category:
-      CATEGORY_NAMES?.["VETRIFIED-TILES"] &&
-      CATEGORY_NAMES?.["CERAMIC-WALL-TILE-TOILED-AND-KITCHEN"] &&
-      CATEGORY_NAMES?.[
-        "GRANITE-DOOR_FRAME-WINDOW_FRAME-KITCHEN_TOP-STAIRCASE"
-      ] &&
+    category: [
+      CATEGORY_NAMES?.["VETRIFIED-TILES"],
+      CATEGORY_NAMES?.["CERAMIC-WALL-TILE-TOILED-AND-KITCHEN"],
+      CATEGORY_NAMES?.["GRANITE-DOOR_FRAME-WINDOW_FRAME-KITCHEN_TOP-STAIRCASE"],
       CATEGORY_NAMES?.["ROUGH-STONE-TERRACE-AND-PARKING-AREA"],
+    ],
     name: "Flooring",
     image: STEPS_IMAGES.FLOORING,
   },
   {
     id: 6,
-    category:
-      CATEGORY_NAMES?.["DOOR-FRAME-SINGLE-REBATE-ELS0100"] &&
-      CATEGORY_NAMES?.["DOOR-SHUTTER"] &&
+    category: [
+      CATEGORY_NAMES?.["DOOR-FRAME-SINGLE-REBATE-ELS0100"],
+      CATEGORY_NAMES?.["DOOR-SHUTTER"],
       CATEGORY_NAMES?.["MAIN-DOOR"],
+    ],
     name: "Door",
     image: STEPS_IMAGES.DOOR,
   },
   {
     id: 7,
-    category: CATEGORY_NAMES?.["WINDOW-MATERIAL"],
+    category: [CATEGORY_NAMES?.["WINDOW-MATERIAL"]],
     name: "Windows",
     image: STEPS_IMAGES.WINDOWS,
   },
   {
     id: 8,
-    category:
-      CATEGORY_NAMES?.["WALL-FINISH-POP-FALSE-CEILING"] &&
-      CATEGORY_NAMES?.["WALL-FINISH-POP-IN-WALLS"] &&
+    category: [
+      CATEGORY_NAMES?.["WALL-FINISH-POP-FALSE-CEILING"],
+      CATEGORY_NAMES?.["WALL-FINISH-POP-IN-WALLS"],
       CATEGORY_NAMES?.["WALL-FINISH-INTERNAL-WALL-PAINT"],
+    ],
     name: "Wall Finish",
     image: STEPS_IMAGES.WALL_FINISH,
   },
   {
     id: 9,
-    category:
-      CATEGORY_NAMES?.["STAIR-HANDRAIL"] &&
+    category: [
+      CATEGORY_NAMES?.["STAIR-HANDRAIL"],
       CATEGORY_NAMES?.["BALCONY-HANDRAIL"],
+    ],
     name: "Hand Rails",
     image: STEPS_IMAGES.RAILINGS,
   },
   {
     id: 10,
-    category: CATEGORY_NAMES?.["WATER-TANK"],
+    category: [CATEGORY_NAMES?.["WATER-TANK"]],
     name: "Water Tank",
     image: STEPS_IMAGES.WATER_TANK,
   },
   {
     id: 11,
-    category: CATEGORY_NAMES?.KITCHEN,
+    category: [CATEGORY_NAMES?.KITCHEN],
     name: "Kitchen",
     image: STEPS_IMAGES.KITCHEN,
   },
   {
     id: 12,
-    category:
-      CATEGORY_NAMES?.["MIX-CONCRETE-PCC"] &&
+    category: [
+      CATEGORY_NAMES?.["MIX-CONCRETE-PCC"],
       CATEGORY_NAMES?.["MIX-CONCRETE-RMC"],
+    ],
     name: "Mix Concrete",
     image: STEPS_IMAGES.MIX_CONCRETE,
   },
   {
     id: 13,
-    category: CATEGORY_NAMES?.SAND,
+    category: [CATEGORY_NAMES?.SAND],
     name: "Sand",
     image: STEPS_IMAGES.SAND,
   },
   {
     id: 14,
-    category:
-      CATEGORY_NAMES?.["PLUMBING-CP-AND-VITREOUS"] &&
-      CATEGORY_NAMES?.["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"] &&
+    category: [
+      CATEGORY_NAMES?.["PLUMBING-CP-AND-VITREOUS"],
+      CATEGORY_NAMES?.["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
       CATEGORY_NAMES?.["PLUMBING-PVC-INTERNAL-AND-EXTERNAL"],
+    ],
     name: "Plumbing",
     image: STEPS_IMAGES.PLUMBING,
   },
   {
     id: 15,
-    category: CATEGORY_NAMES?.STONE,
+    category: [CATEGORY_NAMES?.STONE],
     name: "Stone",
     image: STEPS_IMAGES.BRICKS,
   },
@@ -134,6 +139,8 @@ export default function StepNavigation() {
   const { all_prices } = useDataStore();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
+
+  console.log("all_prices =>", all_prices);
 
   // Auto-scroll to selected tab when step changes
   useEffect(() => {
@@ -201,12 +208,52 @@ export default function StepNavigation() {
   };
 
   // Helper function to check if step has selected items
-  const hasSelectedItems = (stepId: string) => {
-    return all_prices.some((item: any) => {
-      const step = CONSTRUCTION_STEPS.find((s) => s.category === stepId);
-      return step && item.NAME.includes(step.name);
+  // const hasSelectedItems = (category: string) => {
+  //   // Find the step that contains this category
+  //   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
+  //   if (!step) return false;
+
+  //   return all_prices.some((item: any) => {
+  //     // Check if item matches the current category
+  //     return (
+  //       item.NAME &&
+  //       (item.NAME.includes(category) ||
+  //         item.category === category ||
+  //         // Add any other matching logic you need
+  //         item.stepCategory === category)
+  //     );
+  //   });
+
+  // return all_prices.some((item: any) => {
+  //   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
+  //   return step && item.NAME.includes(step.category);
+  // });
+  // };
+
+  const hasSelectedItems = (categories: string[]) => {
+    console.log("categories=", categories);
+
+    // Filter out undefined/null categories
+    const validCategories = categories.filter(Boolean);
+
+    if (validCategories.length === 0) return false;
+
+    // Check if ALL categories have selected items
+    return validCategories.every((category) => {
+      const hasItemsInCategory = all_prices.some((item: any) => {
+        return item.NAME && item.NAME.includes(category);
+      });
+
+      console.log(
+        `Category ${category}: ${hasItemsInCategory ? "HAS" : "NO"} items`
+      );
+      return hasItemsInCategory;
     });
   };
+
+  // useEffect(() => {
+  //   hasSelectedItems();
+  // }, [all_prices]);
 
   return (
     <>
@@ -246,11 +293,11 @@ export default function StepNavigation() {
                 >
                   <div className="flex flex-col items-center justify-center h-full p-2">
                     {/* Green check circle for selected items */}
-                    {/* {hasSelectedItems(step.category) && (
+                    {hasSelectedItems(step.category) && (
                       <div className="absolute -top-1 -right-1 z-10">
                         <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" />
                       </div>
-                    )} */}
+                    )}
                     <div className="w-10 h-10 mb-1 flex items-center justify-center">
                       <Image
                         src={step.image || "/placeholder.svg"}

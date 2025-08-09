@@ -7,14 +7,18 @@ import { Label } from "@/components/ui/label";
 import { useStepStore } from "@/store/useStepStore";
 import { CATEGORY_NAMES, CEMENT_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 
 export const Cement = () => {
   const { nextStep, prevStep } = useStepStore();
-  const [selectedBrand, setSelectedBrand] = useState("");
   const {
     constructionData: { total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedBrand, setSelectedBrand] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.CEMENT, all_prices)
+  );
   const brands = ["UltraTech or Ambhuja", "JK", "Wonder or shree"];
   const calculateCementPrice = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = total_build_up_area * standard_quantity;

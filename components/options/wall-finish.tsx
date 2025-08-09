@@ -7,15 +7,29 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, WALL_FINISHES } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const WallFinishes = () => {
   const { nextStep, prevStep } = useStepStore();
   const {
     addAndCalculate,
+    all_prices,
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
   } = useDataStore();
-  const [selectedCeiling, setSelectedCeiling] = useState("");
-  const [selectedWalls, setSelectedWalls] = useState("");
-  const [selectedPaint, setSelectedPaint] = useState("");
+  const [selectedCeiling, setSelectedCeiling] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["WALL-FINISH-POP-FALSE-CEILING"],
+      all_prices
+    )
+  );
+  const [selectedWalls, setSelectedWalls] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["WALL-FINISH-POP-IN-WALLS"], all_prices)
+  );
+  const [selectedPaint, setSelectedPaint] = useState(() =>
+    getStoredBrand(
+      CATEGORY_NAMES?.["WALL-FINISH-INTERNAL-WALL-PAINT"],
+      all_prices
+    )
+  );
 
   const calculatePopFalseCeiling = (name, per_sqft_rate, standard_quantity) => {
     const total_quantity = total_build_up_area * standard_quantity;

@@ -1,12 +1,8 @@
+import { PriceItem } from "@/types/types";
 import { create } from "zustand";
 
 // Price item interface
 // Add other properties as needed based on your price items
-interface PriceItem {
-  NAME: string;
-  AMOUNT: number;
-  BRAND: string;
-}
 
 // Construction data interface
 interface ConstructionData {

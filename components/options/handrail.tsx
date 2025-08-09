@@ -7,14 +7,20 @@ import { Label } from "@/components/ui/label";
 import { CATEGORY_NAMES, HANDRAILS } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
+import { getStoredBrand } from "@/lib/store-utils";
 export const HandRails = () => {
-  const [selectedStair, setSelectedStair] = useState("");
-  const [selectedBalcony, setSelectedBalcony] = useState("");
   const { nextStep, prevStep } = useStepStore();
   const {
     constructionData: { ground_floor_area, no_of_floors, total_build_up_area },
     addAndCalculate,
+    all_prices,
   } = useDataStore();
+  const [selectedBalcony, setSelectedBalcony] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["BALCONY-HANDRAIL"], all_prices)
+  );
+  const [selectedStair, setSelectedStair] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["STAIR-HANDRAIL"], all_prices)
+  );
   const calculateStairHandRail = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = standard_quantity * no_of_floors;
     const amount = per_unit_rate * total_quantity;
@@ -50,7 +56,7 @@ export const HandRails = () => {
   };
   const handleBalconyHandRail = (name) => {
     setSelectedBalcony(name);
-    const selected = HANDRAILS.STAIR_HANDRAIL.find(
+    const selected = HANDRAILS.BALCONY_HANDRAIL.find(
       (hand) => hand?.NAME === name
     );
     if (selected) {
