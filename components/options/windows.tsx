@@ -64,7 +64,7 @@ export const Windows = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`window-${index}`}
-                    className="absolute top-0 right-0"
+                    className="absolute top-2 right-2"
                   />
 
                   <img src={item?.IMAGE} />

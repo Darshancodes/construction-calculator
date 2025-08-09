@@ -118,7 +118,7 @@ export const Plumbing = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`pvc-${index}`}
-                      className="absolute top-1 right-1"
+                      className="absolute top-2 right-2"
                     />
                     <img src={item?.IMAGE} />
                     {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
@@ -149,7 +149,7 @@ export const Plumbing = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`cpvc-${index}`}
-                      className="absolute top-1 right-1"
+                      className="absolute top-2 right-2"
                     />
                     <img src={item?.IMAGE} />
                     {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
@@ -177,7 +177,7 @@ export const Plumbing = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`vitreous-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <img src={item?.IMAGE} />
                   {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/

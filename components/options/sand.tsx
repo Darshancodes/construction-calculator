@@ -15,8 +15,8 @@ export const Sand = () => {
     addAndCalculate,
     all_prices,
   } = useDataStore();
-  const [selectedSand, setSelectedSand] = useState(
-    () => () => getStoredBrand(CATEGORY_NAMES?.["SAND"], all_prices)
+  const [selectedSand, setSelectedSand] = useState(() =>
+    getStoredBrand(CATEGORY_NAMES?.["SAND"], all_prices)
   );
   const calculateSand = (name, per_unit_rate, standard_quantity) => {
     const total_quantity = total_build_up_area * standard_quantity;

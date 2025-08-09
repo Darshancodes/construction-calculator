@@ -307,7 +307,17 @@ export const ConstructionEstimator = () => {
                 type="tel" // Use text type to have better control
                 inputMode="numeric"
                 value={formData.ground_floor_area}
-                onChange={(e) => handleAreaChange(e.target.value)}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleAreaChange(e.target.value);
+                }}
+                onFocus={(e) => {
+                  // Prevent zoom on iOS
+                  e.target.setAttribute("readonly", true);
+                  setTimeout(() => {
+                    e.target.removeAttribute("readonly");
+                  }, 100);
+                }}
                 className="flex-1"
                 placeholder="2000"
               />

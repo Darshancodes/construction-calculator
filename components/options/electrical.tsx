@@ -109,7 +109,7 @@ export const Electrical = () => {
                 (item, index) => (
                   <div
                     key={index}
-                    className={`flex flex-col justify-center items-center min-h-44 space-x-2 bg-white border-2  relative ${
+                    className={`flex flex-col justify-center  items-center min-h-44 space-x-2 bg-white border-2 border-black relative ${
                       selectedWallMaterial === item.NAME
                         ? "border-black shadow-md"
                         : "border-gray-200"
@@ -120,7 +120,7 @@ export const Electrical = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`wall-${index}`}
-                      className="absolute top-0 right-0"
+                      className="absolute top-3 right-2"
                     />
                     <Label htmlFor={`wall-${index}`} className="cursor-pointer">
                       {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
@@ -154,7 +154,7 @@ export const Electrical = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`wires-${index}`}
-                      className="absolute top-0 right-0"
+                      className="absolute top-3 right-2"
                     />
                     <Label
                       htmlFor={`wires-${index}`}
@@ -191,7 +191,7 @@ export const Electrical = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`switches-${index}`}
-                      className="absolute top-0 right-0"
+                      className="absolute top-3 right-2"
                     />
                     <Label
                       htmlFor={`switches-${index}`}

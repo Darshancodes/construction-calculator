@@ -90,7 +90,7 @@ export const MixConcrete = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`rmc-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <img src={item?.IMAGE} />
                   <Label htmlFor={`rmc-${index}`} className="cursor-pointer">
@@ -121,7 +121,7 @@ export const MixConcrete = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`pcc-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <img src={item.IMAGE} />
                   <Label htmlFor={`pcc-${index}`} className="cursor-pointer">

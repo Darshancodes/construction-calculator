@@ -105,7 +105,7 @@ export const Door = () => {
                   <RadioGroupItem
                     value={`${item.PER_SQFT_RATE}/ft`}
                     id={`shutter-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <Label
                     htmlFor={`shutter-${index}`}
@@ -142,7 +142,7 @@ export const Door = () => {
                     <RadioGroupItem
                       value={item.NAME}
                       id={`frame-${index}`}
-                      className="absolute top-1 right-1"
+                      className="absolute top-2 right-2"
                     />
                     <img src={item?.IMAGE} />
                     <Label
@@ -175,7 +175,7 @@ export const Door = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`main-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
 
                   <Label htmlFor={`main-${index}`} className="cursor-pointer">

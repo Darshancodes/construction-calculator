@@ -62,7 +62,7 @@ export const Kitchen = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`kitchen-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
 
                   <img src={"/brand-images/kitchen.svg"} />

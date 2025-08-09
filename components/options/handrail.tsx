@@ -92,7 +92,7 @@ export const HandRails = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`stair-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <img src={item.IMAGE} />
                   {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
@@ -122,7 +122,7 @@ export const HandRails = () => {
                   <RadioGroupItem
                     value={item.NAME}
                     id={`balcony-${index}`}
-                    className="absolute top-1 right-1"
+                    className="absolute top-2 right-2"
                   />
                   <img src={item.IMAGE} />
                   {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}

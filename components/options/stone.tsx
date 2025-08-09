@@ -61,11 +61,11 @@ export const Stone = () => {
                   }`}
                   onClick={() => handleStonePrice(item?.NAME)}
                 >
-                  <RadioGroupItem
+                  {/* <RadioGroupItem
                     value={item.NAME}
                     id={`stone-${index}`}
                     className="peer sr-only"
-                  />
+                  /> */}
 
                   <RadioGroupItem
                     value={item.NAME}

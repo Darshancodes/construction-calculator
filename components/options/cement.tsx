@@ -67,7 +67,7 @@ export const Cement = () => {
                   <RadioGroupItem
                     value={brand.NAME}
                     id={`cement-${index}`}
-                    className="absolute top-0 right-0"
+                    className="absolute top-2 right-2"
                   />
                   {/* <div className="absolute top-3 right-3">
                     <div
