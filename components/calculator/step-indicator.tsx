@@ -20,7 +20,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { CATEGORY_NAMES } from "@/lib/constants";
 
 export const StepIndicator = () => {
   const scrollRef = useRef(null);
@@ -35,6 +36,15 @@ export const StepIndicator = () => {
     console.log("Remove item:", brand);
     removePriceByName(brand);
   };
+
+  // Check if all required categories are filled
+  const isAllCategoriesFilled = useMemo(() => {
+    const requiredCategories = Object.values(CATEGORY_NAMES);
+    const filledCategories = [
+      ...new Set(all_prices.map((price) => price.NAME)),
+    ];
+    return requiredCategories.length === filledCategories.length;
+  }, [all_prices]);
 
   const handleProceed = () => {
     // Implement your proceed logic here
@@ -134,8 +144,20 @@ export const StepIndicator = () => {
                   ) : (
                     <Link
                       href="/total-cost"
-                      className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                      onClick={(e) => e.stopPropagation()}
+                      className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors ${
+                        isAllCategoriesFilled
+                          ? "bg-white text-black hover:bg-gray-100 cursor-pointer"
+                          : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (!isAllCategoriesFilled) {
+                          e.preventDefault();
+                          alert(
+                            "Please fill all required categories before proceeding."
+                          );
+                        }
+                      }}
                     >
                       Proceed
                       <ArrowRight className="w-4 h-4" />
@@ -324,7 +346,20 @@ export const StepIndicator = () => {
           <div className="flex-shrink-0 ml-4">
             <Link
               href={"/total-cost"}
-              className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+              className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors ${
+                isAllCategoriesFilled
+                  ? "bg-white text-black hover:bg-gray-100 cursor-pointer"
+                  : "bg-gray-500 text-gray-300 cursor-not-allowed"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!isAllCategoriesFilled) {
+                  e.preventDefault();
+                  alert(
+                    "Please fill all required categories before proceeding."
+                  );
+                }
+              }}
             >
               Proceed
               <ArrowRight className="w-4 h-4" />

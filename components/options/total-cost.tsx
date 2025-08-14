@@ -2,6 +2,8 @@
 import { useDataStore } from "@/store/useDataStore";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const TotalCost = () => {
   // const finalprice = material-cost + miscallenous-cost + labour-charge + design-management-fees
@@ -178,6 +180,23 @@ export const TotalCost = () => {
           </div>
         </CardContent>
       </Card>
+      <div className="flex justify-center items-center mt-4">
+        <Link
+          href={"/"}
+          className="
+      bg-white hover:bg-gray-200 text-black ring ring-gray-500
+      font-medium py-2 px-4 rounded-lg
+      transition-colors duration-200 min-w-[300px] font-mono
+      text-center
+      focus:outline-none 
+    "
+        >
+          Calculate again →
+        </Link>
+        {/* <Button variant={"outline"} className="border border-gray-400">
+          Calculate Again <ArrowRight />
+        </Button> */}
+      </div>
     </div>
   );
 };
