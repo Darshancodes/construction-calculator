@@ -44,10 +44,12 @@ export const WaterTank = () => {
       </CardHeader>
       <CardContent className="p-6">
         <div>
-          <h3 className="text-lg font-medium mb-4">Tank Capacity</h3>
           <RadioGroup value={selectedTank} onValueChange={handleTank}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <img src={WATER_TANK_CATEGORY.IMAGE} />
+              <img
+                src={WATER_TANK_CATEGORY.IMAGE}
+                className="place-self-center"
+              />
               {WATER_TANK_CATEGORY.BRANDS.map((item, index) => (
                 <div
                   key={index}

@@ -389,22 +389,23 @@ export const WATER_TANK_CATEGORY = {
 export const KITCHEN_CATEGORY = {
   BRANDS: [
     {
-      NAME: "BASIC",
-      PER_UNIT_RATE: 100000,
-      PER_UNIT: "RS",
-      IMAGE: "/brand-images/kitchen.svg",
-    },
-    {
       NAME: "PREMIUM",
       PER_UNIT_RATE: 150000,
       PER_UNIT: "RS",
       IMAGE: "/brand-images/kitchen.svg",
     },
+
     {
       NAME: "CLASSIC",
       PER_UNIT_RATE: 200000,
       PER_UNIT: "RS",
-      IMAGE: "/brand-images/kitchen.svg",
+      IMAGE: "/brand-images/classic-kitchen.svg",
+    },
+    {
+      NAME: "BASIC",
+      PER_UNIT_RATE: 100000,
+      PER_UNIT: "RS",
+      IMAGE: "/brand-images/basic-kitchen.svg",
     },
   ],
 };

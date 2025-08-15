@@ -260,40 +260,43 @@ export default function StepNavigation() {
               className="flex gap-3 overflow-x-auto scrollbar-hide px-10 py-2"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-              {CONSTRUCTION_STEPS.map((step) => (
-                <div
-                  key={step.id}
-                  data-step-id={step.id}
-                  onClick={() => stepChange(step.id)}
-                  className={`flex-shrink-0 relative w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
-                    currentStep === step.id
-                      ? "bg-main border-black"
-                      : "border-gray-200 bg-white hover:border-gray-300"
-                  }`}
-                >
-                  <div className="flex flex-col items-center justify-center h-full p-2">
-                    {/* Green check circle for selected items */}
-                    {hasSelectedItems(step.category) && (
-                      <div className="absolute top-1 right-1 z-10">
-                        <img src={"/icons/green-check.svg"} />
-                        {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
+              {CONSTRUCTION_STEPS.map(
+                (step) =>
+                  step?.id < 14 && (
+                    <div
+                      key={step.id}
+                      data-step-id={step.id}
+                      onClick={() => stepChange(step.id)}
+                      className={`flex-shrink-0 relative w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                        currentStep === step.id
+                          ? "bg-main border-black"
+                          : "border-gray-200 bg-white hover:border-gray-300"
+                      }`}
+                    >
+                      <div className="flex flex-col items-center justify-center h-full p-2">
+                        {/* Green check circle for selected items */}
+                        {hasSelectedItems(step.category) && (
+                          <div className="absolute top-1 right-1 z-10">
+                            <img src={"/icons/green-check.svg"} />
+                            {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
+                          </div>
+                        )}
+                        <div className="w-10 h-10 mb-1 flex items-center justify-center">
+                          <Image
+                            src={step.image || "/placeholder.svg"}
+                            alt={step.name}
+                            width={40}
+                            height={40}
+                            className="object-contain"
+                          />
+                        </div>
+                        <span className="text-xs text-gray-600 text-center leading-tight">
+                          {step.name}
+                        </span>
                       </div>
-                    )}
-                    <div className="w-10 h-10 mb-1 flex items-center justify-center">
-                      <Image
-                        src={step.image || "/placeholder.svg"}
-                        alt={step.name}
-                        width={40}
-                        height={40}
-                        className="object-contain"
-                      />
                     </div>
-                    <span className="text-xs text-gray-600 text-center leading-tight">
-                      {step.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                  )
+              )}
             </div>
 
             {/* Right scroll button */}
@@ -317,31 +320,34 @@ export default function StepNavigation() {
             className="flex gap-4 overflow-x-auto scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {CONSTRUCTION_STEPS.map((step) => (
-              <div
-                key={step.id}
-                data-step-id={step.id}
-                onClick={() => stepChange(step.id)}
-                className={`flex-shrink-0 flex flex-col gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
-                  currentStep === step.id
-                    ? "bg-yellow-100 border-b-4 border-black"
-                    : "bg-transparent hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center justify-center">
-                  <Image
-                    src={step.image || "/placeholder.svg"}
-                    alt={step.name}
-                    width={0}
-                    height={0}
-                    className="object-contain w-20 h-[60px]"
-                  />
-                </div>
-                <span className="text-xs text-gray-600 text-center leading-tight">
-                  {step.name}
-                </span>
-              </div>
-            ))}
+            {CONSTRUCTION_STEPS.map(
+              (step) =>
+                step?.id < 14 && (
+                  <div
+                    key={step.id}
+                    data-step-id={step.id}
+                    onClick={() => stepChange(step.id)}
+                    className={`flex-shrink-0 flex flex-col gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
+                      currentStep === step.id
+                        ? "bg-yellow-100 border-b-4 border-black"
+                        : "bg-transparent hover:bg-gray-50"
+                    }`}
+                  >
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src={step.image || "/placeholder.svg"}
+                        alt={step.name}
+                        width={0}
+                        height={0}
+                        className="object-contain w-20 h-[60px]"
+                      />
+                    </div>
+                    <span className="text-xs text-gray-600 text-center leading-tight">
+                      {step.name}
+                    </span>
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>

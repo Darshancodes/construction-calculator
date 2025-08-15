@@ -46,10 +46,6 @@ export const StepIndicator = () => {
     return requiredCategories.length === filledCategories.length;
   }, [all_prices]);
 
-  const handleProceed = () => {
-    // Implement your proceed logic here
-    console.log("Proceed to next step");
-  };
   // Check if screen is mobile
   useEffect(() => {
     const checkScreenSize = () => {
@@ -186,7 +182,7 @@ export const StepIndicator = () => {
                 </div>
               </SheetTitle>
               <div className="">
-                {currentStep < 15 && (
+                {currentStep < 14 && (
                   <button
                     className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
                     onClick={nextStep}
@@ -197,7 +193,7 @@ export const StepIndicator = () => {
                 )}
 
                 {/* Right side - Proceed button */}
-                {currentStep == 15 && (
+                {currentStep == 14 && (
                   <div className="flex-shrink-0 ml-4">
                     <Link
                       href={"/total-cost"}
@@ -332,7 +328,7 @@ export const StepIndicator = () => {
         </div>
 
         {/* Action buttons */}
-        {currentStep < 15 && (
+        {currentStep < 14 && (
           <button
             className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ml-4 flex-shrink-0"
             onClick={nextStep}
@@ -342,7 +338,7 @@ export const StepIndicator = () => {
           </button>
         )}
 
-        {currentStep === 15 && (
+        {currentStep === 14 && (
           <div className="flex-shrink-0 ml-4">
             <Link
               href={"/total-cost"}
