@@ -133,7 +133,7 @@ export const StepIndicator = () => {
                   className="flex items-center gap-2"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {currentStep < 15 ? (
+                  {currentStep < 14 ? (
                     <div
                       className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 cursor-pointer"
                       onClick={nextStep}

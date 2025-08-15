@@ -1,5 +1,6 @@
 import { Download, Home } from "lucide-react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -9,12 +10,12 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo/Brand */}
-            <div className="flex items-center space-x-2">
+            <Link href={"/"} className="flex items-center space-x-2">
               <Home className="h-6 w-6 text-black" />
               <span className="text-xl font-semibold text-black">
                 Reidius Infra
               </span>
-            </div>
+            </Link>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">

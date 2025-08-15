@@ -90,14 +90,9 @@ const CONSTRUCTION_STEPS = [
     name: "Stone",
     image: STEPS_IMAGES.BRICKS,
   },
+
   {
     id: 11,
-    category: [CATEGORY_NAMES?.KITCHEN],
-    name: "Kitchen",
-    image: STEPS_IMAGES.KITCHEN,
-  },
-  {
-    id: 12,
     category: [
       CATEGORY_NAMES?.["MIX-CONCRETE-PCC"],
       CATEGORY_NAMES?.["MIX-CONCRETE-RMC"],
@@ -106,13 +101,13 @@ const CONSTRUCTION_STEPS = [
     image: STEPS_IMAGES.MIX_CONCRETE,
   },
   {
-    id: 13,
+    id: 12,
     category: [CATEGORY_NAMES?.SAND],
     name: "Sand",
     image: STEPS_IMAGES.SAND,
   },
   {
-    id: 14,
+    id: 13,
     category: [
       CATEGORY_NAMES?.["PLUMBING-CP-AND-VITREOUS"],
       CATEGORY_NAMES?.["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
@@ -123,13 +118,19 @@ const CONSTRUCTION_STEPS = [
   },
 
   {
-    id: 15,
-    category: [CATEGORY_NAMES?.["WATER-TANK"]],
-    name: "Water Tank",
+    id: 14,
+    category: [CATEGORY_NAMES?.["WATER-TANK"], CATEGORY_NAMES?.KITCHEN],
+    name: "Miscallenous",
     image: STEPS_IMAGES.WATER_TANK,
   },
 ];
 
+// {
+//     id: 11,
+//     category: [CATEGORY_NAMES?.KITCHEN],
+//     name: "Kitchen",
+//     image: STEPS_IMAGES.KITCHEN,
+//   },
 interface StepNavigationProps {
   currentStep: number;
   onStepChange: (step: number) => void;
@@ -208,29 +209,6 @@ export default function StepNavigation() {
     }
   };
 
-  // Helper function to check if step has selected items
-  // const hasSelectedItems = (category: string) => {
-  //   // Find the step that contains this category
-  //   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
-  //   if (!step) return false;
-
-  //   return all_prices.some((item: any) => {
-  //     // Check if item matches the current category
-  //     return (
-  //       item.NAME &&
-  //       (item.NAME.includes(category) ||
-  //         item.category === category ||
-  //         // Add any other matching logic you need
-  //         item.stepCategory === category)
-  //     );
-  //   });
-
-  // return all_prices.some((item: any) => {
-  //   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
-  //   return step && item.NAME.includes(step.category);
-  // });
-  // };
-
   const hasSelectedItems = (categories: string[]) => {
     console.log("categories=", categories);
 
@@ -252,9 +230,10 @@ export default function StepNavigation() {
     });
   };
 
-  // useEffect(() => {
-  //   hasSelectedItems();
-  // }, [all_prices]);
+  // Hide navigation when user is on Miscellaneous step (id: 14)
+  if (currentStep === 14) {
+    return null;
+  }
 
   return (
     <>
@@ -369,6 +348,29 @@ export default function StepNavigation() {
     </>
   );
 }
+
+// Helper function to check if step has selected items
+// const hasSelectedItems = (category: string) => {
+//   // Find the step that contains this category
+//   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
+//   if (!step) return false;
+
+//   return all_prices.some((item: any) => {
+//     // Check if item matches the current category
+//     return (
+//       item.NAME &&
+//       (item.NAME.includes(category) ||
+//         item.category === category ||
+//         // Add any other matching logic you need
+//         item.stepCategory === category)
+//     );
+//   });
+
+// return all_prices.some((item: any) => {
+//   const step = CONSTRUCTION_STEPS.find((s) => s.category === category);
+//   return step && item.NAME.includes(step.category);
+// });
+// };
 
 // export default function StepNavigation() {
 //   const { currentStep, stepChange } = useStepStore();
