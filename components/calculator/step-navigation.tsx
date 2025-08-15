@@ -86,9 +86,9 @@ const CONSTRUCTION_STEPS = [
   },
   {
     id: 10,
-    category: [CATEGORY_NAMES?.["WATER-TANK"]],
-    name: "Water Tank",
-    image: STEPS_IMAGES.WATER_TANK,
+    category: [CATEGORY_NAMES?.STONE],
+    name: "Stone",
+    image: STEPS_IMAGES.BRICKS,
   },
   {
     id: 11,
@@ -121,11 +121,12 @@ const CONSTRUCTION_STEPS = [
     name: "Plumbing",
     image: STEPS_IMAGES.PLUMBING,
   },
+
   {
     id: 15,
-    category: [CATEGORY_NAMES?.STONE],
-    name: "Stone",
-    image: STEPS_IMAGES.BRICKS,
+    category: [CATEGORY_NAMES?.["WATER-TANK"]],
+    name: "Water Tank",
+    image: STEPS_IMAGES.WATER_TANK,
   },
 ];
 

@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { PersonalDetailPopup } from "../calculator/personal-detail-popup";
 
 export const TotalCost = () => {
   // const finalprice = material-cost + miscallenous-cost + labour-charge + design-management-fees
@@ -184,7 +185,7 @@ export const TotalCost = () => {
         <Link
           href={"/"}
           className="
-      bg-white hover:bg-gray-200 text-black ring ring-gray-500
+      bg-white hover:bg-gray-200 text-black ring
       font-medium py-2 px-4 rounded-lg
       transition-colors duration-200 min-w-[300px] font-mono
       text-center
