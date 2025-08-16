@@ -68,9 +68,9 @@ export const HandRails = () => {
     }
   };
   return (
-    <div className="w-full bg-main">
+    <div className="w-full ">
       <div className="p-6 space-y-6">
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
           </CardHeader>
@@ -104,7 +104,7 @@ export const HandRails = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
           </CardHeader>

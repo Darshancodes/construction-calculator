@@ -322,13 +322,19 @@ export default function StepNavigation() {
                 key={step.id}
                 data-step-id={step.id}
                 onClick={() => stepChange(step.id)}
-                className={`flex-shrink-0 flex flex-col gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
+                className={`flex-shrink-0 flex flex-col relative gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
                   currentStep === step.id
                     ? "bg-yellow-100 border-b-4 border-black"
                     : "bg-transparent hover:bg-gray-50"
                 }`}
               >
                 <div className="flex items-center justify-center">
+                  {hasSelectedItems(step.category) && (
+                    <div className="absolute top-0 right-0 z-10">
+                      <img src={"/icons/green-check.svg"} />
+                      {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
+                    </div>
+                  )}
                   <Image
                     src={step.image || "/placeholder.svg"}
                     alt={step.name}

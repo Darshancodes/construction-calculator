@@ -106,9 +106,9 @@ export const WallFinishes = () => {
   };
 
   return (
-    <div className="w-full bg-main">
+    <div className="w-full ">
       <div className="p-6 space-y-6">
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">POP False Ceiling</h3>
           </CardHeader>
@@ -142,7 +142,7 @@ export const WallFinishes = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">POP in Walls</h3>
           </CardHeader>
@@ -173,7 +173,7 @@ export const WallFinishes = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">Internal Wall Paint</h3>
           </CardHeader>

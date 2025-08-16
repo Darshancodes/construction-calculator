@@ -36,43 +36,42 @@ export const Kitchen = () => {
     }
   };
   return (
-    <div className="w-full bg-main">
-      <div className="p-6">
-        <Card>
-          <CardContent>
-            <RadioGroup
-              value={selectedKitchen}
-              onValueChange={handleKitchenPrice}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {KITCHEN_CATEGORY.BRANDS.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedKitchen === item.NAME
-                        ? "border-black"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handleKitchenPrice(item.NAME)}
-                  >
-                    <RadioGroupItem
-                      value={item.NAME}
-                      id={`kitchen-${index}`}
-                      className="absolute top-2 right-2"
-                    />
+    <div className="w-full ">
+      <Card className="bg-main">
+        <CardContent>
+          <RadioGroup
+            value={selectedKitchen}
+            onValueChange={handleKitchenPrice}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {KITCHEN_CATEGORY.BRANDS.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    selectedKitchen === item.NAME
+                      ? "border-black"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleKitchenPrice(item.NAME)}
+                >
+                  <RadioGroupItem
+                    value={item.NAME}
+                    id={`kitchen-${index}`}
+                    className="absolute top-2 right-2"
+                  />
 
-                    <img src={"/brand-images/kitchen.svg"} />
-                    <span className="text-sm font-medium">{item.NAME}</span>
-                    <span className="text-xs text-gray-500 mt-1">
-                      ₹{item.PER_UNIT_RATE.toLocaleString()}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </CardContent>
-        </Card>
-        {/* <button
+                  <img src={"/brand-images/kitchen.svg"} />
+                  <span className="text-sm font-medium">{item.NAME}</span>
+                  <span className="text-xs text-gray-500 mt-1">
+                    ₹{item.PER_UNIT_RATE.toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
+        </CardContent>
+      </Card>
+      {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
         >
@@ -84,7 +83,6 @@ export const Kitchen = () => {
         >
           prevStep
         </button> */}
-      </div>
     </div>
   );
 };

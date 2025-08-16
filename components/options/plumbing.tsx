@@ -91,9 +91,9 @@ export const Plumbing = () => {
   };
 
   return (
-    <div className="w-full bg-main">
+    <div className="w-full ">
       <div className="p-6 space-y-6">
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">
               PVC (Internal & External)
@@ -128,7 +128,7 @@ export const Plumbing = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">
               CPVC (Internal & External)
@@ -163,7 +163,7 @@ export const Plumbing = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">CP-Vitreous</h3>
           </CardHeader>

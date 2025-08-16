@@ -91,9 +91,9 @@ export const Electrical = () => {
     }
   };
   return (
-    <div className="w-full bg-yellow-50">
+    <div className="w-full ">
       <div className="p-6 space-y-6">
-        <Card className="">
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">
               Electrical/Wall Material
@@ -136,7 +136,7 @@ export const Electrical = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">Wires and Cables</h3>
           </CardHeader>
@@ -177,7 +177,7 @@ export const Electrical = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-main">
           <CardHeader>
             <h3 className="text-lg font-medium mb-4">Sheets and Switches</h3>
           </CardHeader>
