@@ -153,12 +153,12 @@ export const ConstructionEstimator = () => {
 
   return (
     <>
-      <DesktopView
+      {/* <DesktopView
         constructionData={constructionData}
         handleAreaChange={handleAreaChange}
         location={location}
         setLocation={setLocation}
-      />
+      /> */}
       {showDesktopModal && (
         <DesktopModal
           formData={formData}

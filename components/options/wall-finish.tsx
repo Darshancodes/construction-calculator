@@ -106,96 +106,103 @@ export const WallFinishes = () => {
   };
 
   return (
-    <Card className="w-full bg-main">
-      <CardHeader className="">
-        <CardTitle className="text-xl font-semibold text-gray-800">
-          Wall Finishes
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6 space-y-6">
-        <div>
-          <h3 className="text-lg font-medium mb-4">POP False Ceiling</h3>
-          <RadioGroup
-            value={selectedCeiling}
-            onValueChange={setSelectedCeiling}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {WALL_FINISHES.POP_FALSE_CEILING.map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedCeiling === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handlePopFalseCeiling(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`ceiling-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item?.IMAGE} />
-                  {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+    <div className="w-full bg-main">
+      <div className="p-6 space-y-6">
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">POP False Ceiling</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={selectedCeiling}
+              onValueChange={setSelectedCeiling}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {WALL_FINISHES.POP_FALSE_CEILING.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedCeiling === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePopFalseCeiling(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`ceiling-${index}`}
+                      className="absolute top-2 right-2"
+                    />
+                    <img src={item?.IMAGE} />
+                    {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
 
-        <div>
-          <h3 className="text-lg font-medium mb-4">POP in Walls</h3>
-          <RadioGroup value={selectedWalls} onValueChange={setSelectedWalls}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {WALL_FINISHES.POP_IN_WALLS.map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedWalls === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handlePopInWalls(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`walls-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item?.IMAGE} />
-                  {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">POP in Walls</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedWalls} onValueChange={setSelectedWalls}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {WALL_FINISHES.POP_IN_WALLS.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedWalls === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePopInWalls(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`walls-${index}`}
+                      className="absolute top-2 right-2"
+                    />
+                    <img src={item?.IMAGE} />
+                    {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
 
-        <div>
-          <h3 className="text-lg font-medium mb-4">Internal Wall Paint</h3>
-          <RadioGroup value={selectedPaint} onValueChange={setSelectedPaint}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {WALL_FINISHES.INTERMNAL_WALL_PAINT.map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedPaint === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handleWallPaint(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`paint-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item?.IMAGE} />
-                  {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">Internal Wall Paint</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedPaint} onValueChange={setSelectedPaint}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {WALL_FINISHES.INTERMNAL_WALL_PAINT.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedPaint === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleWallPaint(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`paint-${index}`}
+                      className="absolute top-2 right-2"
+                    />
+                    <img src={item?.IMAGE} />
+                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
         {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
@@ -208,7 +215,7 @@ export const WallFinishes = () => {
         >
           prevStep
         </button> */}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

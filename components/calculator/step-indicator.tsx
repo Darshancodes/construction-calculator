@@ -267,7 +267,7 @@ export const StepIndicator = () => {
   };
   const DesktopView = () => {
     return (
-      <div className="bg-black text-white px-4 py-3 flex items-center justify-between min-h-[60px] w-full mt-6 rounded-t-lg">
+      <div className="bg-black fixed bottom-0 left-1/2 transform -translate-x-1/2 z-50 text-white px-4 py-3 flex items-center justify-between min-h-[60px] max-w-6xl mx-auto w-full rounded-t-lg">
         {/* Left side - Cart icon and items */}
         <div className="flex flex-col items-start gap-3 flex-1 overflow-hidden min-w-0">
           <div className="flex gap-3 items-start text-sm">

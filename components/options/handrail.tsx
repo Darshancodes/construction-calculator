@@ -68,69 +68,75 @@ export const HandRails = () => {
     }
   };
   return (
-    <Card className="w-full bg-main">
-      <CardHeader className="">
-        <CardTitle className="text-xl font-semibold text-gray-800">
-          Handrails
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6 space-y-6">
-        <div>
-          <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
-          <RadioGroup value={selectedStair} onValueChange={handleStairHandRail}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedStair === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handleStairHandRail(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`stair-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item.IMAGE} />
-                  {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+    <div className="w-full bg-main">
+      <div className="p-6 space-y-6">
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">Stair Handrail</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={selectedStair}
+              onValueChange={handleStairHandRail}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {HANDRAILS.STAIR_HANDRAIL.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedStair === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleStairHandRail(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`stair-${index}`}
+                      className="absolute top-2 right-2"
+                    />
+                    <img src={item.IMAGE} />
+                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
 
-        <div>
-          <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
-          <RadioGroup
-            value={selectedBalcony}
-            onValueChange={handleBalconyHandRail}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedBalcony === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handleBalconyHandRail(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`balcony-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item.IMAGE} />
-                  {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">Balcony Handrail</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={selectedBalcony}
+              onValueChange={handleBalconyHandRail}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {HANDRAILS.BALCONY_HANDRAIL.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                      selectedBalcony === item.NAME
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handleBalconyHandRail(item.NAME)}
+                  >
+                    <RadioGroupItem
+                      value={item.NAME}
+                      id={`balcony-${index}`}
+                      className="absolute top-2 right-2"
+                    />
+                    <img src={item.IMAGE} />
+                    {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
         {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
@@ -143,7 +149,7 @@ export const HandRails = () => {
         >
           prevStep
         </button> */}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

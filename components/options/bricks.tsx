@@ -130,14 +130,14 @@ export const Bricks = () => {
   };
 
   return (
-    <Card className="w-full bg-yellow-50">
+    <Card className="w-full  bg-yellow-50">
       <CardHeader className="">
         <CardTitle className="text-xl font-semibold text-gray-800">
           Bricks
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
-        <div className="mb-6">
+        <div className="mb-6 ">
           <RadioGroup value={selectedBrand} onValueChange={handleBrandChange}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
@@ -203,8 +203,8 @@ export const Bricks = () => {
           </RadioGroup>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
+        <div className="grid grid-cols-1  gap-6">
+          <div className="flex items-center gap-4">
             <h3 className="text-lg font-medium mb-3">Water proofing</h3>
             <RadioGroup
               value={waterProofing}
@@ -214,14 +214,14 @@ export const Bricks = () => {
                 {BRICKS_CATEGORY.WATER_PROOFING.map((option, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-2 bg-white py-4 px-2"
+                    className={`flex items-center space-x-2 bg-white py-4 px-2 ${
+                      selectedBrand === option.NAME
+                        ? "border-blue-500 bg-blue-500"
+                        : "border-gray-300"
+                    }`}
                   >
                     <RadioGroupItem
-                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center ${
-                        selectedBrand === option.NAME
-                          ? "border-blue-500 bg-blue-500"
-                          : "border-gray-300"
-                      }`}
+                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center `}
                       value={option.NAME}
                       id={`water-${index}`}
                     />
@@ -242,7 +242,7 @@ export const Bricks = () => {
             </RadioGroup>
           </div>
 
-          <div>
+          <div className="flex items-center gap-4">
             <h3 className="text-lg font-medium mb-3">Termite solution</h3>
             <RadioGroup
               value={termiteSolution}

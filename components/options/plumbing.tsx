@@ -91,102 +91,112 @@ export const Plumbing = () => {
   };
 
   return (
-    <Card className="w-full bg-main">
-      <CardHeader className="">
-        <CardTitle className="text-xl font-semibold text-gray-800">
-          Plumbing
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6 space-y-6">
-        <div>
-          <h3 className="text-lg font-medium mb-4">
-            PVC (Internal & External)
-          </h3>
-          <RadioGroup value={selectedPVC} onValueChange={handlePVC}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {PLUMBING_QUANTITY["PVC-(INTERNAL & EXTERNAL)"].map(
-                (item, index) => (
+    <div className="w-full bg-main">
+      <div className="p-6 space-y-6">
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">
+              PVC (Internal & External)
+            </h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedPVC} onValueChange={handlePVC}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {PLUMBING_QUANTITY["PVC-(INTERNAL & EXTERNAL)"].map(
+                  (item, index) => (
+                    <div
+                      key={index}
+                      className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedPVC === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handlePVC(item.NAME)}
+                    >
+                      <RadioGroupItem
+                        value={item.NAME}
+                        id={`pvc-${index}`}
+                        className="absolute top-2 right-2"
+                      />
+                      <img src={item?.IMAGE} />
+                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                    </div>
+                  )
+                )}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">
+              CPVC (Internal & External)
+            </h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedCPVC} onValueChange={handleCPVC}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {PLUMBING_QUANTITY["CPVC-(INTERNAL & EXTERNAL)"].map(
+                  (item, index) => (
+                    <div
+                      key={index}
+                      className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        selectedCPVC === item.NAME
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      onClick={() => handleCPVC(item.NAME)}
+                    >
+                      <RadioGroupItem
+                        value={item.NAME}
+                        id={`cpvc-${index}`}
+                        className="absolute top-2 right-2"
+                      />
+                      <img src={item?.IMAGE} />
+                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                    </div>
+                  )
+                )}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-medium mb-4">CP-Vitreous</h3>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={selectedVitreous}
+              onValueChange={handleCPVitreous}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (
                   <div
                     key={index}
                     className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedPVC === item.NAME
+                      selectedVitreous === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
-                    onClick={() => handlePVC(item.NAME)}
+                    onClick={() => handleCPVitreous(item.NAME)}
                   >
                     <RadioGroupItem
                       value={item.NAME}
-                      id={`pvc-${index}`}
+                      id={`vitreous-${index}`}
                       className="absolute top-2 right-2"
                     />
                     <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                    {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
+                    {item.PER_UNIT}
                   </div>
-                )
-              )}
-            </div>
-          </RadioGroup>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-medium mb-4">
-            CPVC (Internal & External)
-          </h3>
-          <RadioGroup value={selectedCPVC} onValueChange={handleCPVC}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {PLUMBING_QUANTITY["CPVC-(INTERNAL & EXTERNAL)"].map(
-                (item, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                      selectedCPVC === item.NAME
-                        ? "border-black"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handleCPVC(item.NAME)}
-                  >
-                    <RadioGroupItem
-                      value={item.NAME}
-                      id={`cpvc-${index}`}
-                      className="absolute top-2 right-2"
-                    />
-                    <img src={item?.IMAGE} />
-                    {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
-                  </div>
-                )
-              )}
-            </div>
-          </RadioGroup>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-medium mb-4">CP-Vitreous</h3>
-          <RadioGroup value={selectedVitreous} onValueChange={handleCPVitreous}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (
-                <div
-                  key={index}
-                  className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
-                    selectedVitreous === item.NAME
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  onClick={() => handleCPVitreous(item.NAME)}
-                >
-                  <RadioGroupItem
-                    value={item.NAME}
-                    id={`vitreous-${index}`}
-                    className="absolute top-2 right-2"
-                  />
-                  <img src={item?.IMAGE} />
-                  {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
-                  {item.PER_UNIT}
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
         {/* <button
           className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
           onClick={nextStep}
@@ -199,7 +209,7 @@ export const Plumbing = () => {
         >
           prevStep
         </button> */}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

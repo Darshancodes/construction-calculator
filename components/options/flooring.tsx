@@ -143,7 +143,7 @@ export const Flooring = () => {
   return (
     <>
       {/* Main Content */}
-      <div className="space-y-6 bg-main">
+      <div className="flex flex-col space-y-6 ">
         {/* Vitrified Tiles */}
         <FlooringSection
           title="Vitrified tiles"
@@ -194,7 +194,7 @@ const FlooringSection = ({
   onSelect,
   bgColor = "bg-yellow-50",
 }) => (
-  <div className={`${bgColor} rounded-lg p-3 md:p-6`}>
+  <Card className={`${bgColor} rounded-lg p-3 md:p-6 my-2`}>
     <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
       {/* Image and Title Section */}
       <div className="flex items-center gap-3 lg:flex-col md:w-56 lg:items-center lg:flex-shrink-0">
@@ -241,7 +241,7 @@ const FlooringSection = ({
         </RadioGroup>
       </div>
     </div>
-  </div>
+  </Card>
 );
 
 // <div className=" p-6 space-y-4 bg-main rounded-lg">
