@@ -50,8 +50,7 @@ export const MultiStep = () => {
         return <HandRails />;
       case 10:
         return <Stone />;
-      // case 11:
-      //   return <Kitchen />;
+
       case 11:
         return <MixConcrete />;
       case 12:

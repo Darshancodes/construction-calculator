@@ -43,8 +43,12 @@ export const StepIndicator = () => {
     const filledCategories = [
       ...new Set(all_prices.map((price) => price.NAME)),
     ];
+    console.log(requiredCategories, filledCategories);
+
     return requiredCategories.length === filledCategories.length;
   }, [all_prices]);
+
+  console.log("isallcategoriesfilled >", isAllCategoriesFilled);
 
   // Check if screen is mobile
   useEffect(() => {
@@ -101,6 +105,8 @@ export const StepIndicator = () => {
     acc[category].push(price);
     return acc;
   }, {});
+
+  console.log("current-step", currentStep);
 
   const MobileSheet = () => {
     return (
@@ -302,7 +308,7 @@ export const StepIndicator = () => {
                   key={`${price?.BRAND}-${index}`}
                   className="flex items-center gap-2 bg-gray-800 rounded-full px-3 py-1.5 text-sm whitespace-nowrap flex-shrink-0"
                 >
-                  <span className="text-white">{price.BRAND}</span>
+                  <span className="text-white">{price.NAME}</span>
                   <button
                     onClick={() => handleRemoveItem(price?.NAME)}
                     className="text-gray-400 hover:text-white transition-colors"

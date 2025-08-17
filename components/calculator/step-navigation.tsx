@@ -220,7 +220,11 @@ export default function StepNavigation() {
     // Check if ALL categories have selected items
     return validCategories.every((category) => {
       const hasItemsInCategory = all_prices.some((item: any) => {
-        return item.NAME && item.NAME.includes(category);
+        return (
+          item.NAME === category ||
+          item.NAME?.startsWith(category + "-") ||
+          item.NAME?.startsWith(category + "_")
+        );
       });
 
       console.log(
