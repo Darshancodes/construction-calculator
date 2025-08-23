@@ -100,15 +100,12 @@ export const Bricks = () => {
     const selectedOption = BRICKS_CATEGORY.WATER_PROOFING.find(
       (option) => option.NAME === optionName
     );
-    if (selectedOption && selectedOption.PER_SQFT_RATE > 0) {
+    if (selectedOption) {
       calculateWaterProofing(
         selectedOption.NAME,
         selectedOption.PER_SQFT_RATE,
         selectedOption.STANDARD_QUANTITY
       );
-    } else {
-      // User selected "No" or empty option → remove it
-      removePriceByName(CATEGORY_NAMES["WATER-PROOFING"]);
     }
   };
 
@@ -118,14 +115,12 @@ export const Bricks = () => {
     const selectedOption = BRICKS_CATEGORY.TERMITE_SOLUTION.find(
       (option) => option.NAME === optionName
     );
-    if (selectedOption && selectedOption.PER_SQFT_RATE > 0) {
+    if (selectedOption) {
       calculateTermiteSolution(
         selectedOption.NAME,
         selectedOption.PER_SQFT_RATE,
         selectedOption.STANDARD_QUANTITY
       );
-    } else {
-      removePriceByName(CATEGORY_NAMES["TERMITE-SOLUTION"]);
     }
   };
 

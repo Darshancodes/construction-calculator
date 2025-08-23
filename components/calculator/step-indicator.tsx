@@ -187,7 +187,7 @@ export const StepIndicator = () => {
                   </span>
                 </div>
               </SheetTitle>
-              <div className="">
+              <div className="mr-5">
                 {currentStep < 14 && (
                   <button
                     className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
@@ -203,7 +203,20 @@ export const StepIndicator = () => {
                   <div className="flex-shrink-0 ml-4">
                     <Link
                       href={"/total-cost"}
-                      className="bg-white absolute right-0 bottom-0 text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+                      className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors ${
+                        isAllCategoriesFilled
+                          ? "bg-white text-black hover:bg-gray-100 cursor-pointer"
+                          : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (!isAllCategoriesFilled) {
+                          e.preventDefault();
+                          alert(
+                            "Please fill all required categories before proceeding."
+                          );
+                        }
+                      }}
                     >
                       Proceed
                       <ArrowRight className="w-4 h-4" />
@@ -212,61 +225,61 @@ export const StepIndicator = () => {
                 )}
               </div>
             </div>
-            <div className="space-y-6 overflow-y-auto max-h-[40vh]">
-              {Object.entries(groupedItems).map(([category, items]) => (
-                <div key={category} className="space-y-3 my-3">
-                  {/* Category Header */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-white w-10 h-5 text-lg font-semibold">
-                      <img src={"/steps-images/cement.svg"} />
-                    </span>
+          </SheetHeader>
+          <div className="space-y-6 overflow-y-auto max-h-[40vh] px-4">
+            {Object.entries(groupedItems).map(([category, items]) => (
+              <div key={category} className="space-y-3 my-3">
+                {/* Category Header */}
+                <div className="flex items-center gap-2">
+                  <span className="text-white w-10 h-5 text-lg font-semibold">
+                    <img src={"/steps-images/cement.svg"} />
+                  </span>
 
-                    <h3 className="text-white text-lg font-semibold">
-                      {category}
-                    </h3>
-                  </div>
+                  <h3 className="text-white text-lg font-semibold">
+                    {category}
+                  </h3>
+                </div>
 
-                  {/* Category Items */}
-                  <div className="space-y-2">
-                    {items?.map((price, index) => (
-                      <div
-                        key={`${price?.BRAND}-${index}`}
-                        className="flex items-center justify-between rounded-lg px-4 py-3 group bg-[#1B1B1B] transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          {/* Item Icon */}
-                          <div className="w-10 h-8 bg-gray-600/90 rounded flex items-center justify-center flex-shrink-0">
-                            <span className="text-white text-xs font-bold">
-                              <img src={"/steps-images/cement.svg"} />
-                            </span>
-                          </div>
-
-                          {/* Item Details */}
-                          <div className="flex flex-col">
-                            <span className="text-gray-300 text-sm">
-                              {price.NAME}
-                            </span>
-                            <span className="text-white font-semibold">
-                              {price.BRAND}
-                            </span>
-                          </div>
+                {/* Category Items */}
+                <div className="space-y-2">
+                  {items?.map((price, index) => (
+                    <div
+                      key={`${price?.BRAND}-${index}`}
+                      className="flex items-center justify-between rounded-lg px-4 py-3 group bg-[#1B1B1B] transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        {/* Item Icon */}
+                        <div className="w-10 h-8 bg-gray-600/90 rounded flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-xs font-bold">
+                            <img src={"/steps-images/cement.svg"} />
+                          </span>
                         </div>
 
-                        {/* Remove Button */}
-                        <Button
-                          onClick={() => handleRemoveItem(price?.NAME)}
-                          className="text-white transition-all p-1 rounded-lg"
-                          aria-label={`Remove ${price.NAME}`}
-                        >
-                          <X className="w-4 h-4 text-white" />
-                        </Button>
+                        {/* Item Details */}
+                        <div className="flex flex-col">
+                          <span className="text-gray-300 text-sm">
+                            {price.NAME}
+                          </span>
+                          <span className="text-white font-semibold">
+                            {price.BRAND}
+                          </span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+
+                      {/* Remove Button */}
+                      <Button
+                        onClick={() => handleRemoveItem(price?.NAME)}
+                        className="text-white transition-all p-1 rounded-lg"
+                        aria-label={`Remove ${price.NAME}`}
+                      >
+                        <X className="w-4 h-4 text-white" />
+                      </Button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </SheetHeader>
+              </div>
+            ))}
+          </div>
         </SheetContent>
       </Sheet>
     );

@@ -39,9 +39,10 @@ export const PersonalDetailPopup = () => {
       setFormData({ name: "", phone_number: "", accept_deals: true });
       console.log("Saved data:", data);
       setIsOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       setMessage("Error: " + error.message);
-      console.error("Error:", error);
+      alert(error?.message);
+      console.log("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -133,7 +134,7 @@ export const PersonalDetailPopup = () => {
                 className="mt-0.5 h-4 w-4 text-black bg-white border-gray-300 rounded focus:ring-black focus:ring-2"
               />
               <label
-                htmlFor="acceptDeals"
+                htmlFor="accept_deals"
                 className="text-sm text-gray-700 leading-5"
               >
                 Yes, I'd love to receive exciting deals and updates!
