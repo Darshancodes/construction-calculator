@@ -241,7 +241,7 @@ export default function StepNavigation() {
 
   return (
     <>
-      <div className="hidden md:block w-full bg-white">
+      <div className="hidden md:block w-full bg-white sticky top-0 z-50">
         <div className="px-4 ">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
             Select materials
@@ -314,7 +314,7 @@ export default function StepNavigation() {
       </div>
 
       {/* Mobile Version */}
-      <div className="md:hidden bg-white border-t border-gray-200 z-50">
+      <div className="md:hidden bg-white border-t border-gray-200 sticky top-0 z-50">
         <div className="px-4 py-3">
           <div
             ref={mobileScrollContainerRef}

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <div className="w-full mb-2 md:mb-10">
+    <div className="w-full mb-2 md:mb-10 ">
       {/* Main header */}
       <header className="w-full bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
