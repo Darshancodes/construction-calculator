@@ -8,129 +8,8 @@ import { CATEGORY_NAMES, STEPS_IMAGES } from "@/lib/constants";
 import { useStepStore } from "@/store/useStepStore";
 import { useDataStore } from "@/store/useDataStore";
 import { Micro_5 } from "next/font/google";
+import { CONSTRUCTION_STEPS } from "@/lib/material-constants";
 
-const CONSTRUCTION_STEPS = [
-  {
-    id: 1,
-    category: [CATEGORY_NAMES?.STEEL],
-    name: "TMT Steel",
-    image: STEPS_IMAGES.TMT_STEEL,
-  },
-  {
-    id: 2,
-    category: [CATEGORY_NAMES?.BRICKS],
-    name: "Bricks",
-    image: STEPS_IMAGES.BRICKS,
-  },
-  {
-    id: 3,
-    category: [CATEGORY_NAMES?.CEMENT],
-    name: "Cement",
-    image: STEPS_IMAGES.CEMENT,
-  },
-  {
-    id: 4,
-    category: [
-      CATEGORY_NAMES?.["ELECTRICAL-SLAB-AND-WALL-MATERIAL"],
-      CATEGORY_NAMES?.["WIRES-AND-CABLES-EWC0100-FLAT"],
-      CATEGORY_NAMES?.["SHEET-AND-SWITCHES-EWC0100-FLAT"],
-    ],
-    name: "Electrical",
-    image: STEPS_IMAGES.ELECTRICAL,
-  },
-  {
-    id: 5,
-    category: [
-      CATEGORY_NAMES?.["VETRIFIED-TILES"],
-      CATEGORY_NAMES?.["CERAMIC-WALL-TILE-TOILED-AND-KITCHEN"],
-      CATEGORY_NAMES?.["GRANITE-DOOR_FRAME-WINDOW_FRAME-KITCHEN_TOP-STAIRCASE"],
-      CATEGORY_NAMES?.["ROUGH-STONE-TERRACE-AND-PARKING-AREA"],
-    ],
-    name: "Flooring",
-    image: STEPS_IMAGES.FLOORING,
-  },
-  {
-    id: 6,
-    category: [
-      CATEGORY_NAMES?.["DOOR-FRAME-SINGLE-REBATE-ELS0100"],
-      CATEGORY_NAMES?.["DOOR-SHUTTER"],
-      CATEGORY_NAMES?.["MAIN-DOOR"],
-    ],
-    name: "Door",
-    image: STEPS_IMAGES.DOOR,
-  },
-  {
-    id: 7,
-    category: [CATEGORY_NAMES?.["WINDOW-MATERIAL"]],
-    name: "Windows",
-    image: STEPS_IMAGES.WINDOWS,
-  },
-  {
-    id: 8,
-    category: [
-      CATEGORY_NAMES?.["WALL-FINISH-POP-FALSE-CEILING"],
-      CATEGORY_NAMES?.["WALL-FINISH-POP-IN-WALLS"],
-      CATEGORY_NAMES?.["WALL-FINISH-INTERNAL-WALL-PAINT"],
-    ],
-    name: "Wall Finish",
-    image: STEPS_IMAGES.WALL_FINISH,
-  },
-  {
-    id: 9,
-    category: [
-      CATEGORY_NAMES?.["STAIR-HANDRAIL"],
-      CATEGORY_NAMES?.["BALCONY-HANDRAIL"],
-    ],
-    name: "Hand Rails",
-    image: STEPS_IMAGES.RAILINGS,
-  },
-  {
-    id: 10,
-    category: [CATEGORY_NAMES?.STONE],
-    name: "Stone",
-    image: STEPS_IMAGES.BRICKS,
-  },
-
-  {
-    id: 11,
-    category: [
-      CATEGORY_NAMES?.["MIX-CONCRETE-PCC"],
-      CATEGORY_NAMES?.["MIX-CONCRETE-RMC"],
-    ],
-    name: "Mix Concrete",
-    image: STEPS_IMAGES.MIX_CONCRETE,
-  },
-  {
-    id: 12,
-    category: [CATEGORY_NAMES?.SAND],
-    name: "Sand",
-    image: STEPS_IMAGES.SAND,
-  },
-  {
-    id: 13,
-    category: [
-      CATEGORY_NAMES?.["PLUMBING-CP-AND-VITREOUS"],
-      CATEGORY_NAMES?.["PLUMBING-CPVC-INTERNAL-AND-EXTERNAL"],
-      CATEGORY_NAMES?.["PLUMBING-PVC-INTERNAL-AND-EXTERNAL"],
-    ],
-    name: "Plumbing",
-    image: STEPS_IMAGES.PLUMBING,
-  },
-
-  {
-    id: 14,
-    category: [CATEGORY_NAMES?.["WATER-TANK"], CATEGORY_NAMES?.KITCHEN],
-    name: "Preferences",
-    image: STEPS_IMAGES.WATER_TANK,
-  },
-];
-
-// {
-//     id: 11,
-//     category: [CATEGORY_NAMES?.KITCHEN],
-//     name: "Kitchen",
-//     image: STEPS_IMAGES.KITCHEN,
-//   },
 interface StepNavigationProps {
   currentStep: number;
   onStepChange: (step: number) => void;
@@ -142,7 +21,67 @@ export default function StepNavigation() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
 
-  console.log("all_prices =>", all_prices);
+  // Check if a specific step can be accessed
+  const canAccessStep = (targetStep: number) => {
+    // Always allow going to current or previous steps
+    if (targetStep <= currentStep) return true;
+
+    // For future steps, check if all previous steps are complete
+    for (let i = 1; i < targetStep; i++) {
+      const stepData = CONSTRUCTION_STEPS.find((step) => step.id === i);
+      if (!stepData) continue;
+
+      const isStepComplete = stepData.category.every((category) => {
+        return all_prices.some((item) => {
+          return (
+            item.NAME === category ||
+            item.NAME?.startsWith(category + "-") ||
+            item.NAME?.startsWith(category + "_")
+          );
+        });
+      });
+
+      if (!isStepComplete) return false;
+    }
+
+    return true;
+  };
+
+  // Handle step navigation with validation
+  const handleStepChange = (targetStep: number) => {
+    if (canAccessStep(targetStep)) {
+      stepChange(targetStep);
+    } else {
+      // Find the first incomplete step
+      let firstIncompleteStep = null;
+      for (let i = 1; i < targetStep; i++) {
+        const stepData = CONSTRUCTION_STEPS.find((step) => step.id === i);
+        if (!stepData) continue;
+
+        const isStepComplete = stepData.category.every((category) => {
+          return all_prices.some((item) => {
+            return (
+              item.NAME === category ||
+              item.NAME?.startsWith(category + "-") ||
+              item.NAME?.startsWith(category + "_")
+            );
+          });
+        });
+
+        if (!isStepComplete) {
+          firstIncompleteStep = i;
+          break;
+        }
+      }
+
+      const stepName =
+        CONSTRUCTION_STEPS.find((s) => s.id === firstIncompleteStep)?.name ||
+        "previous step";
+      alert(
+        `Please complete the ${stepName} step before proceeding to this step.`
+      );
+    }
+  };
 
   // Auto-scroll to selected tab when step changes
   useEffect(() => {
@@ -252,7 +191,7 @@ export default function StepNavigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              className="absolute cursor-pointer -left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
               onClick={scrollLeft}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -264,47 +203,67 @@ export default function StepNavigation() {
               className="flex gap-3 overflow-x-auto scrollbar-hide px-10 py-2"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-              {CONSTRUCTION_STEPS.map((step) => (
-                <div
-                  key={step.id}
-                  data-step-id={step.id}
-                  onClick={() => stepChange(step.id)}
-                  className={`flex-shrink-0 relative w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
-                    currentStep === step.id
-                      ? "bg-main border-black"
-                      : "border-gray-200 bg-white hover:border-gray-300"
-                  }`}
-                >
-                  <div className="flex flex-col items-center justify-center h-full p-2">
-                    {/* Green check circle for selected items */}
-                    {hasSelectedItems(step.category) && (
-                      <div className="absolute top-1 right-1 z-10">
-                        <img src={"/icons/green-check.svg"} />
-                        {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
+              {CONSTRUCTION_STEPS.map((step) => {
+                const stepAccessible = canAccessStep(step.id);
+                const isComplete = hasSelectedItems(step.category);
+
+                return (
+                  <div
+                    key={step.id}
+                    data-step-id={step.id}
+                    onClick={() => handleStepChange(step.id)}
+                    className={`flex-shrink-0 relative w-24 h-24 rounded-xl border-2 transition-all duration-200 ${
+                      currentStep === step.id
+                        ? "bg-main border-black cursor-pointer"
+                        : stepAccessible
+                        ? "border-gray-200 bg-white hover:border-gray-300 cursor-pointer hover:shadow-md"
+                        : "border-gray-100 bg-gray-50 cursor-not-allowed opacity-50"
+                    }`}
+                  >
+                    <div className="flex flex-col items-center justify-center h-full p-2">
+                      {isComplete && (
+                        <div className="absolute top-1 right-1 z-10">
+                          <img src={"/icons/green-check.svg"} alt="Complete" />
+                        </div>
+                      )}
+
+                      {!stepAccessible && step.id > currentStep && (
+                        <div className="absolute top-1 right-1 z-10">
+                          <div className="w-5 h-5 bg-gray-400 rounded-full flex items-center justify-center">
+                            <span className="text-white text-xs">🔒</span>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="w-10 h-10 mb-1 flex items-center justify-center">
+                        <Image
+                          src={step.image || "/placeholder.svg"}
+                          alt={step.name}
+                          width={40}
+                          height={40}
+                          className={`object-contain ${
+                            !stepAccessible ? "grayscale" : ""
+                          }`}
+                        />
                       </div>
-                    )}
-                    <div className="w-10 h-10 mb-1 flex items-center justify-center">
-                      <Image
-                        src={step.image || "/placeholder.svg"}
-                        alt={step.name}
-                        width={40}
-                        height={40}
-                        className="object-contain"
-                      />
+                      <span
+                        className={`text-xs text-center leading-tight ${
+                          stepAccessible ? "text-gray-600" : "text-gray-400"
+                        }`}
+                      >
+                        {step.name}
+                      </span>
                     </div>
-                    <span className="text-xs text-gray-600 text-center leading-tight">
-                      {step.name}
-                    </span>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Right scroll button */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute cursor-pointer right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
+              className="absolute cursor-pointer -right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full h-8 w-8"
               onClick={scrollRight}
             >
               <ChevronRight className="h-4 w-4" />
@@ -321,43 +280,130 @@ export default function StepNavigation() {
             className="flex gap-4 overflow-x-auto scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {CONSTRUCTION_STEPS.map((step) => (
-              <div
-                key={step.id}
-                data-step-id={step.id}
-                onClick={() => stepChange(step.id)}
-                className={`flex-shrink-0 flex flex-col relative gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
-                  currentStep === step.id
-                    ? "bg-yellow-100 border-b-4 border-black"
-                    : "bg-transparent hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center justify-center">
-                  {hasSelectedItems(step.category) && (
-                    <div className="absolute top-0 right-0 z-10">
-                      <img src={"/icons/green-check.svg"} />
-                      {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
-                    </div>
-                  )}
-                  <Image
-                    src={step.image || "/placeholder.svg"}
-                    alt={step.name}
-                    width={0}
-                    height={0}
-                    className="object-contain w-20 h-[60px]"
-                  />
+            {CONSTRUCTION_STEPS.map((step) => {
+              const stepAccessible = canAccessStep(step.id);
+              const isComplete = hasSelectedItems(step.category);
+
+              return (
+                <div
+                  key={step.id}
+                  data-step-id={step.id}
+                  onClick={() => handleStepChange(step.id)}
+                  className={`flex-shrink-0 flex flex-col relative gap-2 items-center transition-all duration-200 px-3 ${
+                    currentStep === step.id
+                      ? "bg-yellow-100 border-b-4 border-black cursor-pointer"
+                      : stepAccessible
+                      ? "bg-transparent hover:bg-gray-50 cursor-pointer"
+                      : "bg-transparent cursor-not-allowed opacity-50"
+                  }`}
+                >
+                  <div className="flex items-center justify-center">
+                    {isComplete && (
+                      <div className="absolute top-0 right-0 z-10">
+                        <img src={"/icons/green-check.svg"} alt="Complete" />
+                      </div>
+                    )}
+
+                    {!stepAccessible && step.id > currentStep && (
+                      <div className="absolute top-0 right-0 z-10">
+                        <div className="w-4 h-4 bg-gray-400 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs">🔒</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <Image
+                      src={step.image || "/placeholder.svg"}
+                      alt={step.name}
+                      width={0}
+                      height={0}
+                      className={`object-contain w-20 h-[60px] ${
+                        !stepAccessible ? "grayscale" : ""
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`text-xs text-center leading-tight ${
+                      stepAccessible ? "text-gray-600" : "text-gray-400"
+                    }`}
+                  >
+                    {step.name}
+                  </span>
                 </div>
-                <span className="text-xs text-gray-600 text-center leading-tight">
-                  {step.name}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
     </>
   );
 }
+
+// {CONSTRUCTION_STEPS.map((step) => (
+//               <div
+//                 key={step.id}
+//                 data-step-id={step.id}
+//                 onClick={() => stepChange(step.id)}
+//                 className={`flex-shrink-0 flex flex-col relative gap-2 items-center cursor-pointer transition-all duration-200 px-3 ${
+//                   currentStep === step.id
+//                     ? "bg-yellow-100 border-b-4 border-black"
+//                     : "bg-transparent hover:bg-gray-50"
+//                 }`}
+//               >
+//                 <div className="flex items-center justify-center">
+//                   {hasSelectedItems(step.category) && (
+//                     <div className="absolute top-0 right-0 z-10">
+//                       <img src={"/icons/green-check.svg"} />
+//                       {/* <CheckCircle className="w-5 h-5 text-green-500 bg-white rounded-full" /> */}
+//                     </div>
+//                   )}
+//                   <Image
+//                     src={step.image || "/placeholder.svg"}
+//                     alt={step.name}
+//                     width={0}
+//                     height={0}
+//                     className="object-contain w-20 h-[60px]"
+//                   />
+//                 </div>
+//                 <span className="text-xs text-gray-600 text-center leading-tight">
+//                   {step.name}
+//                 </span>
+//               </div>
+//             ))}
+
+// {CONSTRUCTION_STEPS?.map((step) => (
+//                 <div
+//                   key={step.id}
+//                   data-step-id={step.id}
+//                   onClick={() => stepChange(step.id)}
+//                   className={`flex-shrink-0 relative w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-md ${
+//                     currentStep === step.id
+//                       ? "bg-main border-black"
+//                       : "border-gray-200 bg-white hover:border-gray-300"
+//                   }`}
+//                 >
+//                   <div className="flex flex-col items-center justify-center h-full p-2">
+//                     {/* Green check circle for selected items */}
+//                     {hasSelectedItems(step.category) && (
+//                       <div className="absolute top-1 right-1 z-10">
+//                         <img src={"/icons/green-check.svg"} />
+//                       </div>
+//                     )}
+//                     <div className="w-10 h-10 mb-1 flex items-center justify-center">
+//                       <Image
+//                         src={step.image || "/placeholder.svg"}
+//                         alt={step.name}
+//                         width={40}
+//                         height={40}
+//                         className="object-contain"
+//                       />
+//                     </div>
+//                     <span className="text-xs text-gray-600 text-center leading-tight">
+//                       {step.name}
+//                     </span>
+//                   </div>
+//                 </div>
+//               ))}
 
 // Helper function to check if step has selected items
 // const hasSelectedItems = (category: string) => {

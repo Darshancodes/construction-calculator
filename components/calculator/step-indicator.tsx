@@ -22,6 +22,7 @@ import {
 } from "../ui/sheet";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CATEGORY_NAMES } from "@/lib/constants";
+import { CONSTRUCTION_STEPS } from "@/lib/material-constants";
 
 export const StepIndicator = () => {
   const scrollRef = useRef(null);
@@ -35,6 +36,57 @@ export const StepIndicator = () => {
     // Implement your remove logic here
     console.log("Remove item:", brand);
     removePriceByName(brand);
+  };
+
+  // Get current step's required categories
+  const getCurrentStepCategories = () => {
+    const currentStepData = CONSTRUCTION_STEPS.find(
+      (step) => step.id === currentStep
+    );
+    return currentStepData?.category || [];
+  };
+
+  // Check if current step has all required categories filled
+  const isCurrentStepComplete = useMemo(() => {
+    const currentStepCategories = getCurrentStepCategories();
+
+    if (currentStepCategories.length === 0) return true;
+
+    // Check if ALL categories for current step have selected items
+    return currentStepCategories.every((category) => {
+      const hasItemsInCategory = all_prices?.some((item) => {
+        return (
+          item.NAME === category ||
+          item.NAME?.startsWith(category + "-") ||
+          item.NAME?.startsWith(category + "_")
+        );
+      });
+      return hasItemsInCategory;
+    });
+  }, [all_prices, currentStep]);
+
+  // Handle next step with validation
+  const handleNextStep = () => {
+    if (isCurrentStepComplete) {
+      nextStep();
+    } else {
+      const currentStepCategories = getCurrentStepCategories();
+      const missingCategories = currentStepCategories.filter((category) => {
+        return !all_prices.some((item) => {
+          return (
+            item.NAME === category ||
+            item.NAME?.startsWith(category + "-") ||
+            item.NAME?.startsWith(category + "_")
+          );
+        });
+      });
+
+      alert(
+        `Please select items for all categories in this step: ${missingCategories.join(
+          ", "
+        )}`
+      );
+    }
   };
 
   // Check if all required categories are filled
@@ -137,8 +189,12 @@ export const StepIndicator = () => {
                 >
                   {currentStep < 14 ? (
                     <div
-                      className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 cursor-pointer"
-                      onClick={nextStep}
+                      className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors ${
+                        isCurrentStepComplete
+                          ? "bg-white text-black hover:bg-gray-100"
+                          : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                      }`}
+                      onClick={handleNextStep}
                     >
                       Next
                       <ArrowRight className="w-4 h-4" />
@@ -190,8 +246,12 @@ export const StepIndicator = () => {
               <div className="mr-5">
                 {currentStep < 14 && (
                   <button
-                    className="bg-white  text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
-                    onClick={nextStep}
+                    className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors ${
+                      isCurrentStepComplete
+                        ? "bg-white text-black hover:bg-gray-100 cursor-pointer"
+                        : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                    }`}
+                    onClick={handleNextStep}
                   >
                     Next
                     <ArrowRight className="w-4 h-4" />
@@ -349,8 +409,12 @@ export const StepIndicator = () => {
         {/* Action buttons */}
         {currentStep < 14 && (
           <button
-            className="bg-white text-black hover:bg-gray-100 transition-colors px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ml-4 flex-shrink-0"
-            onClick={nextStep}
+            className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ml-4 flex-shrink-0 transition-colors ${
+              isCurrentStepComplete
+                ? "bg-white text-black hover:bg-gray-100 cursor-pointer"
+                : "bg-gray-500 text-gray-300 cursor-not-allowed"
+            }`}
+            onClick={handleNextStep}
           >
             Next
             <ArrowRight className="w-4 h-4" />
@@ -382,13 +446,6 @@ export const StepIndicator = () => {
           </div>
         )}
       </div>
-
-      // {/* CSS to hide scrollbar */}
-      // <style jsx>{`
-      //   div::-webkit-scrollbar {
-      //     display: none;
-      //   }
-      // `}</style>
     );
   };
   return isMobile ? <MobileSheet /> : <DesktopView />;
