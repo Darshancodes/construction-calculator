@@ -227,14 +227,6 @@ export default function StepNavigation() {
                         </div>
                       )}
 
-                      {!stepAccessible && step.id > currentStep && (
-                        <div className="absolute top-1 right-1 z-10">
-                          <div className="w-5 h-5 bg-gray-400 rounded-full flex items-center justify-center">
-                            <span className="text-white text-xs">🔒</span>
-                          </div>
-                        </div>
-                      )}
-
                       <div className="w-10 h-10 mb-1 flex items-center justify-center">
                         <Image
                           src={step.image || "/placeholder.svg"}
