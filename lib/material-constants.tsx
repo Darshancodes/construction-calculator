@@ -9,7 +9,11 @@ export const CONSTRUCTION_STEPS = [
   },
   {
     id: 2,
-    category: [CATEGORY_NAMES?.BRICKS],
+    category: [
+      CATEGORY_NAMES?.BRICKS,
+      CATEGORY_NAMES?.["WATER-PROOFING"],
+      CATEGORY_NAMES?.["TERMITE-SOLUTION"],
+    ],
     name: "Bricks",
     image: STEPS_IMAGES.BRICKS,
   },
