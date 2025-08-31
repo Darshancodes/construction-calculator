@@ -182,7 +182,7 @@ export default function StepNavigation() {
     <>
       <div className="hidden md:block w-full bg-white sticky top-0 z-50">
         <div className="px-4 ">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 mt-10">
             Select materials
           </h2>
 
