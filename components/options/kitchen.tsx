@@ -38,6 +38,11 @@ export const Kitchen = () => {
   return (
     <div className="w-full ">
       <Card className="bg-main">
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold text-gray-800">
+            Modular kitchen
+          </CardTitle>
+        </CardHeader>
         <CardContent>
           <RadioGroup
             value={selectedKitchen}
