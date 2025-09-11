@@ -12,6 +12,32 @@ export const PersonalDetailPopup = () => {
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    phone_number: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      phone_number: "",
+    };
+
+    // Validate name
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    // Validate phone number
+    if (!formData.phone_number.trim()) {
+      newErrors.phone_number = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone_number.trim())) {
+      newErrors.phone_number = "Please enter a valid 10-digit phone number";
+    }
+
+    setErrors(newErrors);
+    return !newErrors.name && !newErrors.phone_number;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -23,6 +49,11 @@ export const PersonalDetailPopup = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
     setLoading(true);
     setMessage("");
     // Handle form submission logic here
@@ -37,7 +68,8 @@ export const PersonalDetailPopup = () => {
 
       setMessage("User details saved successfully!");
       setFormData({ name: "", phone_number: "", accept_deals: true });
-      console.log("Saved data:", data);
+      setErrors({ name: "", phone_number: "" });
+
       setIsOpen(false);
     } catch (error: any) {
       setMessage("Error: " + error.message);
@@ -63,14 +95,6 @@ export const PersonalDetailPopup = () => {
   return (
     <div className="fixed inset-0 bg-black/90 bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-2xl shadow-xl max-w-md w-full mx-4 relative">
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className="absolute cursor-pointer top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-        >
-          <X size={20} />
-        </button>
-
         {/* Modal content */}
         <div className="p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -79,7 +103,7 @@ export const PersonalDetailPopup = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name field */}
-            <div>
+            <div className="flex flex-col items-start">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -93,13 +117,20 @@ export const PersonalDetailPopup = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Write your name"
-                className="w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:bg-white focus:ring-2 focus:ring-black focus:outline-none transition-all"
                 required
+                className={`w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:bg-white focus:ring-2 focus:outline-none transition-all ${
+                  errors.name
+                    ? "focus:ring-red-500 bg-red-50"
+                    : "focus:ring-black"
+                }`}
               />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
             {/* Phone number field */}
-            <div>
+            <div className="flex flex-col items-start">
               <label
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -117,10 +148,19 @@ export const PersonalDetailPopup = () => {
                   value={formData.phone_number}
                   onChange={handleInputChange}
                   placeholder="Add your phone number"
-                  className="flex-1 px-4 py-3 bg-gray-50 border-0 rounded-r-lg text-gray-900 placeholder-gray-500 focus:bg-white focus:ring-2 focus:ring-black focus:outline-none transition-all"
+                  className={`w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:bg-white focus:ring-2 focus:outline-none transition-all ${
+                    errors.name
+                      ? "focus:ring-red-500 bg-red-50"
+                      : "focus:ring-black"
+                  }`}
                   required
                 />
               </div>
+              {errors.phone_number && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.phone_number}
+                </p>
+              )}
             </div>
 
             {/* Checkbox */}
