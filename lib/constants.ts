@@ -201,7 +201,7 @@ export const ELECTRICAL_CATEGORY = {
     {
       NAME: "SCHNEIDER/GM",
       PER_SQFT_RATE: 18,
-      IMAGE: "/brand-images/gm-sheet.svg",
+      IMAGE: "/product-images/gm-sheet.svg",
     },
   ],
 };
@@ -420,13 +420,13 @@ export const KITCHEN_CATEGORY = {
       NAME: "CLASSIC",
       PER_UNIT_RATE: 200000,
       PER_UNIT: "RS",
-      IMAGE: "/brand-images/classic-kitchen.svg",
+      IMAGE: "/product-images/classic-kitchen.svg",
     },
     {
       NAME: "BASIC",
       PER_UNIT_RATE: 100000,
       PER_UNIT: "RS",
-      IMAGE: "/brand-images/basic-kitchen.svg",
+      IMAGE: "/product-images/basic-kitchen.svg",
     },
   ],
 };
@@ -531,14 +531,14 @@ export const PLUMBING_QUANTITY = {
       PER_UNIT_RATE: 35000,
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 2,
-      IMAGE: "/brand-images/acc.svg",
+      // IMAGE: "/brand-images/acc.svg",
     },
     {
       NAME: "50K",
       PER_UNIT_RATE: 50000,
       PER_UNIT: "NOS",
       STANDARD_QUANTITY: 2,
-      IMAGE: "/brand-images/acc.svg",
+      // IMAGE: "/brand-images/acc.svg",
     },
   ],
 };

@@ -57,7 +57,7 @@ export const Cement = () => {
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
                 <div
                   key={index}
-                  className={`relative border-2 rounded-lg ${
+                  className={`relative border-2 rounded-lg h-full ${
                     selectedBrand === brand.NAME
                       ? "border-black shadow-md"
                       : "border-gray-200"
@@ -84,11 +84,12 @@ export const Cement = () => {
                   </div> */}
                   <Label
                     htmlFor={`cement-${index}`}
-                    className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
+                    className="flex flex-col items-center justify-center p-4 h-full bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
                   >
                     <div className=" rounded-lg mb-3 flex items-center justify-center">
                       <img src={brand?.IMAGE} />
                     </div>
+                    <h3>{brand?.NAME}</h3>
                   </Label>
                 </div>
               ))}

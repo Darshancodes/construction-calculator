@@ -65,7 +65,7 @@ export const Kitchen = () => {
                     className="absolute top-2 right-2"
                   />
 
-                  <img src={"/brand-images/kitchen.svg"} />
+                  <img src={item?.IMAGE} />
                   <span className="text-sm font-medium">{item.NAME}</span>
                   <span className="text-xs text-gray-500 mt-1">
                     ₹{item.PER_UNIT_RATE.toLocaleString()}

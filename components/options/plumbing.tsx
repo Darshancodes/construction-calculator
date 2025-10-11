@@ -176,7 +176,7 @@ export const Plumbing = () => {
                 {PLUMBING_QUANTITY["CP-VITREOUS"].map((item, index) => (
                   <div
                     key={index}
-                    className={`bg-white flex flex-col justify-center items-center relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                    className={`bg-white flex flex-col justify-center items-center min-h-44 relative rounded-lg border-2 p-4 cursor-pointer transition-all ${
                       selectedVitreous === item.NAME
                         ? "border-black"
                         : "border-gray-200 hover:border-gray-300"
@@ -188,7 +188,6 @@ export const Plumbing = () => {
                       id={`vitreous-${index}`}
                       className="absolute top-2 right-2"
                     />
-                    <img src={item?.IMAGE} />
                     {item.NAME} - ₹{item.PER_UNIT_RATE.toLocaleString()}/
                     {item.PER_UNIT}
                   </div>
