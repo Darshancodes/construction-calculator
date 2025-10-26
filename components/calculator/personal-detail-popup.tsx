@@ -149,7 +149,7 @@ export const PersonalDetailPopup = () => {
                   onChange={handleInputChange}
                   placeholder="Add your phone number"
                   className={`w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:bg-white focus:ring-2 focus:outline-none transition-all ${
-                    errors.name
+                    errors.phone_number
                       ? "focus:ring-red-500 bg-red-50"
                       : "focus:ring-black"
                   }`}
