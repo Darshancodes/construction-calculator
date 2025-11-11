@@ -106,27 +106,81 @@ export const Electrical = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {ELECTRICAL_CATEGORY.ELECTRICAL_OR_WALL_MATERIAL.map(
-                  (item, index) => (
+                  (brand, index) => (
                     <div
                       key={index}
                       className={`flex flex-col justify-center  items-center min-h-44 space-x-2 bg-white border-2 border-black relative ${
-                        selectedWallMaterial === item.NAME
+                        selectedWallMaterial === brand?.NAME
                           ? "border-black shadow-md"
                           : "border-gray-200"
                       }`}
-                      onClick={() => handleSlabWall(item?.NAME)}
+                      onClick={() => handleSlabWall(brand?.NAME)}
                     >
-                      <img src={item?.IMAGE} />
                       <RadioGroupItem
-                        value={item.NAME}
+                        value={brand.NAME}
                         id={`wall-${index}`}
                         className="absolute top-3 right-2"
                       />
                       <Label
                         htmlFor={`wall-${index}`}
-                        className="cursor-pointer"
+                        className="flex flex-col items-center justify-center w-full  rounded-lg cursor-pointer"
                       >
-                        {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
+                        {/* Images Section */}
+                        <div className="flex  justify-center mb-3 w-full min-h-[160px]">
+                          {brand.IMAGE2 ? (
+                            // Two images with "Or" between them
+                            <div className="flex items-center justify-center gap-3 w-full">
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={brand.IMAGE}
+                                    alt={brand.NAME}
+                                    className="max-w-full max-h-16 object-contain "
+                                  />
+                                </div>
+
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {brand.NAME}
+                                </span>
+                              </div>
+
+                              <div className="flex flex-col items-center justify-center gap-1 px-2">
+                                <div className="w-px h-6 bg-gray-300"></div>
+                                <span className="text-xs font-medium text-gray-400">
+                                  Or
+                                </span>
+                                <div className="w-px h-6 bg-gray-300"></div>
+                              </div>
+
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={brand.IMAGE2}
+                                    alt={brand.NAME2}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {brand.NAME2}
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Single image
+                            <div className="flex flex-col items-center justify-center">
+                              <div className="h-20 flex items-center justify-center mb-2">
+                                <img
+                                  src={brand.IMAGE}
+                                  alt={brand.NAME}
+                                  className="max-w-full max-h-16 object-contain"
+                                />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700 text-center">
+                                {brand.NAME}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </Label>
                     </div>
                   )
@@ -147,27 +201,80 @@ export const Electrical = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {ELECTRICAL_CATEGORY["WIRES_AND_CABLES_EWC0100-FLAT"].map(
-                  (item, index) => (
+                  (brand, index) => (
                     <div
                       key={index}
                       className={`flex items-center justify-center min-h-44 space-x-2 bg-white border-2 flex-col relative ${
-                        selectedWiresCables === item.NAME
+                        selectedWiresCables === brand.NAME
                           ? "border-black shadow-md"
                           : "border-gray-200"
                       }`}
-                      onClick={() => handleWireCables(item?.NAME)}
+                      onClick={() => handleWireCables(brand?.NAME)}
                     >
-                      <img src={item?.IMAGE} />
                       <RadioGroupItem
-                        value={item.NAME}
+                        value={brand.NAME}
                         id={`wires-${index}`}
                         className="absolute top-3 right-2"
                       />
                       <Label
                         htmlFor={`wires-${index}`}
-                        className="cursor-pointer"
+                        className="flex flex-col items-center justify-center p-4 bg-white rounded-lg cursor-pointer"
                       >
-                        {item.NAME} - ₹{item.PER_SQFT_RATE}/sqft
+                        {/* Images Section */}
+                        <div className="flex items-center justify-center mb-3 w-full min-h-[80px]">
+                          {brand.IMAGE2 ? (
+                            // Two images with "Or" between them
+                            <div className="flex items-center justify-center gap-3 w-full">
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={brand.IMAGE}
+                                    alt={brand.NAME}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {brand.NAME}
+                                </span>
+                              </div>
+
+                              <div className="flex flex-col items-center justify-center gap-1 px-2">
+                                <div className="w-px h-6 bg-gray-300"></div>
+                                <span className="text-xs font-medium text-gray-400">
+                                  Or
+                                </span>
+                                <div className="w-px h-6 bg-gray-300"></div>
+                              </div>
+
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={brand.IMAGE2}
+                                    alt={brand.NAME2}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {brand.NAME2}
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Single image
+                            <div className="flex flex-col items-center justify-center">
+                              <div className="h-20 flex items-center justify-center mb-2">
+                                <img
+                                  src={brand.IMAGE}
+                                  alt={brand.NAME}
+                                  className="max-w-full max-h-16 object-contain mb-2"
+                                />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700 text-center">
+                                {brand.NAME}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </Label>
                     </div>
                   )
@@ -198,12 +305,12 @@ export const Electrical = () => {
                       }`}
                       onClick={() => handleSheetsSwitches(item?.NAME)}
                     >
-                      <img src={item?.IMAGE} />
                       <RadioGroupItem
                         value={item.NAME}
                         id={`switches-${index}`}
                         className="absolute top-3 right-2"
                       />
+                      <img src={item?.IMAGE} />
                       <Label
                         htmlFor={`switches-${index}`}
                         className="cursor-pointer"

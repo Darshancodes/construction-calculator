@@ -41,7 +41,7 @@ export const MixConcrete = () => {
   };
   const handleRMC = (name) => {
     setSelectedRMC(name);
-    const selected = MIX_CONCRETE_CATEGORY.RMC.find(
+    const selected = MIX_CONCRETE_CATEGORY.CONCRETE.find(
       (concrete) => concrete.NAME === name
     );
     if (selected) {
@@ -70,14 +70,12 @@ export const MixConcrete = () => {
       <div className="p-6 space-y-6">
         <Card className="bg-main">
           <CardHeader>
-            <h3 className="text-lg font-medium mb-4">
-              RMC (Ready Mix Concrete)
-            </h3>
+            <h3 className="text-lg font-medium mb-4">Concrete</h3>
           </CardHeader>
           <CardContent>
             <RadioGroup value={selectedRMC} onValueChange={handleRMC}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {MIX_CONCRETE_CATEGORY.RMC.map((item, index) => (
+                {MIX_CONCRETE_CATEGORY?.CONCRETE?.map((item, index) => (
                   <div
                     key={index}
                     className={`bg-white relative flex flex-col justify-center items-center rounded-lg border-2 p-4 cursor-pointer transition-all ${
@@ -89,11 +87,14 @@ export const MixConcrete = () => {
                   >
                     <RadioGroupItem
                       value={item.NAME}
-                      id={`rmc-${index}`}
+                      id={`concrete-${index}`}
                       className="absolute top-2 right-2"
                     />
                     <img src={item?.IMAGE} />
-                    <Label htmlFor={`rmc-${index}`} className="cursor-pointer">
+                    <Label
+                      htmlFor={`concrete-${index}`}
+                      className="cursor-pointer"
+                    >
                       {item.NAME} - ₹{item.PER_UNIT_RATE}/{item.PER_UNIT}
                     </Label>
                   </div>
@@ -112,7 +113,7 @@ export const MixConcrete = () => {
           <CardContent>
             <RadioGroup value={selectedPCC} onValueChange={handlePCC}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {MIX_CONCRETE_CATEGORY.PCC.map((item, index) => (
+                {MIX_CONCRETE_CATEGORY?.PCC?.map((item, index) => (
                   <div
                     key={index}
                     className={`bg-white flex flex-col justify-center items-center w-full relative rounded-lg border-2 p-4 cursor-pointer transition-all ${

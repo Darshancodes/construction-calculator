@@ -8,6 +8,7 @@ import { useStepStore } from "@/store/useStepStore";
 import { BRICKS_CATEGORY, CATEGORY_NAMES } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 import { getStoredBrand } from "@/lib/store-utils";
+import { ProductCard } from "./product-card";
 
 export const Bricks = () => {
   const {
@@ -110,7 +111,7 @@ export const Bricks = () => {
   };
 
   // Handle termite solution selection and calculation
-  const handleTermiteSolutionChange = (optionName) => {
+  const handleTermiteSolutionChange = (optionName: string) => {
     setTermiteSolution(optionName);
     const selectedOption = BRICKS_CATEGORY.TERMITE_SOLUTION.find(
       (option) => option.NAME === optionName
@@ -138,7 +139,7 @@ export const Bricks = () => {
               {BRICKS_CATEGORY.BRANDS.map((brand, index) => (
                 <div
                   key={index}
-                  className={`relative border-2 rounded-lg ${
+                  className={`relative h-full bg-white border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
                     selectedBrand === brand.NAME
                       ? "border-black shadow-md"
                       : "border-gray-200"
@@ -155,42 +156,63 @@ export const Bricks = () => {
 
                   <Label
                     htmlFor={`brick-${index}`}
-                    className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
+                    className="flex flex-col items-center justify-center p-4 bg-white rounded-lg cursor-pointer"
                   >
                     {/* Images Section */}
-                    <div className="flex items-center justify-center mb-3 w-full h-20">
-                      <div className="flex items-center space-x-2">
-                        <img
-                          src={brand.IMAGE}
-                          alt={brand.NAME}
-                          className="h-16 w-auto object-contain"
-                        />
-                        {brand.IMAGE2 && (
-                          <>
-                            <span className="text-gray-400 text-sm">Or</span>
+                    <div className="flex items-center justify-center mb-3 w-full min-h-[80px]">
+                      {brand.IMAGE2 ? (
+                        // Two images with "Or" between them
+                        <div className="flex items-center justify-center gap-3 w-full">
+                          <div className="flex-1 flex flex-col items-center justify-center">
+                            <div className="h-20 flex items-center justify-center mb-2">
+                              <img
+                                src={brand.IMAGE}
+                                alt={brand.NAME}
+                                className="max-w-full max-h-16 object-contain mb-2"
+                              />
+                            </div>
+                            <span className="text-xs font-medium text-gray-700 text-center">
+                              {brand.NAME}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-col items-center justify-center gap-1 px-2">
+                            <div className="w-px h-6 bg-gray-300"></div>
+                            <span className="text-xs font-medium text-gray-400">
+                              Or
+                            </span>
+                            <div className="w-px h-6 bg-gray-300"></div>
+                          </div>
+
+                          <div className="flex-1 flex flex-col items-center justify-center">
+                            <div className="h-20 flex items-center justify-center mb-2">
+                              <img
+                                src={brand.IMAGE2}
+                                alt={brand.NAME2}
+                                className="max-w-full max-h-16 object-contain mb-2"
+                              />
+                            </div>
+                            <span className="text-xs font-medium text-gray-700 text-center">
+                              {brand.NAME2}
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        // Single image
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="h-20 flex items-center justify-center mb-2">
                             <img
-                              src={brand.IMAGE2}
-                              alt={`${brand.NAME} alternative`}
-                              className="h-16 w-auto object-contain"
+                              src={brand.IMAGE}
+                              alt={brand.NAME}
+                              className="max-w-full max-h-16 object-contain mb-2"
                             />
-                          </>
-                        )}
-                      </div>
+                          </div>
+                          <span className="text-sm font-medium text-gray-700 text-center">
+                            {brand.NAME}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    {/* <img src={brand?.IMAGE} className="w-full h-full" />
-                    or
-                    {brand?.IMAGE2 && (
-                      <img src={brand?.IMAGE} className="w-full h-full" />
-                    )} */}
-                    <span className="text-sm font-medium text-center">
-                      {brand.NAME}
-                    </span>
-                    <span className="text-xs text-gray-500 mt-1">
-                      ₹{brand.PER_UNIT_RATE}/{brand.PER_UNIT}
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      {brand.STANDARD_QUANTITY} {brand.STANDARD_QUANTITY_UNIT}
-                    </span>
                   </Label>
                 </div>
               ))}
@@ -215,22 +237,17 @@ export const Bricks = () => {
                         : "border-gray-300"
                     }`}
                   >
-                    <RadioGroupItem
-                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center `}
-                      value={option.NAME}
-                      id={`water-${index}`}
-                    />
                     <Label
                       htmlFor={`water-${index}`}
                       className="cursor-pointer "
                     >
                       {option.NAME}
-                      {option.PER_SQFT_RATE > 0 && (
-                        <span className="text-xs text-gray-500 ml-1">
-                          (₹{option.PER_SQFT_RATE}/sqft)
-                        </span>
-                      )}
                     </Label>
+                    <RadioGroupItem
+                      className={`w-5 h-5 rounded-full cursor-pointer border-2 flex items-center justify-center `}
+                      value={option.NAME}
+                      id={`water-${index}`}
+                    />
                   </div>
                 ))}
               </div>
@@ -249,21 +266,16 @@ export const Bricks = () => {
                     key={index}
                     className="flex items-center space-x-2 bg-white py-4 px-2"
                   >
-                    <RadioGroupItem
-                      value={option.NAME}
-                      id={`termite-${index}`}
-                    />
                     <Label
                       htmlFor={`termite-${index}`}
                       className="cursor-pointer"
                     >
                       {option.NAME}
-                      {option.PER_SQFT_RATE > 0 && (
-                        <span className="text-xs text-gray-500 ml-1">
-                          (₹{option.PER_SQFT_RATE}/sqft)
-                        </span>
-                      )}
                     </Label>
+                    <RadioGroupItem
+                      value={option.NAME}
+                      id={`termite-${index}`}
+                    />
                   </div>
                 ))}
               </div>

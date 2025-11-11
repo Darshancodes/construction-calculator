@@ -8,6 +8,7 @@ import { useStepStore } from "@/store/useStepStore";
 import { CATEGORY_NAMES, CEMENT_CATEGORY } from "@/lib/constants";
 import { useDataStore } from "@/store/useDataStore";
 import { getStoredBrand } from "@/lib/store-utils";
+import { ProductCard } from "./product-card";
 
 export const Cement = () => {
   const { nextStep, prevStep } = useStepStore();
@@ -30,7 +31,7 @@ export const Cement = () => {
     });
     return amount;
   };
-  const handleCementPrice = (brandName) => {
+  const handleCementPrice = (brandName: string) => {
     setSelectedBrand(brandName);
     const selectedBrandData = CEMENT_CATEGORY.BRANDS.find(
       (brand) => brand.NAME === brandName
@@ -57,7 +58,7 @@ export const Cement = () => {
               {CEMENT_CATEGORY.BRANDS.map((brand, index) => (
                 <div
                   key={index}
-                  className={`relative border-2 rounded-lg h-full ${
+                  className={`relative h-full bg-white border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
                     selectedBrand === brand.NAME
                       ? "border-black shadow-md"
                       : "border-gray-200"
@@ -69,45 +70,72 @@ export const Cement = () => {
                     id={`cement-${index}`}
                     className="absolute top-2 right-2"
                   />
-                  {/* <div className="absolute top-3 right-3">
-                    <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        selectedBrand === brand.NAME
-                          ? "border-blue-500 bg-blue-500"
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {selectedBrand === brand.NAME && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                  </div> */}
+
                   <Label
                     htmlFor={`cement-${index}`}
-                    className="flex flex-col items-center justify-center p-4 h-full bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50"
+                    className="flex flex-col items-center justify-center p-4 bg-white rounded-lg cursor-pointer"
                   >
-                    <div className=" rounded-lg mb-3 flex items-center justify-center">
-                      <img src={brand?.IMAGE} />
+                    {/* Images Section */}
+                    <div className="flex items-center justify-center mb-3 w-full min-h-[80px]">
+                      {brand.IMAGE2 ? (
+                        // Two images with "Or" between them
+                        <div className="flex items-center justify-center gap-3 w-full">
+                          <div className="flex-1 flex flex-col items-center justify-center">
+                            <div className="h-20 flex items-center justify-center mb-2">
+                              <img
+                                src={brand.IMAGE}
+                                alt={brand.NAME}
+                                className="max-w-full max-h-16 object-contain mb-2"
+                              />
+                            </div>
+                            <span className="text-xs font-medium text-gray-700 text-center">
+                              {brand.NAME}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-col items-center justify-center gap-1 px-2">
+                            <div className="w-px h-6 bg-gray-300"></div>
+                            <span className="text-xs font-medium text-gray-400">
+                              Or
+                            </span>
+                            <div className="w-px h-6 bg-gray-300"></div>
+                          </div>
+
+                          <div className="flex-1 flex flex-col items-center justify-center">
+                            <div className="h-20 flex items-center justify-center mb-2">
+                              <img
+                                src={brand.IMAGE2}
+                                alt={brand.NAME2}
+                                className="max-w-full max-h-16 object-contain mb-2"
+                              />
+                            </div>
+                            <span className="text-xs font-medium text-gray-700 text-center">
+                              {brand.NAME2}
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        // Single image
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="h-20 flex items-center justify-center mb-2">
+                            <img
+                              src={brand.IMAGE}
+                              alt={brand.NAME}
+                              className="max-w-full max-h-16 object-contain mb-2"
+                            />
+                          </div>
+                          <span className="text-sm font-medium text-gray-700 text-center">
+                            {brand.NAME}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <h3>{brand?.NAME}</h3>
                   </Label>
                 </div>
               ))}
             </div>
           </RadioGroup>
         </div>
-        {/* <button
-          className="mt-6 w-44 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-          onClick={nextStep}
-        >
-          nextStep
-        </button>
-        <button
-          className="w-44 mt-6  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-300"
-          onClick={prevStep}
-        >
-          prevStep
-        </button> */}
       </CardContent>
     </Card>
   );

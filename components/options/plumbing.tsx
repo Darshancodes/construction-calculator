@@ -118,8 +118,66 @@ export const Plumbing = () => {
                         id={`pvc-${index}`}
                         className="absolute top-2 right-2"
                       />
-                      <img src={item?.IMAGE} />
-                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                      <Label
+                        htmlFor={`pvc-${index}`}
+                        className="flex flex-col items-center justify-center p-4 bg-white rounded-lg cursor-pointer"
+                      >
+                        {/* Images Section */}
+                        <div className="flex items-center justify-center mb-3 w-full min-h-[80px]">
+                          {item.IMAGE2 ? (
+                            // Two images with "Or" between them
+                            <div className="flex items-center justify-center gap-3 w-full">
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={item.IMAGE}
+                                    alt={item.NAME}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {item.NAME}
+                                </span>
+                              </div>
+
+                              <div className="flex flex-col items-center justify-center gap-1 px-2">
+                                <div className="w-px h-6 bg-gray-300"></div>
+                                <span className="text-xs font-medium text-gray-400">
+                                  Or
+                                </span>
+                                <div className="w-px h-6 bg-gray-300"></div>
+                              </div>
+
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={item.IMAGE2}
+                                    alt={item.NAME2}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {item.NAME2}
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Single image
+                            <div className="flex flex-col items-center justify-center">
+                              <div className="h-20 flex items-center justify-center mb-2">
+                                <img
+                                  src={item.IMAGE}
+                                  alt={item.NAME}
+                                  className="max-w-full max-h-16 object-contain mb-2"
+                                />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700 text-center">
+                                {item.NAME}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </Label>
                     </div>
                   )
                 )}
@@ -153,8 +211,66 @@ export const Plumbing = () => {
                         id={`cpvc-${index}`}
                         className="absolute top-2 right-2"
                       />
-                      <img src={item?.IMAGE} />
-                      {item.NAME} - ₹{item.PER_SQRT_RATE}/sqft
+                      <Label
+                        htmlFor={`cpvc-${index}`}
+                        className="flex flex-col items-center justify-center p-4 bg-white rounded-lg cursor-pointer"
+                      >
+                        {/* Images Section */}
+                        <div className="flex items-center justify-center mb-3 w-full min-h-[80px]">
+                          {item.IMAGE2 ? (
+                            // Two images with "Or" between them
+                            <div className="flex items-center justify-center gap-3 w-full">
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={item.IMAGE}
+                                    alt={item.NAME}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {item.NAME}
+                                </span>
+                              </div>
+
+                              <div className="flex flex-col items-center justify-center gap-1 px-2">
+                                <div className="w-px h-6 bg-gray-300"></div>
+                                <span className="text-xs font-medium text-gray-400">
+                                  Or
+                                </span>
+                                <div className="w-px h-6 bg-gray-300"></div>
+                              </div>
+
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="h-20 flex items-center justify-center mb-2">
+                                  <img
+                                    src={item.IMAGE2}
+                                    alt={item.NAME2}
+                                    className="max-w-full max-h-16 object-contain mb-2"
+                                  />
+                                </div>
+                                <span className="text-xs font-medium text-gray-700 text-center">
+                                  {item.NAME2}
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Single image
+                            <div className="flex flex-col items-center justify-center">
+                              <div className="h-20 flex items-center justify-center mb-2">
+                                <img
+                                  src={item.IMAGE}
+                                  alt={item.NAME}
+                                  className="max-w-full max-h-16 object-contain mb-2"
+                                />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700 text-center">
+                                {item.NAME}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </Label>
                     </div>
                   )
                 )}
