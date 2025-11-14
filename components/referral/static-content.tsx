@@ -51,25 +51,27 @@ export function WhyChooseSection() {
 
 // CTA Section Component
 export function CTASection() {
+  const backgroundImageUrl = "/cta-images/map-image.svg";
   return (
-    <section className="py-20 bg-gradient-to-r from-red-900 to-red-800 text-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
+    <section className="py-20   text-white relative overflow-hidden">
+      <div className="absolute inset-0 ">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)",
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),  url(${backgroundImageUrl})`,
           }}
         ></div>
       </div>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Join our referral network, help people build their dream homes
-        </h2>
-        <p className="text-xl mb-8 italic text-gray-100">
-          Create a reliable income stream for yourself.
-        </p>
-        <button className="bg-white text-gray-900 px-8 py-3 rounded hover:bg-gray-100 transition font-semibold">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 flex items-end">
+        <div className="flex flex-col items-start">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Join our referral network, help people build their dream homes
+          </h2>
+          <p className="text-xl mb-8 italic text-gray-100">
+            Create a reliable income stream for yourself.
+          </p>
+        </div>
+        <button className="bg-white text-gray-900  py-3 rounded hover:bg-gray-100 transition font-semibold">
           Refer now
         </button>
       </div>
