@@ -135,7 +135,7 @@ export const TotalCost = () => {
                 </div>
 
                 {/* Design & management charges */}
-                {/* <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3">
                   <div className="w-5 h-5 bg-gray-300 rounded-sm mt-1 flex-shrink-0"></div>
                   <div className="flex-1">
                     <div className="text-sm text-gray-600 mb-1">
@@ -145,7 +145,7 @@ export const TotalCost = () => {
                       {formatCurrency(management_cost)}
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
 

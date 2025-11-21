@@ -189,7 +189,7 @@ export const Bricks = () => {
                               <img
                                 src={brand.IMAGE2}
                                 alt={brand.NAME2}
-                                className="max-w-full max-h-16 object-contain mb-2"
+                                className="max-w-full max-h-20 object-contain mb-2"
                               />
                             </div>
                             <span className="text-xs font-medium text-gray-700 text-center">

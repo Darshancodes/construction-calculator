@@ -168,7 +168,7 @@ export const Plumbing = () => {
                                 <img
                                   src={item.IMAGE}
                                   alt={item.NAME}
-                                  className="max-w-full max-h-16 object-contain mb-2"
+                                  className="max-w-full max-h-20 object-contain mb-2"
                                 />
                               </div>
                               <span className="text-sm font-medium text-gray-700 text-center">
@@ -261,7 +261,7 @@ export const Plumbing = () => {
                                 <img
                                   src={item.IMAGE}
                                   alt={item.NAME}
-                                  className="max-w-full max-h-16 object-contain mb-2"
+                                  className="max-w-full max-h-20 object-contain mb-2"
                                 />
                               </div>
                               <span className="text-sm font-medium text-gray-700 text-center">

@@ -162,7 +162,7 @@ const Card = ({
                 <img
                   src={product.IMAGE || "/placeholder.svg"}
                   alt={product.NAME}
-                  className="max-w-full max-h-16 object-contain mb-3"
+                  className="max-w-full max-h-20 object-contain mb-3"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
