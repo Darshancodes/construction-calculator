@@ -48,7 +48,12 @@ export const DesktopModal = ({
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                className="z-[500]"
+                position="popper"
+                // Ensure it renders above the modal
+                sideOffset={4}
+              >
                 <SelectItem value="Bikaner">Bikaner</SelectItem>
                 <SelectItem value="Jaipur">Jaipur</SelectItem>
                 <SelectItem value="Jodhpur">Jodhpur</SelectItem>

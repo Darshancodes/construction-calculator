@@ -77,7 +77,9 @@ export const Header = () => {
                 <div className="w-5 h-5 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded transform rotate-12 flex items-center justify-center shadow-sm">
                   <Download className="h-3 w-3 text-white" />
                 </div>
-                <span className="font-medium">Download Portfolio</span>
+                <span className="font-medium text-black">
+                  Download Portfolio
+                </span>
               </Button>
             </div>
 

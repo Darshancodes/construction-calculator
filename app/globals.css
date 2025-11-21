@@ -122,3 +122,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* custom range slider styling with yellow/gold accent and black fill */
+@layer components {
+  .range-slider {
+    @apply appearance-none h-2 rounded-lg cursor-pointer;
+    background: linear-gradient(
+      to right,
+      black 0%,
+      black var(--value, 40%),
+      #d1d5db var(--value, 40%),
+      #d1d5db 100%
+    );
+
+    &::-webkit-slider-thumb {
+      @apply appearance-none w-5 h-5 rounded-full bg-yellow-400 cursor-pointer border border-yellow-500 shadow-md hover:bg-yellow-500 transition;
+    }
+
+    &::-moz-range-thumb {
+      @apply w-5 h-5 rounded-full bg-yellow-400 cursor-pointer border border-yellow-500 shadow-md hover:bg-yellow-500 transition;
+    }
+
+    /* Add track styling for Firefox */
+    &::-moz-range-track {
+      @apply bg-transparent border-none;
+    }
+  }
+}

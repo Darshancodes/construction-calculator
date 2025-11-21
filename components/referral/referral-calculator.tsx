@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export const ReferralCalculator = () => {
@@ -58,33 +59,28 @@ export const ReferralCalculator = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-12">
           Your Earnings Potential
         </h2>
+        <div className="mb-10">
+          <p className="text-sm text-gray-600 mb-4">Choose a service model:</p>
+          <div className="grid grid-cols-3 gap-4">
+            {Object.entries(serviceModels).map(([key, { price, label }]) => (
+              <button
+                key={key}
+                onClick={() => setServiceModel(key)}
+                className={`p-4 border-2 rounded-lg text-left transition ${
+                  serviceModel === key
+                    ? "border-black bg-gray-50"
+                    : "border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                <p className="text-sm text-gray-600 mb-1">{label}</p>
+                <p className="text-2xl font-bold">₹{price}</p>
+                <p className="text-xs text-gray-500">per sq ft</p>
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div>
-              <p className="text-sm text-gray-600 mb-4">
-                Choose a service model:
-              </p>
-              <div className="grid grid-cols-3 gap-4">
-                {Object.entries(serviceModels).map(
-                  ([key, { price, label }]) => (
-                    <button
-                      key={key}
-                      onClick={() => setServiceModel(key)}
-                      className={`p-4 border-2 rounded-lg text-left transition ${
-                        serviceModel === key
-                          ? "border-black bg-gray-50"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                    >
-                      <p className="text-sm text-gray-600 mb-1">{label}</p>
-                      <p className="text-2xl font-bold">₹{price}</p>
-                      <p className="text-xs text-gray-500">per sq ft</p>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
             <div>
               <div className="flex justify-between items-center mb-4">
                 <label className="text-sm text-gray-700">
@@ -120,7 +116,12 @@ export const ReferralCalculator = () => {
                 step="100"
                 value={groundFloorArea}
                 onChange={(e) => setGroundFloorArea(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="range-slider w-full"
+                style={{
+                  ["--value" as any]: `${
+                    ((groundFloorArea - 1000) / (5000 - 1000)) * 100
+                  }%`,
+                }}
               />
             </div>
 
@@ -169,8 +170,8 @@ export const ReferralCalculator = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-gray-50 rounded-lg p-6">
+          <div className="space-y-6 ">
+            <div className="bg-gray-50 rounded-lg p-6 flex flex-col justify-center items-center">
               <p className="text-sm text-gray-600 mb-2">
                 Total earning from this project would be
               </p>
@@ -198,7 +199,15 @@ export const ReferralCalculator = () => {
                 </span>
               </div>
               <div className="text-center">
-                <div className="text-6xl mb-4">💰</div>
+                <div className=" mb-4 flex justify-center items-center ">
+                  <Image
+                    src={"/icons/cash-pink.png"}
+                    width={100}
+                    height={100}
+                    className="w-16 h-16 filter-pink"
+                    alt="cash"
+                  />
+                </div>
                 <p className="text-sm text-gray-600 mb-2">
                   Your total earning can be
                 </p>
